@@ -5,6 +5,7 @@ import { fetchUser } from '../actions/authActions';
 import PropTypes from 'prop-types';
 
 import PrivateRoute from './common/PrivateRoute';
+import Container from 'react-bootstrap/Container';
 import Header from './layout/Header';
 import Login from './auth/Login';
 import Register from './auth/Register';
@@ -23,7 +24,7 @@ class App extends Component {
       <BrowserRouter>
         <Fragment>
           <Header />
-          <div className="container">
+          <Container>
             <Switch>
               <Route exact path="/" component={Landing} />
               <Route exact path="/about" component={About} />
@@ -32,7 +33,7 @@ class App extends Component {
               <PrivateRoute exact path="/dashboard" component={Dashboard} />
               <Route component={NotFound} />
             </Switch>
-          </div>
+          </Container>
         </Fragment>
       </BrowserRouter>
     );
