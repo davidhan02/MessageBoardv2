@@ -1,4 +1,5 @@
 import React from 'react';
+import Form from 'react-bootstrap/Form';
 
 export default ({
   input,
@@ -8,10 +9,10 @@ export default ({
   meta: { error, touched }
 }) => {
   return (
-    <div>
-      <label>{label}: </label>
-      <input type={type} placeholder={placeholder} {...input} />
-      <div>{touched && error}</div>
-    </div>
+    <Form.Group>
+      <Form.Label>{label}: </Form.Label>
+      <Form.Control type={type} placeholder={placeholder} {...input} />
+      <Form.Text>{touched && error}</Form.Text>
+    </Form.Group>
   );
 };

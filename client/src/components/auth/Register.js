@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import Form from 'react-bootstrap/Form';
+import Button from 'react-bootstrap/Button';
 
 import FormField from '../common/FormField';
 import { submitRegister, clearErrors } from '../../actions/authActions';
@@ -45,14 +47,16 @@ class Register extends Component {
     } = this.props;
 
     return (
-      <main>
+      <div className="register">
         <h3>Register</h3>
-        <form onSubmit={handleSubmit(this.onSubmit)}>
+        <Form onSubmit={handleSubmit(this.onSubmit)}>
           {this.renderFields()}
-          <button type="submit">Register</button>
-          {errors.register && errors.register}
-        </form>
-      </main>
+          <Button variant="primary" size="lg" type="submit" block>
+            Register
+          </Button>
+          <div className="mt-3">{errors.register && errors.register}</div>
+        </Form>
+      </div>
     );
   }
 }

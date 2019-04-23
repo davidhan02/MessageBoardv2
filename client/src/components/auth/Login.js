@@ -3,6 +3,8 @@ import { Field, reduxForm } from 'redux-form';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import Form from 'react-bootstrap/Form';
+import Button from 'react-bootstrap/Button';
 
 import FormField from '../common/FormField';
 import { submitLogin, clearErrors } from '../../actions/authActions';
@@ -53,20 +55,23 @@ class Login extends Component {
     } = this.props;
 
     return (
-      <main>
+      <div className="login">
         <h3>Login</h3>
         <a href="/auth/google">
           <span>Sign in with Google</span>
         </a>
-        <form onSubmit={handleSubmit(this.onSubmit)}>
+        <Form onSubmit={handleSubmit(this.onSubmit)}>
           {this.renderFields()}
-          <button type="submit">Login</button>
-        </form>
-        {errors.login && errors.login}
-        <br />
-        <span>No Account?</span>
-        <Link to="/register">Register</Link>
-      </main>
+          <Button variant="primary" size="lg" type="submit" block>
+            Login
+          </Button>
+        </Form>
+        <div className="mt-3">{errors.login && errors.login}</div>
+        <Form.Group>
+          <Form.Label>No Account? </Form.Label>
+          <Link to="/register"> Register</Link>
+        </Form.Group>
+      </div>
     );
   }
 }

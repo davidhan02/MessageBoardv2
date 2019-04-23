@@ -1,14 +1,15 @@
 import React, { Component, Fragment } from 'react';
 import { Route, Switch, BrowserRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { fetchUser } from '../actions/authActions';
 import PropTypes from 'prop-types';
 
+import { fetchUser } from '../actions/authActions';
 import PrivateRoute from './common/PrivateRoute';
-import Container from 'react-bootstrap/Container';
 import Header from './layout/Header';
 import Login from './auth/Login';
 import Register from './auth/Register';
+
+import Container from 'react-bootstrap/Container';
 const About = () => <h2>About</h2>;
 const Dashboard = () => <h2>Dashboard</h2>;
 const Landing = () => <h2>Landing</h2>;
