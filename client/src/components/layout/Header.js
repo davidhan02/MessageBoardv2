@@ -15,12 +15,13 @@ class Header extends Component {
 
     const authLinks = (
       <Fragment>
-        <li>Welcome {user.name}</li>
-        <li>
-          <Link to="/dashboard">Dashboard</Link>
+        <li className="nav-item">
+          <Link className="nav-link" to="/dashboard">
+            {user.name}
+          </Link>
         </li>
-        <li>
-          <Link to="/" onClick={this.logout}>
+        <li className="nav-item">
+          <Link className="nav-link" to="/" onClick={this.logout}>
             Logout
           </Link>
         </li>
@@ -29,11 +30,15 @@ class Header extends Component {
 
     const guestLinks = (
       <Fragment>
-        <li>
-          <Link to="/login">Login</Link>
+        <li className="nav-item">
+          <Link className="nav-link" to="/login">
+            Login
+          </Link>
         </li>
-        <li>
-          <Link to="/register">Register</Link>
+        <li className="nav-item">
+          <Link className="nav-link" to="/register">
+            Register
+          </Link>
         </li>
       </Fragment>
     );
@@ -49,20 +54,35 @@ class Header extends Component {
     };
 
     return (
-      <nav>
-        <div className="nav container">
-          <Link className="nav-brand" to="/">
-            Company Logo
+      <nav className="navbar navbar-expand-sm navbar-dark bg-dark mb-4">
+        <div className="container">
+          <Link className="navbar-brand" to="/">
+            CompanyName
           </Link>
-          <ul className="nav-list">
-            <li>
-              <Link to="/">Home</Link>
-            </li>
-            <li>
-              <Link to="/about">About Us</Link>
-            </li>
-            {renderLinks()}
-          </ul>
+          <button
+            className="navbar-toggler"
+            type="button"
+            data-toggle="collapse"
+            data-target="#mobile-nav"
+          >
+            <span className="navbar-toggler-icon" />
+          </button>
+
+          <div className="collapse navbar-collapse" id="mobile-nav">
+            <ul className="navbar-nav ml-auto">
+              <li className="nav-item">
+                <Link className="nav-link" to="/">
+                  Home
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link className="nav-link" to="/about">
+                  About Us
+                </Link>
+              </li>
+              {renderLinks()}
+            </ul>
+          </div>
         </div>
       </nav>
     );
