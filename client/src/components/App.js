@@ -2,14 +2,15 @@ import { Route, Switch, BrowserRouter as Router } from 'react-router-dom';
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import Container from 'react-bootstrap/Container';
 
 import { fetchUser } from '../actions/authActions';
 import PrivateRoute from './common/PrivateRoute';
 import Header from './layout/Header';
+import Footer from './layout/Footer';
 import Login from './auth/Login';
 import Register from './auth/Register';
 
-import Container from 'react-bootstrap/Container';
 const About = () => <h2>About</h2>;
 const Dashboard = () => <h2>Dashboard</h2>;
 const Landing = () => <h2>Landing</h2>;
@@ -35,6 +36,7 @@ class App extends Component {
               <Route component={NotFound} />
             </Switch>
           </Container>
+          <Footer />
         </Fragment>
       </Router>
     );
