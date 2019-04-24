@@ -9,14 +9,20 @@ export default ({
   placeholder,
   meta: { error, touched }
 }) => {
+  const renderErrors = () => {
+    if (errors[type]) {
+      return errors[type];
+    }
+    if (touched) {
+      return error;
+    }
+  };
+
   return (
     <Form.Group>
       <Form.Label>{label}: </Form.Label>
       <Form.Control type={type} placeholder={placeholder} {...input} />
-      <Form.Text>
-        {touched && error}
-        {errors[type] && errors[type]}
-      </Form.Text>
+      <Form.Text>{renderErrors()}</Form.Text>
     </Form.Group>
   );
 };
