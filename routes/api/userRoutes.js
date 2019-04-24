@@ -23,7 +23,7 @@ router.get('/current_user', (req, res) => {
 });
 
 // @route   GET /api/users/logout
-// @desc    Log Out from oauth session
+// @desc    Log out user
 // @access  Public
 router.get('/logout', (req, res) => {
   req.logout();
@@ -31,7 +31,7 @@ router.get('/logout', (req, res) => {
 });
 
 // @route   POST api/users/login
-// @desc    Login a user / Returning auth token
+// @desc    Login a user
 // @access  Public
 router.post('/login', (req, res, next) => {
   const errors = {};
@@ -61,7 +61,7 @@ router.post('/register', (req, res) => {
 
   User.findOne({ email }).then(user => {
     if (user) {
-      errors.register = 'Email already exists';
+      errors.email = 'Email already exists';
       return res.status(400).json(errors);
     } else {
       const newUser = new User({

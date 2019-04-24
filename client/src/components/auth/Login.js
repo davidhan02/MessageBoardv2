@@ -30,9 +30,7 @@ class Login extends Component {
   }
 
   renderFields() {
-    const {
-      auth: { errors }
-    } = this.props;
+    const { errors } = this.props.auth;
     return loginFields.map(({ label, name }) => {
       return (
         <Field

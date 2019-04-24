@@ -21,6 +21,7 @@ class Register extends Component {
   }
 
   renderFields() {
+    const { errors } = this.props.auth;
     return registerFields.map(({ label, name }) => {
       return (
         <Field
@@ -28,6 +29,7 @@ class Register extends Component {
           type={name}
           name={name}
           label={label}
+          errors={errors}
           placeholder={label}
           component={FormField}
         />
@@ -41,10 +43,7 @@ class Register extends Component {
   };
 
   render() {
-    const {
-      handleSubmit,
-      auth: { errors }
-    } = this.props;
+    const { handleSubmit } = this.props;
 
     return (
       <div className="register">
@@ -54,7 +53,6 @@ class Register extends Component {
           <Button variant="primary" size="lg" type="submit" block>
             Register
           </Button>
-          <div className="mt-3">{errors.register && errors.register}</div>
         </Form>
       </div>
     );
