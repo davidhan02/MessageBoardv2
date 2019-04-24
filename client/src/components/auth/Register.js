@@ -11,10 +11,10 @@ import FormField from '../common/FormField';
 import { submitRegister, clearErrors } from '../../actions/authActions';
 
 const registerFields = [
-  { label: 'Name', name: 'name' },
-  { label: 'Email', name: 'email' },
-  { label: 'Password', name: 'password' },
-  { label: 'Confirm Password', name: 'password2' }
+  { label: 'Name', name: 'name', type: 'text' },
+  { label: 'Email', name: 'email', type: 'email' },
+  { label: 'Password', name: 'password', type: 'password' },
+  { label: 'Confirm Password', name: 'password2', type: 'password' }
 ];
 
 class Register extends Component {
@@ -24,12 +24,12 @@ class Register extends Component {
 
   renderFields() {
     const { errors } = this.props.auth;
-    return registerFields.map(({ label, name }) => {
+    return registerFields.map(({ label, name, type }) => {
       return (
         <Field
           key={name}
-          type={name}
           name={name}
+          type={type}
           label={label}
           errors={errors}
           placeholder={label}
