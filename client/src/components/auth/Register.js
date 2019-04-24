@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 
 import FormField from '../common/FormField';
 import { submitRegister, clearErrors } from '../../actions/authActions';
@@ -46,15 +48,18 @@ class Register extends Component {
     const { handleSubmit } = this.props;
 
     return (
-      <div className="register">
-        <h3>Register</h3>
-        <Form onSubmit={handleSubmit(this.onSubmit)}>
-          {this.renderFields()}
-          <Button variant="primary" size="lg" type="submit" block>
-            Register
-          </Button>
-        </Form>
-      </div>
+      <Row className="register">
+        <Col md={8} className="m-auto">
+          <h1 className="display-4 text-center">Register</h1>
+          <p className="lead text-center">Create a new account</p>
+          <Form onSubmit={handleSubmit(this.onSubmit)}>
+            {this.renderFields()}
+            <Button variant="primary" size="lg" type="submit" block>
+              Register
+            </Button>
+          </Form>
+        </Col>
+      </Row>
     );
   }
 }
@@ -69,18 +74,15 @@ const mapStateToProps = ({ auth }) => ({ auth });
 
 const validate = formValues => {
   const errors = {};
-
   registerFields.forEach(({ name }) => {
     if (!formValues[name]) {
       errors[name] = `You must provide a ${name}`;
     }
   });
-
   const { password, password2 } = formValues;
   if (password !== password2) {
     errors.password2 = 'Passwords do not match';
   }
-
   return errors;
 };
 

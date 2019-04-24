@@ -5,6 +5,8 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 
 import FormField from '../common/FormField';
 import { submitLogin, clearErrors } from '../../actions/authActions';
@@ -47,29 +49,31 @@ class Login extends Component {
   }
 
   onSubmit = formValues => {
-    this.props.submitLogin(formValues, this.props.history);
+    const { submitLogin, history } = this.props;
+    submitLogin(formValues, history);
   };
 
   render() {
     const { handleSubmit } = this.props;
 
     return (
-      <div className="login">
-        <h3>Login</h3>
-        <a href="/auth/google">
-          <span>Sign in with Google</span>
-        </a>
-        <Form onSubmit={handleSubmit(this.onSubmit)}>
-          {this.renderFields()}
-          <Button variant="primary" size="lg" type="submit" block>
-            Login
-          </Button>
-        </Form>
-        <Form.Group>
-          <Form.Label>No Account? </Form.Label>
-          <Link to="/register"> Register</Link>
-        </Form.Group>
-      </div>
+      <Row className="login">
+        <Col md={8} className="m-auto">
+          <h1 className="display-4 text-center">Log In</h1>
+          <p className="lead text-center">Sign in to your account</p>
+          <a href="/auth/google">Sign in with Google</a>
+          <Form onSubmit={handleSubmit(this.onSubmit)}>
+            {this.renderFields()}
+            <Button variant="primary" size="lg" type="submit" block>
+              Login
+            </Button>
+            <Form.Group>
+              <Form.Label>No Account? </Form.Label>
+              <Link to="/register"> Register</Link>
+            </Form.Group>
+          </Form>
+        </Col>
+      </Row>
     );
   }
 }
@@ -84,13 +88,11 @@ const mapStateToProps = ({ auth }) => ({ auth });
 
 const validate = formValues => {
   const errors = {};
-
   loginFields.forEach(({ name }) => {
     if (!formValues[name]) {
       errors[name] = `You must provide a ${name}`;
     }
   });
-
   return errors;
 };
 

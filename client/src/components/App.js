@@ -1,5 +1,5 @@
+import { Route, Switch, BrowserRouter as Router } from 'react-router-dom';
 import React, { Component, Fragment } from 'react';
-import { Route, Switch, BrowserRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
@@ -22,7 +22,7 @@ class App extends Component {
 
   render() {
     return (
-      <BrowserRouter>
+      <Router>
         <Fragment>
           <Header />
           <Container>
@@ -36,7 +36,7 @@ class App extends Component {
             </Switch>
           </Container>
         </Fragment>
-      </BrowserRouter>
+      </Router>
     );
   }
 }
