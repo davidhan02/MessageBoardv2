@@ -30,6 +30,9 @@ class Login extends Component {
   }
 
   renderFields() {
+    const {
+      auth: { errors }
+    } = this.props;
     return loginFields.map(({ label, name }) => {
       return (
         <Field
@@ -37,6 +40,7 @@ class Login extends Component {
           type={name}
           name={name}
           label={label}
+          errors={errors}
           placeholder={label}
           component={FormField}
         />
@@ -49,10 +53,7 @@ class Login extends Component {
   };
 
   render() {
-    const {
-      handleSubmit,
-      auth: { errors }
-    } = this.props;
+    const { handleSubmit } = this.props;
 
     return (
       <div className="login">
@@ -66,7 +67,6 @@ class Login extends Component {
             Login
           </Button>
         </Form>
-        <div className="mt-3">{errors.login && errors.login}</div>
         <Form.Group>
           <Form.Label>No Account? </Form.Label>
           <Link to="/register"> Register</Link>

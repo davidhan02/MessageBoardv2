@@ -5,6 +5,7 @@ export default ({
   input,
   type,
   label,
+  errors,
   placeholder,
   meta: { error, touched }
 }) => {
@@ -12,7 +13,10 @@ export default ({
     <Form.Group>
       <Form.Label>{label}: </Form.Label>
       <Form.Control type={type} placeholder={placeholder} {...input} />
-      <Form.Text>{touched && error}</Form.Text>
+      <Form.Text>
+        {touched && error}
+        {errors[type] && errors[type]}
+      </Form.Text>
     </Form.Group>
   );
 };
