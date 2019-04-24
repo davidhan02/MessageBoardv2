@@ -8,13 +8,10 @@ import Button from 'react-bootstrap/Button';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
-import FormField from '../common/FormField';
 import { submitLogin, clearErrors } from '../../actions/authActions';
-
-const loginFields = [
-  { label: 'Email', name: 'email' },
-  { label: 'Password', name: 'password' }
-];
+import loginFields from '../../utils/fields/login';
+import validate from '../../utils/validation/login';
+import FormField from '../common/FormField';
 
 class Login extends Component {
   componentDidMount() {
@@ -86,16 +83,6 @@ Login.propTypes = {
 };
 
 const mapStateToProps = ({ auth }) => ({ auth });
-
-const validate = formValues => {
-  const errors = {};
-  loginFields.forEach(({ name }) => {
-    if (!formValues[name]) {
-      errors[name] = `You must provide a ${name}`;
-    }
-  });
-  return errors;
-};
 
 const formWrap = reduxForm({
   validate,

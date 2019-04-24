@@ -7,15 +7,10 @@ import Button from 'react-bootstrap/Button';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
-import FormField from '../common/FormField';
 import { submitRegister, clearErrors } from '../../actions/authActions';
-
-const registerFields = [
-  { label: 'Name', name: 'name', type: 'text' },
-  { label: 'Email', name: 'email', type: 'email' },
-  { label: 'Password', name: 'password', type: 'password' },
-  { label: 'Confirm Password', name: 'password2', type: 'password' }
-];
+import registerFields from '../../utils/fields/register';
+import validate from '../../utils/validation/register';
+import FormField from '../common/FormField';
 
 class Register extends Component {
   componentWillUnmount() {
@@ -71,20 +66,6 @@ Register.propTypes = {
 };
 
 const mapStateToProps = ({ auth }) => ({ auth });
-
-const validate = formValues => {
-  const errors = {};
-  registerFields.forEach(({ name }) => {
-    if (!formValues[name]) {
-      errors[name] = `You must provide a ${name}`;
-    }
-  });
-  const { password, password2 } = formValues;
-  if (password !== password2) {
-    errors.password2 = 'Passwords do not match';
-  }
-  return errors;
-};
 
 const formWrap = reduxForm({
   validate,
