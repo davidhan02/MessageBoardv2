@@ -61,16 +61,17 @@ class Login extends Component {
         <Col md={8} className="m-auto">
           <h1 className="display-4 text-center">Log In</h1>
           <p className="lead text-center">Sign in to your account</p>
-          <a href="/auth/google">Sign in with Google</a>
           <Form onSubmit={handleSubmit(this.onSubmit)}>
             {this.renderFields()}
             <Button variant="primary" size="lg" type="submit" block>
               Login
             </Button>
-            <Form.Group>
-              <Form.Label>No Account? </Form.Label>
-              <Link to="/register"> Register</Link>
-            </Form.Group>
+            <Button variant="info" size="lg" href="/auth/google" block>
+              Sign in with Google
+            </Button>
+            <p className="mt-3">
+              No Account? <Link to="/register"> Register</Link>
+            </p>
           </Form>
         </Col>
       </Row>

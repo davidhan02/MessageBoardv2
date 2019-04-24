@@ -6,7 +6,7 @@ import Container from 'react-bootstrap/Container';
 
 import { fetchUser } from '../actions/authActions';
 import PrivateRoute from './common/PrivateRoute';
-import Header from './layout/Header';
+import Navbar from './layout/Navbar';
 import Footer from './layout/Footer';
 import Login from './auth/Login';
 import Register from './auth/Register';
@@ -25,7 +25,7 @@ class App extends Component {
     return (
       <Router>
         <Fragment>
-          <Header />
+          <Navbar />
           <Container>
             <Switch>
               <Route exact path="/" component={Landing} />
