@@ -22,11 +22,8 @@ mongoose
   .then(() => console.log('MongoDB Connected'))
   .catch(err => console.log(err));
 
-// Middlewares
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-
-// Passport config
 app.use(
   cookieSession({
     maxAge: 24 * 60 * 60 * 1000,
@@ -36,13 +33,11 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
-// Routes
 app.use('/auth/google', googleRoutes);
 app.use('/api/users', authRoutes);
 app.use('/api/profiles', profileRoutes);
 app.use('/api/posts', postRoutes);
 
-// Serve static assets if in production
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static('client/build'));
   app.get('*', (req, res) => {
@@ -50,6 +45,6 @@ if (process.env.NODE_ENV === 'production') {
   });
 }
 
-const port = process.env.PORT || 5000;
-
-app.listen(port, () => console.log(`Server running on port ${port}`));
+app.listen(process.env.PORT || 5000, () =>
+  console.log(`Server running on port ${port}`)
+);
