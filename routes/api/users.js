@@ -6,15 +6,6 @@ const User = require('../../models/User');
 
 const router = express.Router();
 
-// @route   GET api/users/test
-// @desc    Test requireLogin
-// @access  Private
-router.get('/test', requireLogin, (req, res) =>
-  res.json({
-    msg: 'Users works!'
-  })
-);
-
 // @route   GET /api/users/current_user
 // @desc    Get the user data
 // @access  Public
