@@ -12,6 +12,8 @@ const postRoutes = require('./routes/api/postRoutes');
 require('./services/passportSetup')(passport);
 require('./services/passportLocal')(passport);
 require('./services/passportGoogle')(passport);
+require('./models/Profile');
+require('./models/User');
 
 const keys = require('./config/keys');
 
