@@ -4,20 +4,20 @@ const cookieSession = require('cookie-session');
 const bodyParser = require('body-parser');
 const passport = require('passport');
 
-const googleRoutes = require('./routes/auth/googleRoutes');
-const authRoutes = require('./routes/api/userRoutes');
-const profileRoutes = require('./routes/api/profileRoutes');
-const postRoutes = require('./routes/api/postRoutes');
+const google = require('./routes/auth/google');
+const profiles = require('./routes/api/profiles');
+const users = require('./routes/api/users');
+const posts = require('./routes/api/posts');
+
+const keys = require('./config/keys');
+const port = process.env.PORT || 5000;
+const app = express();
 
 require('./services/passportSetup')(passport);
 require('./services/passportLocal')(passport);
 require('./services/passportGoogle')(passport);
 require('./models/Profile');
 require('./models/User');
-
-const keys = require('./config/keys');
-
-const app = express();
 
 mongoose
   .connect(keys.mongoURI, { useNewUrlParser: true })
@@ -35,10 +35,10 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use('/auth/google', googleRoutes);
-app.use('/api/users', authRoutes);
-app.use('/api/profiles', profileRoutes);
-app.use('/api/posts', postRoutes);
+app.use('/auth/google', google);
+app.use('/api/profiles', profiles);
+app.use('/api/users', users);
+app.use('/api/posts', posts);
 
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static('client/build'));
@@ -47,6 +47,4 @@ if (process.env.NODE_ENV === 'production') {
   });
 }
 
-app.listen(process.env.PORT || 5000, () =>
-  console.log(`Server running on port ${port}`)
-);
+app.listen(port, () => console.log(`Server running on port ${port}`));
