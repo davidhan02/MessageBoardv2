@@ -95,10 +95,10 @@ router.get('/', requireLogin, async (req, res) => {
 // @route   POST api/profiles/
 // @desc    Create / Edit users profile
 // @access  Private
-router.post('/', requireLogin, (req, res) => {
+router.post('/', (req, res) => {
   const errors = {};
 
-  const { interests, website } = req.body;
+  const { handle, interests, website } = req.body;
 
   const socialList = [
     'youtube',
@@ -110,7 +110,7 @@ router.post('/', requireLogin, (req, res) => {
 
   const profileFields = {
     ...req.body,
-    user: req.user.id,
+    user: req.body.id,
     interests: interests.split(',').map(x => x.trim()),
     social: {}
   };
@@ -126,20 +126,21 @@ router.post('/', requireLogin, (req, res) => {
       });
   });
 
-  Profile.findOne({ user: req.user.id }).then(profile => {
+  Profile.findOne({ handle }).then(profile => {
     if (profile) {
-      Profile.findOneAndUpdate(
-        { user: req.user.id },
-        { $set: profileFields },
-        { new: true }
-      ).then(profile => res.json(profile));
+      errors.handle = 'That handle already exists';
+      return res.status(400).json(errors);
     } else {
-      Profile.findOne({ handle: profileFields.handle }).then(profile => {
+      Profile.findOne({ user: req.body.id }).then(profile => {
         if (profile) {
-          errors.handle = 'That handle already exists';
-          return res.status(400).json(errors);
+          Profile.findOneAndUpdate(
+            { user: req.body.id },
+            { $set: profileFields },
+            { new: true }
+          ).then(profile => res.json(profile));
         }
-        new Profile(profileFields).save().then(profile => res.json(profile));
+        const newProfile = new Profile(profileFields);
+        newProfile.save().then(profile => res.json(profile));
       });
     }
   });
