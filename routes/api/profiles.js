@@ -18,13 +18,13 @@ router.get('/all', (req, res) => {
     .populate('user', ['name', 'email'])
     .then(profiles => {
       if (!profiles) {
-        errors.noprofiles = 'There are no profiles';
+        errors.noprofiles = 'No profiles found';
         return res.status(404).json(errors);
       }
       return res.json(profiles);
     })
     .catch(err => {
-      errors.noprofiles = 'There are no profiles';
+      errors.noprofiles = 'No profiles found';
       return res.status(404).json(errors);
     });
 });
@@ -97,9 +97,7 @@ router.get('/', requireLogin, async (req, res) => {
 // @access  Private
 router.post('/', (req, res) => {
   const errors = {};
-
   const { handle, interests, website } = req.body;
-
   const socialList = [
     'youtube',
     'twitter',
@@ -107,10 +105,9 @@ router.post('/', (req, res) => {
     'instagram',
     'linkedin'
   ];
-
   const profileFields = {
     ...req.body,
-    user: req.body.id,
+    user: req.user.id,
     interests: interests.split(',').map(x => x.trim()),
     social: {}
   };
@@ -130,19 +127,18 @@ router.post('/', (req, res) => {
     if (profile) {
       errors.handle = 'That handle already exists';
       return res.status(400).json(errors);
-    } else {
-      Profile.findOne({ user: req.body.id }).then(profile => {
-        if (profile) {
-          Profile.findOneAndUpdate(
-            { user: req.body.id },
-            { $set: profileFields },
-            { new: true }
-          ).then(profile => res.json(profile));
-        }
-        const newProfile = new Profile(profileFields);
-        newProfile.save().then(profile => res.json(profile));
-      });
     }
+    Profile.findOne({ user: req.user.id }).then(profile => {
+      if (profile) {
+        Profile.findOneAndUpdate(
+          { user: req.user.id },
+          { $set: profileFields },
+          { new: true }
+        ).then(profile => res.json(profile));
+      }
+      const newProfile = new Profile(profileFields);
+      newProfile.save().then(profile => res.json(profile));
+    });
   });
 });
 
