@@ -84,7 +84,7 @@ router.get('/', requireLogin, async (req, res) => {
         errors.noprofile = 'No profile found';
         return res.status(404).json(errors);
       }
-      res.json(profile);
+      return res.json(profile);
     })
     .catch(err => res.status(404).json(err));
 });
