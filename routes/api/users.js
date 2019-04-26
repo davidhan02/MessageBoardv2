@@ -2,7 +2,6 @@ const express = require('express');
 const router = express.Router();
 const passport = require('passport');
 
-const requireLogin = require('../../middlewares/requireLogin');
 const User = require('../../models/User');
 
 // @route   GET /api/users/current_user
@@ -25,7 +24,6 @@ router.get('/logout', (req, res) => {
 // @access  Public
 router.post('/login', (req, res, next) => {
   const errors = {};
-
   passport.authenticate('local', (err, user, info) => {
     if (!user) {
       return res.status(400).json(info);
