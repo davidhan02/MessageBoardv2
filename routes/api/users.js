@@ -1,10 +1,9 @@
 const express = require('express');
+const router = express.Router();
 const passport = require('passport');
 
 const requireLogin = require('../../middlewares/requireLogin');
 const User = require('../../models/User');
-
-const router = express.Router();
 
 // @route   GET /api/users/current_user
 // @desc    Get the user data

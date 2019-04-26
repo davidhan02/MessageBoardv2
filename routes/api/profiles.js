@@ -1,12 +1,12 @@
 const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
-mongoose.set('useFindAndModify', false);
 const prependHttp = require('prepend-http');
 
 const requireLogin = require('../../middlewares/requireLogin');
 const Profile = require('../../models/Profile');
 const User = require('../../models/User');
+mongoose.set('useFindAndModify', false);
 
 // @route   GET api/profiles/all
 // @desc    Get all profiles
@@ -150,7 +150,6 @@ router.post('/experience', requireLogin, (req, res) => {
     .then(profile => {
       const newExp = { ...req.body };
 
-      // Add to exp array
       profile.experience.unshift(newExp);
 
       profile.save().then(profile => res.json(profile));
@@ -166,7 +165,6 @@ router.post('/education', requireLogin, (req, res) => {
     .then(profile => {
       const newEdu = { ...req.body };
 
-      // Add to exp array
       profile.education.unshift(newEdu);
 
       profile.save().then(profile => res.json(profile));
@@ -178,14 +176,20 @@ router.post('/education', requireLogin, (req, res) => {
 // @desc    Replace experience in profile
 // @access  Private
 router.put('/experience/:exp_id', requireLogin, (req, res) => {
+  const errors = {};
+
   Profile.findOne({ user: req.user.id })
     .then(profile => {
-      const newExp = { ...req.body };
-      const editIndex = profile.experience
-        .map(item => item.id)
-        .indexOf(req.params.exp_id);
+      const idList = profile.experience.map(item => item.id);
+      const match = idList.filter(id => id == req.params.exp_id);
 
-      profile.experience.splice(editIndex, 1, newExp);
+      if (match.length == 0) {
+        errors.nomatch = 'Experience ID not found';
+        return res.status(404).json(errors);
+      }
+      const editIndex = idList.indexOf(req.params.exp_id);
+
+      profile.experience.splice(editIndex, 1, { ...req.body });
 
       profile.save().then(profile => res.json(profile));
     })
@@ -196,14 +200,20 @@ router.put('/experience/:exp_id', requireLogin, (req, res) => {
 // @desc    Replace education in profile
 // @access  Private
 router.put('/education/:edu_id', requireLogin, (req, res) => {
+  const errors = {};
+
   Profile.findOne({ user: req.user.id })
     .then(profile => {
-      const newEdu = { ...req.body };
-      const editIndex = profile.education
-        .map(item => item.id)
-        .indexOf(req.params.edu_id);
+      const idList = profile.education.map(item => item.id);
+      const matchList = idList.filter(id => id == req.params.edu_id);
 
-      profile.education.splice(editIndex, 1, newEdu);
+      if (matchList.length == 0) {
+        errors.nomatch = 'Education ID not found';
+        return res.status(404).json(errors);
+      }
+      const editIndex = idList.indexOf(req.params.edu_id);
+
+      profile.education.splice(editIndex, 1, { ...req.body });
 
       profile.save().then(profile => res.json(profile));
     })
