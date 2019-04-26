@@ -86,7 +86,10 @@ router.get('/', requireLogin, async (req, res) => {
       }
       return res.json(profile);
     })
-    .catch(err => res.status(404).json(err));
+    .catch(err => {
+      errors.noprofile = 'No profile found';
+      res.status(404).json(errors);
+    });
 });
 
 // @route   POST api/profiles/
@@ -146,53 +149,48 @@ router.post('/', requireLogin, (req, res) => {
 // @desc    Add experience to profile
 // @access  Private
 router.post('/experience', requireLogin, (req, res) => {
+  const errors = {};
+
   Profile.findOne({ user: req.user.id })
     .then(profile => {
-      const newExp = { ...req.body };
-
-      profile.experience.unshift(newExp);
+      profile.experience.unshift({ ...req.body });
 
       profile.save().then(profile => res.json(profile));
     })
-    .catch(err => res.status(404).json(err));
+    .catch(err => {
+      errors.noprofile = 'No profile found';
+      res.status(404).json(errors);
+    });
 });
 
 // @route   POST api/profiles/education
 // @desc    Add education to profile
 // @access  Private
 router.post('/education', requireLogin, (req, res) => {
+  const errors = {};
+
   Profile.findOne({ user: req.user.id })
     .then(profile => {
-      const newEdu = { ...req.body };
-
-      profile.education.unshift(newEdu);
+      profile.education.unshift({ ...req.body });
 
       profile.save().then(profile => res.json(profile));
     })
-    .catch(err => res.status(404).json(err));
+    .catch(err => {
+      errors.noprofile = 'No profile found';
+      res.status(404).json(errors);
+    });
 });
 
 // @route   PUT api/profiles/experience
 // @desc    Replace experience in profile
 // @access  Private
 router.put('/experience/:exp_id', requireLogin, (req, res) => {
-  const errors = {};
-
-  Profile.findOne({ user: req.user.id })
-    .then(profile => {
-      const idList = profile.experience.map(item => item.id);
-      const match = idList.filter(id => id == req.params.exp_id);
-
-      if (match.length == 0) {
-        errors.nomatch = 'Experience ID not found';
-        return res.status(404).json(errors);
-      }
-      const editIndex = idList.indexOf(req.params.exp_id);
-
-      profile.experience.splice(editIndex, 1, { ...req.body });
-
-      profile.save().then(profile => res.json(profile));
-    })
+  Profile.findOneAndUpdate(
+    { user: req.user.id, 'experience._id': req.params.exp_id },
+    { $set: { 'experience.$': { ...req.body } } },
+    { new: true }
+  )
+    .then(profile => res.json(profile))
     .catch(err => res.status(404).json(err));
 });
 
@@ -200,23 +198,12 @@ router.put('/experience/:exp_id', requireLogin, (req, res) => {
 // @desc    Replace education in profile
 // @access  Private
 router.put('/education/:edu_id', requireLogin, (req, res) => {
-  const errors = {};
-
-  Profile.findOne({ user: req.user.id })
-    .then(profile => {
-      const idList = profile.education.map(item => item.id);
-      const matchList = idList.filter(id => id == req.params.edu_id);
-
-      if (matchList.length == 0) {
-        errors.nomatch = 'Education ID not found';
-        return res.status(404).json(errors);
-      }
-      const editIndex = idList.indexOf(req.params.edu_id);
-
-      profile.education.splice(editIndex, 1, { ...req.body });
-
-      profile.save().then(profile => res.json(profile));
-    })
+  Profile.findOneAndUpdate(
+    { user: req.user.id, 'education._id': req.params.edu_id },
+    { $set: { 'education.$': { ...req.body } } },
+    { new: true }
+  )
+    .then(profile => res.json(profile))
     .catch(err => res.status(404).json(err));
 });
 
@@ -226,11 +213,7 @@ router.put('/education/:edu_id', requireLogin, (req, res) => {
 router.delete('/experience/:exp_id', requireLogin, (req, res) => {
   Profile.findOne({ user: req.user.id })
     .then(profile => {
-      const removeIndex = profile.experience
-        .map(item => item.id)
-        .indexOf(req.params.exp_id);
-
-      profile.experience.splice(removeIndex, 1);
+      profile.experience.pull(req.params.exp_id);
 
       profile.save().then(profile => res.json(profile));
     })
@@ -243,11 +226,7 @@ router.delete('/experience/:exp_id', requireLogin, (req, res) => {
 router.delete('/education/:edu_id', requireLogin, (req, res) => {
   Profile.findOne({ user: req.user.id })
     .then(profile => {
-      const removeIndex = profile.education
-        .map(item => item.id)
-        .indexOf(req.params.edu_id);
-
-      profile.education.splice(removeIndex, 1);
+      profile.education.pull(req.params.edu_id);
 
       profile.save().then(profile => res.json(profile));
     })

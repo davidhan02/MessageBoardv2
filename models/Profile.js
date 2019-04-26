@@ -1,9 +1,9 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const ExpSchema = require('./profile/ExpSchema');
-const EduSchema = require('./profile/EduSchema');
-const SocialSchema = require('./profile/SocialSchema');
+const ExpSchema = require('./profile/Experience');
+const EduSchema = require('./profile/Education');
+const SocialSchema = require('./profile/Social');
 
 const ProfileSchema = new Schema({
   user: {
