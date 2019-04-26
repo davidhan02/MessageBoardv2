@@ -45,7 +45,7 @@ router.get('/handle/:handle', (req, res) => {
       return res.json(profile);
     })
     .catch(err => {
-      errors.noprofile = 'No profile found';
+      errors.noprofile = 'No matching handle';
       res.status(404).json(errors);
     });
 });
@@ -66,7 +66,7 @@ router.get('/user/:user_id', (req, res) => {
       return res.json(profile);
     })
     .catch(err => {
-      errors.noprofile = 'No profile found';
+      errors.noprofile = 'No matching user ID';
       res.status(404).json(errors);
     });
 });
@@ -87,7 +87,7 @@ router.get('/', requireLogin, async (req, res) => {
       return res.json(profile);
     })
     .catch(err => {
-      errors.noprofile = 'No profile found';
+      errors.noprofile = 'No matching user ID';
       res.status(404).json(errors);
     });
 });
@@ -95,7 +95,7 @@ router.get('/', requireLogin, async (req, res) => {
 // @route   POST api/profiles/
 // @desc    Create / Edit users profile
 // @access  Private
-router.post('/', (req, res) => {
+router.post('/', requireLogin, (req, res) => {
   const errors = {};
   const { handle, interests, website } = req.body;
   const socialList = [
@@ -155,7 +155,7 @@ router.post('/experience', requireLogin, (req, res) => {
       profile.save().then(profile => res.json(profile));
     })
     .catch(err => {
-      errors.noprofile = 'No profile found';
+      errors.noprofile = 'No matching user ID';
       res.status(404).json(errors);
     });
 });
@@ -173,7 +173,7 @@ router.post('/education', requireLogin, (req, res) => {
       profile.save().then(profile => res.json(profile));
     })
     .catch(err => {
-      errors.noprofile = 'No profile found';
+      errors.noprofile = 'No matching user ID';
       res.status(404).json(errors);
     });
 });
