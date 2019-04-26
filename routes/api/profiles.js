@@ -174,6 +174,42 @@ router.post('/education', requireLogin, (req, res) => {
     .catch(err => res.status(404).json(err));
 });
 
+// @route   PUT api/profiles/experience
+// @desc    Replace experience in profile
+// @access  Private
+router.put('/experience/:exp_id', requireLogin, (req, res) => {
+  Profile.findOne({ user: req.user.id })
+    .then(profile => {
+      const newExp = { ...req.body };
+      const editIndex = profile.experience
+        .map(item => item.id)
+        .indexOf(req.params.exp_id);
+
+      profile.experience.splice(editIndex, 1, newExp);
+
+      profile.save().then(profile => res.json(profile));
+    })
+    .catch(err => res.status(404).json(err));
+});
+
+// @route   PUT api/profiles/education
+// @desc    Replace education in profile
+// @access  Private
+router.put('/education/:edu_id', requireLogin, (req, res) => {
+  Profile.findOne({ user: req.user.id })
+    .then(profile => {
+      const newEdu = { ...req.body };
+      const editIndex = profile.education
+        .map(item => item.id)
+        .indexOf(req.params.edu_id);
+
+      profile.education.splice(editIndex, 1, newEdu);
+
+      profile.save().then(profile => res.json(profile));
+    })
+    .catch(err => res.status(404).json(err));
+});
+
 // @route   DELETE api/profiles/experience/:exp_id
 // @desc    Delete experience from profile
 // @access  Private

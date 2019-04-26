@@ -10,12 +10,6 @@ export const fetchUser = () => async dispatch => {
   });
 };
 
-export const clearErrors = () => dispatch => {
-  dispatch({
-    type: CLEAR_ERRORS
-  });
-};
-
 export const logoutUser = history => async dispatch => {
   await axios.get('/api/users/logout');
   dispatch({
@@ -54,4 +48,10 @@ export const submitRegister = (formValues, history) => async dispatch => {
       payload: err.response.data
     });
   }
+};
+
+export const clearErrors = () => dispatch => {
+  dispatch({
+    type: CLEAR_ERRORS
+  });
 };
