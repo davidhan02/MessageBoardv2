@@ -4,8 +4,7 @@ import {
   LOGOUT_USER,
   SET_ERRORS,
   CLEAR_ERRORS,
-  SET_USER_LOADING,
-  CLEAR_USER_LOADING
+  SET_USER_LOADING
 } from './types';
 
 export const fetchUser = () => async dispatch => {
@@ -23,7 +22,7 @@ export const logoutUser = history => async dispatch => {
   dispatch({
     type: LOGOUT_USER
   });
-  dispatch(clearUserLoading());
+  dispatch(fetchUser());
   history.push('/');
 };
 
@@ -68,11 +67,5 @@ export const clearErrors = () => dispatch => {
 export const setUserLoading = () => dispatch => {
   dispatch({
     type: SET_USER_LOADING
-  });
-};
-
-export const clearUserLoading = () => dispatch => {
-  dispatch({
-    type: CLEAR_USER_LOADING
   });
 };
