@@ -7,6 +7,7 @@ export default ({
   info,
   label,
   errors,
+  controlId,
   placeholder,
   meta: { error, touched }
 }) => {
@@ -20,11 +21,11 @@ export default ({
   };
 
   return (
-    <Form.Group>
-      <Form.Label>{label}: </Form.Label>
+    <Form.Group controlId={`my-${controlId}`}>
+      <Form.Label>{`${label}: `}</Form.Label>
       <Form.Control type={type} placeholder={placeholder} {...input} />
       {info && <Form.Text className="text-muted">{info}</Form.Text>}
-      <Form.Text>{renderErrors()}</Form.Text>
+      <Form.Text className="text-danger">{renderErrors()}</Form.Text>
     </Form.Group>
   );
 };

@@ -56,7 +56,7 @@ class CreateProfile extends Component {
 }
 
 CreateProfile.propTypes = {
-  profile: PropTypes.object.isRequired,
+  profile: PropTypes.object,
   errors: PropTypes.object.isRequired,
   submitProfile: PropTypes.func.isRequired,
   clearErrors: PropTypes.func.isRequired

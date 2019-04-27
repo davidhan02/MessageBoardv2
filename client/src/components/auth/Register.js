@@ -27,6 +27,7 @@ class Register extends Component {
           type={type}
           label={label}
           errors={errors}
+          controlId={name}
           placeholder={label}
           component={FormField}
         />

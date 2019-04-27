@@ -34,10 +34,11 @@ class Login extends Component {
       return (
         <Field
           key={name}
-          type={name}
           name={name}
+          type={name}
           label={label}
           errors={errors}
+          controlId={name}
           placeholder={label}
           component={FormField}
         />
