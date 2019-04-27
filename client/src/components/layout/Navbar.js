@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import { logoutUser } from '../../actions/authActions';
-import { clearCurrentProfile } from '../../actions/profilesActions';
+import { clearCurrentProfile } from '../../actions/profileActions';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import Container from 'react-bootstrap/Container';

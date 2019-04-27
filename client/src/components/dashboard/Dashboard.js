@@ -2,11 +2,10 @@ import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import Button from 'react-bootstrap/Button';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
-import { getCurrentProfile } from '../../actions/profilesActions';
+import { getCurrentProfile } from '../../actions/profileActions';
 import Spinner from '../common/Spinner';
 
 class Dashboard extends Component {

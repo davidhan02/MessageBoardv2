@@ -1,6 +1,7 @@
 import axios from 'axios';
 
 import {
+  SET_ERRORS,
   GET_PROFILE,
   SET_PROFILE_LOADING,
   CLEAR_CURRENT_PROFILE
@@ -20,6 +21,19 @@ export const getCurrentProfile = () => dispatch => {
       dispatch({
         type: GET_PROFILE,
         payload: {}
+      })
+    );
+};
+
+// Create a profile
+export const submitProfile = (formValues, history) => dispatch => {
+  axios
+    .post('/api/profiles', formValues)
+    .then(res => history.push('/dashboard'))
+    .catch(err =>
+      dispatch({
+        type: SET_ERRORS,
+        payload: err.response.data
       })
     );
 };
