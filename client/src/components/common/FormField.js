@@ -12,8 +12,8 @@ export default ({
   meta: { error, touched }
 }) => {
   const renderErrors = () => {
-    if (errors[type]) {
-      return errors[type];
+    if (errors[controlId]) {
+      return errors[controlId];
     } else if (touched) {
       return error;
     }
@@ -24,7 +24,7 @@ export default ({
       <Form.Label>{`${label}: `}</Form.Label>
       <Form.Control type={type} placeholder={placeholder} {...input} />
       {info && <Form.Text className="text-muted">{info}</Form.Text>}
-      {(errors[type] || touched) && (
+      {(errors[controlId] || touched) && (
         <Form.Text className="text-danger">{renderErrors()}</Form.Text>
       )}
     </Form.Group>

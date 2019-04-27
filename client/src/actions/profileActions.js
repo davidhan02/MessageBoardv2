@@ -26,16 +26,16 @@ export const getCurrentProfile = () => dispatch => {
 };
 
 // Create a profile
-export const submitProfile = (formValues, history) => dispatch => {
-  axios
-    .post('/api/profiles', formValues)
-    .then(res => history.push('/dashboard'))
-    .catch(err =>
-      dispatch({
-        type: SET_ERRORS,
-        payload: err.response.data
-      })
-    );
+export const submitProfile = (formValues, history) => async dispatch => {
+  try {
+    const res = await axios.post('/api/profiles', formValues);
+    history.push('/dashboard');
+  } catch (err) {
+    dispatch({
+      type: SET_ERRORS,
+      payload: err.response.data
+    });
+  }
 };
 
 export const setProfileLoading = () => {

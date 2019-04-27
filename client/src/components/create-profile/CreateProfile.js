@@ -29,6 +29,7 @@ class CreateProfile extends Component {
           info={info}
           label={label}
           errors={errors}
+          controlId={name}
           placeholder={label}
           component={FormField}
         />
