@@ -2,7 +2,9 @@ import React, { Component, Fragment } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+
 import { logoutUser } from '../../actions/authActions';
+import { clearCurrentProfile } from '../../actions/profilesActions';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import Container from 'react-bootstrap/Container';
@@ -10,6 +12,7 @@ import Container from 'react-bootstrap/Container';
 class Header extends Component {
   logoutUser = () => {
     const { logoutUser, history } = this.props;
+    this.props.clearCurrentProfile();
     logoutUser(history);
   };
 
@@ -72,12 +75,13 @@ class Header extends Component {
 
 Header.propTypes = {
   auth: PropTypes.object.isRequired,
-  logoutUser: PropTypes.func.isRequired
+  logoutUser: PropTypes.func.isRequired,
+  clearCurrentProfile: PropTypes.func.isRequired
 };
 
 const mapStateToProps = ({ auth }) => ({ auth });
 
 export default connect(
   mapStateToProps,
-  { logoutUser }
+  { logoutUser, clearCurrentProfile }
 )(withRouter(Header));
