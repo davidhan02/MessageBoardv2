@@ -7,9 +7,9 @@ import Navbar from './layout/Navbar';
 import Footer from './layout/Footer';
 import Login from './auth/Login';
 import Register from './auth/Register';
+import Dashboard from './dashboard/Dashboard';
 
 const About = () => <h2>About</h2>;
-const Dashboard = () => <h2>Dashboard</h2>;
 const Landing = () => <h2>Landing</h2>;
 const NotFound = () => <h2>404 Not Found</h2>;
 
