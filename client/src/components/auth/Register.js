@@ -18,7 +18,7 @@ class Register extends Component {
   }
 
   renderFields() {
-    const { errors } = this.props.auth;
+    const { errors } = this.props;
     return registerFields.map(({ label, name, type }) => {
       return (
         <Field
@@ -61,11 +61,12 @@ class Register extends Component {
 
 Register.propTypes = {
   auth: PropTypes.object.isRequired,
+  errors: PropTypes.object.isRequired,
   submitRegister: PropTypes.func.isRequired,
   clearErrors: PropTypes.func.isRequired
 };
 
-const mapStateToProps = ({ auth }) => ({ auth });
+const mapStateToProps = ({ auth, errors }) => ({ auth, errors });
 
 const formWrap = reduxForm({
   validate,

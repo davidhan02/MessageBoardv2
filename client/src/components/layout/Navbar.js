@@ -8,11 +8,6 @@ import Navbar from 'react-bootstrap/Navbar';
 import Container from 'react-bootstrap/Container';
 
 class Header extends Component {
-  logout = () => {
-    const { logoutUser, history } = this.props;
-    logoutUser(history);
-  };
-
   render() {
     const { isAuthenticated, user, loading } = this.props.auth;
 
@@ -21,9 +16,7 @@ class Header extends Component {
         <Link className="nav-link" to="/dashboard">
           {user.name}
         </Link>
-        <Link className="nav-link" to="/" onClick={this.logout}>
-          Logout
-        </Link>
+        <Nav.Link href="/api/users/logout">Logout</Nav.Link>
       </Fragment>
     );
 

@@ -29,7 +29,7 @@ class Login extends Component {
   }
 
   renderFields() {
-    const { errors } = this.props.auth;
+    const { errors } = this.props;
     return loginFields.map(({ label, name }) => {
       return (
         <Field
@@ -78,11 +78,12 @@ class Login extends Component {
 
 Login.propTypes = {
   auth: PropTypes.object.isRequired,
+  errors: PropTypes.object.isRequired,
   submitLogin: PropTypes.func.isRequired,
   clearErrors: PropTypes.func.isRequired
 };
 
-const mapStateToProps = ({ auth }) => ({ auth });
+const mapStateToProps = ({ auth, errors }) => ({ auth, errors });
 
 const formWrap = reduxForm({
   validate,

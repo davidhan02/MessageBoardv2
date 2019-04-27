@@ -16,7 +16,7 @@ router.get('/current_user', (req, res) => {
 // @access  Public
 router.get('/logout', (req, res) => {
   req.logout();
-  res.json({ session: 'Logged Out' });
+  res.redirect('/');
 });
 
 // @route   POST api/users/login
