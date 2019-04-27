@@ -9,12 +9,33 @@ import Button from 'react-bootstrap/Button';
 
 import { clearErrors } from '../../actions/authActions';
 import { submitProfile } from '../../actions/profileActions';
+import FormField from '../common/FormField';
+import profileFields from '../../utils/fields/profile';
 
 class CreateProfile extends Component {
   onSubmit = formValues => {
     const { submitProfile, history } = this.props;
     submitProfile(formValues, history);
   };
+
+  renderFields() {
+    const { errors } = this.props;
+    return profileFields.map(({ label, name, type, info }) => {
+      return (
+        <Field
+          key={name}
+          type={type}
+          name={name}
+          info={info}
+          label={label}
+          errors={errors}
+          placeholder={label}
+          component={FormField}
+        />
+      );
+    });
+  }
+
   render() {
     const { handleSubmit } = this.props;
     return (
@@ -23,7 +44,7 @@ class CreateProfile extends Component {
           <h1 className="display-4 text-center">Create Profile</h1>
           <p className="lead text-center">Input some of your information</p>
           <Form onSubmit={handleSubmit(this.onSubmit)}>
-            <Field name="test" type="text" component="input" />
+            {this.renderFields()}
             <Button variant="primary" size="lg" type="submit" block>
               Submit
             </Button>

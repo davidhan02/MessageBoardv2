@@ -1,5 +1,5 @@
 import isEmpty from '../utils/is-empty';
-import { FETCH_USER, LOGOUT_USER, SET_USER_LOADING } from '../actions/types';
+import { FETCH_USER, LOGOUT_USER } from '../actions/types';
 
 const initialState = {
   isAuthenticated: false,
