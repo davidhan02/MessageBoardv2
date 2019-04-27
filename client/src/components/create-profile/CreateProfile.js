@@ -7,10 +7,11 @@ import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 
-import { clearErrors } from '../../actions/authActions';
 import { submitProfile } from '../../actions/profileActions';
-import FormField from '../common/FormField';
+import { clearErrors } from '../../actions/authActions';
 import profileFields from '../../utils/fields/profile';
+import validate from '../../utils/validation/profile';
+import FormField from '../common/FormField';
 
 class CreateProfile extends Component {
   onSubmit = formValues => {
@@ -66,6 +67,7 @@ CreateProfile.propTypes = {
 const mapStateToProps = ({ profile, errors }) => ({ profile, errors });
 
 const formWrap = reduxForm({
+  validate,
   form: 'profileForm'
 })(CreateProfile);
 

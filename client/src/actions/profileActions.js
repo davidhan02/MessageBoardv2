@@ -28,7 +28,7 @@ export const getCurrentProfile = () => dispatch => {
 // Create a profile
 export const submitProfile = (formValues, history) => async dispatch => {
   try {
-    const res = await axios.post('/api/profiles', formValues);
+    await axios.post('/api/profiles', formValues);
     history.push('/dashboard');
   } catch (err) {
     dispatch({
