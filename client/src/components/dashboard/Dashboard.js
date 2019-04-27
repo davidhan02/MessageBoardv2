@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -21,9 +22,9 @@ class Dashboard extends Component {
       <Fragment>
         <p className="lead text-muted">Welcome {user.name}</p>
         <p>You have not yet set up a profile, please add some information.</p>
-        <Button variant="info" size="lg" to="/create-prof">
+        <Link to="/create-prof" className="btn btn-info btn-lg">
           Create a Profile
-        </Button>
+        </Link>
       </Fragment>
     );
 
