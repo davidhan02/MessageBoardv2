@@ -21,7 +21,7 @@ class Dashboard extends Component {
       <Fragment>
         <p className="lead text-muted">Welcome {user.name}</p>
         <p>You have not yet set up a profile, please add some information.</p>
-        <Button variant="info" size="lg" to="/create-profile">
+        <Button variant="info" size="lg" to="/create-prof">
           Create a Profile
         </Button>
       </Fragment>
