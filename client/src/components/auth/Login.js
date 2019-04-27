@@ -53,6 +53,7 @@ class Login extends Component {
 
   render() {
     const { handleSubmit } = this.props;
+    const { loading } = this.props.auth;
 
     return (
       <Row className="login">
@@ -62,7 +63,7 @@ class Login extends Component {
           <Form onSubmit={handleSubmit(this.onSubmit)}>
             {this.renderFields()}
             <Button variant="primary" size="lg" type="submit" block>
-              Login
+              {loading ? 'Loading...' : 'Login'}
             </Button>
             <Button variant="info" size="lg" href="/auth/google" block>
               Sign in with Google

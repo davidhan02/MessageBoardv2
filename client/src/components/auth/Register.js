@@ -42,6 +42,7 @@ class Register extends Component {
 
   render() {
     const { handleSubmit } = this.props;
+    const { loading } = this.props.auth;
 
     return (
       <Row className="register">
@@ -51,7 +52,7 @@ class Register extends Component {
           <Form onSubmit={handleSubmit(this.onSubmit)}>
             {this.renderFields()}
             <Button variant="primary" size="lg" type="submit" block>
-              Register
+              {loading ? 'Loading...' : 'Register'}
             </Button>
           </Form>
         </Col>
