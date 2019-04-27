@@ -64,8 +64,8 @@ export const clearErrors = () => dispatch => {
   });
 };
 
-export const setUserLoading = () => dispatch => {
-  dispatch({
+export const setUserLoading = () => {
+  return {
     type: SET_USER_LOADING
-  });
+  };
 };
