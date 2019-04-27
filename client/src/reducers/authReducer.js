@@ -1,10 +1,14 @@
 import isEmpty from '../utils/is-empty';
-import { FETCH_USER, LOGOUT_USER } from '../actions/types';
+import {
+  FETCH_USER,
+  LOGOUT_USER,
+  SET_USER_LOADING,
+  CLEAR_USER_LOADING
+} from '../actions/types';
 
 const initialState = {
   isAuthenticated: false,
   user: {},
-  errors: {},
   loading: true
 };
 
@@ -22,7 +26,17 @@ export default (state = initialState, action) => {
         ...state,
         isAuthenticated: false,
         user: {},
-        errors: {}
+        loading: true
+      };
+    case SET_USER_LOADING:
+      return {
+        ...state,
+        loading: true
+      };
+    case CLEAR_USER_LOADING:
+      return {
+        ...state,
+        loading: false
       };
     default:
       return state;
