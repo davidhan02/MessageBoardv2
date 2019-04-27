@@ -3,8 +3,8 @@ import { FETCH_USER, LOGOUT_USER, SET_USER_LOADING } from '../actions/types';
 
 const initialState = {
   isAuthenticated: false,
-  user: {},
-  loading: true
+  loading: false,
+  user: {}
 };
 
 export default (state = initialState, action) => {
