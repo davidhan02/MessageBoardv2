@@ -21,9 +21,7 @@ class Header extends Component {
         <Link className="nav-link" to="/dashboard">
           {user.name}
         </Link>
-        <Link className="nav-link" onClick={this.logoutUser}>
-          Logout
-        </Link>
+        <Nav.Link onClick={this.logoutUser}>Logout</Nav.Link>
       </Fragment>
     );
 
