@@ -58,10 +58,10 @@ export const submitRegister = (formValues, history) => async dispatch => {
   }
 };
 
-export const clearErrors = () => dispatch => {
-  dispatch({
+export const clearErrors = () => {
+  return {
     type: CLEAR_ERRORS
-  });
+  };
 };
 
 export const setUserLoading = () => {
