@@ -17,7 +17,9 @@ class Header extends Component {
   };
 
   render() {
-    const { isAuthenticated, user } = this.props.auth;
+    const { isAuthenticated, loading, user } = this.props.auth;
+
+    const loadingLink = <Nav.Link>Loading...</Nav.Link>;
 
     const authLinks = (
       <Fragment>
@@ -54,7 +56,7 @@ class Header extends Component {
               <Link className="nav-link" to="/about">
                 About Us
               </Link>
-              {isAuthenticated ? authLinks : guestLinks}
+              {loading ? loadingLink : isAuthenticated ? authLinks : guestLinks}
             </Nav>
           </Navbar.Collapse>
         </Container>

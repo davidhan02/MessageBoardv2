@@ -20,10 +20,11 @@ export const fetchUser = () => async dispatch => {
 export const logoutUser = history => async dispatch => {
   dispatch(setUserLoading());
   await axios.get('/api/users/logout');
-  dispatch({
+  await dispatch({
     type: LOGOUT_USER
   });
   history.push('/');
+  dispatch(clearUserLoading());
 };
 
 export const submitLogin = (formValues, history) => async dispatch => {
@@ -36,12 +37,12 @@ export const submitLogin = (formValues, history) => async dispatch => {
     });
     history.push('/login');
   } catch (err) {
-    await dispatch({
+    dispatch({
       type: SET_ERRORS,
       payload: err.response.data
     });
-    dispatch(clearUserLoading());
   }
+  dispatch(clearUserLoading());
 };
 
 export const submitRegister = (formValues, history) => async dispatch => {
@@ -54,12 +55,12 @@ export const submitRegister = (formValues, history) => async dispatch => {
     });
     history.push('/login');
   } catch (err) {
-    await dispatch({
+    dispatch({
       type: SET_ERRORS,
       payload: err.response.data
     });
-    dispatch(clearUserLoading());
   }
+  dispatch(clearUserLoading());
 };
 
 export const setUserLoading = () => {
