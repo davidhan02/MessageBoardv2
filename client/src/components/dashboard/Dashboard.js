@@ -1,25 +1,40 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import Button from 'react-bootstrap/Button';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
 import { getCurrentProfile } from '../../actions/profilesActions';
+import Spinner from '../common/Spinner';
 
 class Dashboard extends Component {
   componentDidMount() {
     this.props.getCurrentProfile();
   }
   render() {
+    let dashboardContent;
     const { user } = this.props.auth;
     const { profile, loading } = this.props.profiles;
 
-    let dashboardContent;
+    const noProfile = (
+      <Fragment>
+        <p className="lead text-muted">Welcome {user.name}</p>
+        <p>You have not yet set up a profile, please add some information.</p>
+        <Button variant="info" size="lg" to="/create-profile">
+          Create a Profile
+        </Button>
+      </Fragment>
+    );
 
     if (profile === null || loading) {
-      dashboardContent = <h4>Loading...</h4>;
+      dashboardContent = <Spinner />;
     } else {
-      dashboardContent = <h1>Hello {user.name}</h1>;
+      if (Object.keys(profile).length > 0) {
+        dashboardContent = <h4>TODO: DISPLAY PROFILE</h4>;
+      } else {
+        dashboardContent = noProfile;
+      }
     }
 
     return (
