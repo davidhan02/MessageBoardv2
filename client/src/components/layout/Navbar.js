@@ -17,7 +17,7 @@ class Header extends Component {
   };
 
   render() {
-    const { isAuthenticated, user, loading } = this.props.auth;
+    const { isAuthenticated, user } = this.props.auth;
 
     const authLinks = (
       <Fragment>
@@ -39,16 +39,6 @@ class Header extends Component {
       </Fragment>
     );
 
-    const renderLinks = () => {
-      if (loading) {
-        return <Nav.Link>Loading...</Nav.Link>;
-      }
-      if (isAuthenticated) {
-        return authLinks;
-      }
-      return guestLinks;
-    };
-
     return (
       <Navbar expand="sm" className="navbar mb-5">
         <Container>
@@ -64,7 +54,7 @@ class Header extends Component {
               <Link className="nav-link" to="/about">
                 About Us
               </Link>
-              {renderLinks()}
+              {isAuthenticated ? authLinks : guestLinks}
             </Nav>
           </Navbar.Collapse>
         </Container>

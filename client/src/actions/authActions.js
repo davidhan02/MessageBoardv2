@@ -1,16 +1,8 @@
 import axios from 'axios';
-import {
-  FETCH_USER,
-  LOGOUT_USER,
-  SET_ERRORS,
-  CLEAR_ERRORS,
-  SET_USER_LOADING
-} from './types';
+import { FETCH_USER, LOGOUT_USER, SET_ERRORS, CLEAR_ERRORS } from './types';
 
 export const fetchUser = () => async dispatch => {
-  dispatch(setUserLoading());
   const res = await axios.get('/api/users/current_user');
-
   dispatch({
     type: FETCH_USER,
     payload: res.data
@@ -22,7 +14,6 @@ export const logoutUser = history => async dispatch => {
   dispatch({
     type: LOGOUT_USER
   });
-  dispatch(fetchUser());
   history.push('/');
 };
 
@@ -61,11 +52,5 @@ export const submitRegister = (formValues, history) => async dispatch => {
 export const clearErrors = () => {
   return {
     type: CLEAR_ERRORS
-  };
-};
-
-export const setUserLoading = () => {
-  return {
-    type: SET_USER_LOADING
   };
 };
