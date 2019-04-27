@@ -14,8 +14,7 @@ export default ({
   const renderErrors = () => {
     if (errors[type]) {
       return errors[type];
-    }
-    if (touched) {
+    } else if (touched) {
       return error;
     }
   };
@@ -25,7 +24,9 @@ export default ({
       <Form.Label>{`${label}: `}</Form.Label>
       <Form.Control type={type} placeholder={placeholder} {...input} />
       {info && <Form.Text className="text-muted">{info}</Form.Text>}
-      <Form.Text className="text-danger">{renderErrors()}</Form.Text>
+      {(errors[type] || touched) && (
+        <Form.Text className="text-danger">{renderErrors()}</Form.Text>
+      )}
     </Form.Group>
   );
 };
