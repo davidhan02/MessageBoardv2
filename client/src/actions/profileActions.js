@@ -3,8 +3,10 @@ import axios from 'axios';
 import {
   SET_ERRORS,
   GET_PROFILE,
+  GET_PROFILES,
   SET_PROFILE_LOADING,
-  CLEAR_CURRENT_PROFILE
+  CLEAR_CURRENT_PROFILE,
+  FETCH_USER
 } from './types';
 
 export const getCurrentProfile = () => dispatch => {
@@ -25,7 +27,6 @@ export const getCurrentProfile = () => dispatch => {
     );
 };
 
-// Create a profile
 export const submitProfile = (formValues, history) => async dispatch => {
   try {
     await axios.post('/api/profiles', formValues);
@@ -35,6 +36,23 @@ export const submitProfile = (formValues, history) => async dispatch => {
       type: SET_ERRORS,
       payload: err.response.data
     });
+  }
+};
+
+export const deleteAccount = () => async dispatch => {
+  if (window.confirm('Are you sure you want to delete your account?')) {
+    try {
+      await axios.delete('/api/profiles');
+      dispatch({
+        type: FETCH_USER,
+        payload: {}
+      });
+    } catch (err) {
+      dispatch({
+        type: SET_ERRORS,
+        payload: err.response.data
+      });
+    }
   }
 };
 

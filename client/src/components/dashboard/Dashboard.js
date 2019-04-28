@@ -4,14 +4,21 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import Button from 'react-bootstrap/Button';
 
-import { getCurrentProfile } from '../../actions/profileActions';
+import { getCurrentProfile, deleteAccount } from '../../actions/profileActions';
+import ProfileActions from './ProfileActions';
 import Spinner from '../common/Spinner';
 
 class Dashboard extends Component {
   componentDidMount() {
     this.props.getCurrentProfile();
   }
+
+  onDeleteClick = e => {
+    this.props.deleteAccount();
+  };
+
   render() {
     let dashboardContent;
     const { user } = this.props.auth;
@@ -19,7 +26,6 @@ class Dashboard extends Component {
 
     const noProfile = (
       <Fragment>
-        <p className="lead text-muted">Welcome {user.name}</p>
         <p>You have not yet set up a profile, please add some information.</p>
         <Link to="/create-prof" className="btn btn-info btn-lg">
           Create a Profile
@@ -27,11 +33,22 @@ class Dashboard extends Component {
       </Fragment>
     );
 
+    const hasProfile = (
+      <Fragment>
+        <p>Edit your profile, experience, and education here.</p>
+        <ProfileActions />
+        <p>Display profile and exp and edu here</p>
+        <Button variant="danger" onClick={this.onDeleteClick}>
+          Delete my Account
+        </Button>
+      </Fragment>
+    );
+
     if (profile === null || loading) {
       dashboardContent = <Spinner />;
     } else {
       if (Object.keys(profile).length > 0) {
-        dashboardContent = <h4>TODO: DISPLAY PROFILE</h4>;
+        dashboardContent = hasProfile;
       } else {
         dashboardContent = noProfile;
       }
@@ -41,6 +58,7 @@ class Dashboard extends Component {
       <Row className="dashboard">
         <Col md={12}>
           <h1 className="display-4">Dashboard</h1>
+          <p className="lead text-muted">Welcome {user.name}</p>
           {dashboardContent}
         </Col>
       </Row>
@@ -49,8 +67,9 @@ class Dashboard extends Component {
 }
 
 Dashboard.propTypes = {
-  auth: PropTypes.object.isRequired,
   profile: PropTypes.object,
+  auth: PropTypes.object.isRequired,
+  deleteAccount: PropTypes.func.isRequired,
   getCurrentProfile: PropTypes.func.isRequired
 };
 
@@ -58,5 +77,5 @@ const mapStateToProps = ({ auth, profiles }) => ({ auth, profiles });
 
 export default connect(
   mapStateToProps,
-  { getCurrentProfile }
+  { getCurrentProfile, deleteAccount }
 )(Dashboard);
