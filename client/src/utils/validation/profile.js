@@ -1,6 +1,3 @@
-import profileFields from '../fields/profile';
-import socialFields from '../fields/social';
-
 const validate = formValues => {
   const errors = {};
   const requiredFields = ['status', 'handle', 'interests'];
