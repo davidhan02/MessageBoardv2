@@ -3,11 +3,11 @@ import React, { Fragment } from 'react';
 import Container from 'react-bootstrap/Container';
 
 import PrivateRoute from './common/PrivateRoute';
+import Dashboard from './dashboard/Dashboard';
+import Register from './auth/Register';
 import Navbar from './layout/Navbar';
 import Footer from './layout/Footer';
 import Login from './auth/Login';
-import Register from './auth/Register';
-import Dashboard from './dashboard/Dashboard';
 
 const About = () => <h2>About</h2>;
 const Landing = () => <h2>Landing</h2>;
