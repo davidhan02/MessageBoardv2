@@ -3,11 +3,10 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import Button from 'react-bootstrap/Button';
 
-import { getCurrentProfile, deleteAccount } from '../../actions/profileActions';
-import CreateProfile from '../create-profile/CreateProfile';
-import ProfileActions from './ProfileActions';
+import { getCurrentProfile } from '../../actions/profileActions';
+import DashboardProfile from './DashboardProfile';
+import CreateProfile from './CreateProfile';
 import Spinner from '../common/Spinner';
 
 class Dashboard extends Component {
@@ -15,33 +14,16 @@ class Dashboard extends Component {
     this.props.getCurrentProfile();
   }
 
-  onDeleteClick = e => {
-    this.props.deleteAccount();
-  };
-
   render() {
     let dashboardContent;
     const { user } = this.props.auth;
     const { profile, loading } = this.props.profiles;
 
-    const hasProfile = (
-      <Row className="mt-5">
-        <Col md={12} className="m-auto">
-          <p>Edit your profile, experience, and education here.</p>
-          <ProfileActions />
-          <p>Display profile and exp and edu here</p>
-          <Button variant="danger" onClick={this.onDeleteClick}>
-            Delete my Account
-          </Button>
-        </Col>
-      </Row>
-    );
-
     if (profile === null || loading) {
       dashboardContent = <Spinner />;
     } else {
       if (Object.keys(profile).length > 0) {
-        dashboardContent = hasProfile;
+        dashboardContent = <DashboardProfile />;
       } else {
         dashboardContent = <CreateProfile />;
       }
@@ -71,5 +53,5 @@ const mapStateToProps = ({ auth, profiles }) => ({ auth, profiles });
 
 export default connect(
   mapStateToProps,
-  { getCurrentProfile, deleteAccount }
+  { getCurrentProfile }
 )(Dashboard);
