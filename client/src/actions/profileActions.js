@@ -3,28 +3,25 @@ import axios from 'axios';
 import {
   SET_ERRORS,
   GET_PROFILE,
-  GET_PROFILES,
   SET_PROFILE_LOADING,
   CLEAR_CURRENT_PROFILE,
   FETCH_USER
 } from './types';
 
-export const getCurrentProfile = () => dispatch => {
+export const getCurrentProfile = () => async dispatch => {
   dispatch(setProfileLoading());
-  axios
-    .get('/api/profiles')
-    .then(res =>
-      dispatch({
-        type: GET_PROFILE,
-        payload: res.data
-      })
-    )
-    .catch(err =>
-      dispatch({
-        type: GET_PROFILE,
-        payload: {}
-      })
-    );
+  try {
+    const res = await axios.get('/api/profiles');
+    dispatch({
+      type: GET_PROFILE,
+      payload: res.data
+    });
+  } catch (err) {
+    dispatch({
+      type: GET_PROFILE,
+      payload: {}
+    });
+  }
 };
 
 export const submitProfile = (formValues, history) => async dispatch => {
