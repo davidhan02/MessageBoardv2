@@ -24,8 +24,6 @@ class Dashboard extends Component {
     const { user } = this.props.auth;
     const { profile, loading } = this.props.profiles;
 
-    const noProfile = <CreateProfile />;
-
     const hasProfile = (
       <Fragment>
         <p>Edit your profile, experience, and education here.</p>
@@ -43,7 +41,7 @@ class Dashboard extends Component {
       if (Object.keys(profile).length > 0) {
         dashboardContent = hasProfile;
       } else {
-        dashboardContent = noProfile;
+        dashboardContent = <CreateProfile />;
       }
     }
 
