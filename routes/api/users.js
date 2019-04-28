@@ -46,7 +46,9 @@ router.post('/register', async (req, res) => {
     return res.status(400).json(errors);
   } else {
     const newUser = await new User({ ...req.body }).save();
-    await req.login(newUser);
+    await req.login(newUser, err => {
+      if (err) console.log(err);
+    });
     return res.json(newUser);
   }
 });

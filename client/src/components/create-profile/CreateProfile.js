@@ -102,7 +102,7 @@ class CreateProfile extends Component {
           {this.renderBioField()}
           {this.renderSocialFields()}
           <Button variant="primary" size="lg" type="submit" block>
-            Submit
+            Save Profile
           </Button>
         </Form>
       </Fragment>
