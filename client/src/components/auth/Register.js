@@ -10,7 +10,7 @@ import Col from 'react-bootstrap/Col';
 import { submitRegister, clearErrors } from '../../actions/authActions';
 import registerFields from '../../utils/fields/register';
 import validate from '../../utils/validation/register';
-import FormField from '../common/FormField';
+import FormField from '../common/fields/FormField';
 
 class Register extends Component {
   componentWillUnmount() {

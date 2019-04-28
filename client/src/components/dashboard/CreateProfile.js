@@ -14,10 +14,10 @@ import profileFields from '../../utils/fields/profile';
 import validate from '../../utils/validation/profile';
 import socialFields from '../../utils/fields/social';
 import statusOptions from '../../utils/fields/status';
-import SelectField from '../common/SelectField';
-import FormField from '../common/FormField';
-import AreaField from '../common/AreaField';
-import IconField from '../common/IconField';
+import SelectField from '../common/fields/SelectField';
+import FormField from '../common/fields/FormField';
+import AreaField from '../common/fields/AreaField';
+import IconField from '../common/fields/IconField';
 
 class CreateProfile extends Component {
   state = { showSocialLinks: false };

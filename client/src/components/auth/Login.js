@@ -11,7 +11,7 @@ import Col from 'react-bootstrap/Col';
 import { submitLogin, clearErrors } from '../../actions/authActions';
 import loginFields from '../../utils/fields/login';
 import validate from '../../utils/validation/login';
-import FormField from '../common/FormField';
+import FormField from '../common/fields/FormField';
 
 class Login extends Component {
   componentDidMount() {
