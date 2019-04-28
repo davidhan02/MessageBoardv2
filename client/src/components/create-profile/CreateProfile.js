@@ -8,8 +8,11 @@ import Button from 'react-bootstrap/Button';
 import { submitProfile } from '../../actions/profileActions';
 import { clearErrors } from '../../actions/authActions';
 import profileFields from '../../utils/fields/profile';
-import validate from '../../utils/validation/profile';
+import validate from '../../utils/validation/profile'; // update with social
+import socialFields from '../../utils/fields/social';
 import FormField from '../common/FormField';
+import AreaField from '../common/AreaField';
+import IconField from '../common/IconField';
 
 class CreateProfile extends Component {
   onSubmit = formValues => {
@@ -17,7 +20,7 @@ class CreateProfile extends Component {
     submitProfile(formValues, history);
   };
 
-  renderFields() {
+  renderFields = () => {
     const { errors } = this.props;
     return profileFields.map(({ label, name, type, info }) => {
       return (
@@ -34,7 +37,37 @@ class CreateProfile extends Component {
         />
       );
     });
-  }
+  };
+
+  renderBioField = () => {
+    return (
+      <Field
+        name="bio"
+        info="Please tell us a little information about yourself"
+        label="Short Bio"
+        controlId="bio"
+        placeholder="Short Bio"
+        component={AreaField}
+      />
+    );
+  };
+
+  renderSocialFields = () => {
+    return socialFields.map(({ label, name, icon }) => {
+      return (
+        <Field
+          key={name}
+          type="text"
+          name={name}
+          icon={icon}
+          label={label}
+          controlId={name}
+          placeholder={label}
+          component={IconField}
+        />
+      );
+    });
+  };
 
   render() {
     const { handleSubmit } = this.props;
@@ -45,6 +78,8 @@ class CreateProfile extends Component {
         </p>
         <Form onSubmit={handleSubmit(this.onSubmit)}>
           {this.renderFields()}
+          {this.renderBioField()}
+          {this.renderSocialFields()}
           <Button variant="primary" size="lg" type="submit" block>
             Submit
           </Button>

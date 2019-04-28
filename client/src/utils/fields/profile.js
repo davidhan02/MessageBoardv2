@@ -34,12 +34,6 @@ const profileFields = [
     name: 'interests',
     type: 'text',
     info: 'Please use comma separated values (eg. HTML, CSS, Javascript)'
-  },
-  {
-    label: 'Short Bio',
-    name: 'bio',
-    type: 'textarea',
-    info: 'Please tell us a little information about yourself.'
   }
 ];
 
