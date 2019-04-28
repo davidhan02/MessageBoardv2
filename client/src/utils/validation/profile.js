@@ -3,21 +3,9 @@ import socialFields from '../fields/social';
 
 const validate = formValues => {
   const errors = {};
-  const miscFields = ['status', 'bio'];
+  const requiredFields = ['status', 'handle', 'interests'];
 
-  profileFields.forEach(({ name }) => {
-    if (!formValues[name]) {
-      errors[name] = `You must provide a ${name}`;
-    }
-  });
-
-  socialFields.forEach(({ name }) => {
-    if (!formValues[name]) {
-      errors[name] = `You must provide a ${name}`;
-    }
-  });
-
-  miscFields.forEach(name => {
+  requiredFields.forEach(name => {
     if (!formValues[name]) {
       errors[name] = `You must provide a ${name}`;
     }

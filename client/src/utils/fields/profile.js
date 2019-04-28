@@ -6,6 +6,12 @@ const profileFields = [
     info: 'A unique name or word to use as a handle for your profile URL.'
   },
   {
+    label: 'Interests',
+    name: 'interests',
+    type: 'text',
+    info: 'Please use comma separated values (eg. HTML, CSS, Javascript)'
+  },
+  {
     label: 'Company',
     name: 'company',
     type: 'text',
@@ -22,18 +28,6 @@ const profileFields = [
     name: 'location',
     type: 'text',
     info: 'City or city & state suggested (eg. Boston, MA)'
-  },
-  {
-    label: 'Status',
-    name: 'status',
-    type: 'text',
-    info: 'Give us an idea of where you are at in your career.'
-  },
-  {
-    label: 'Interests',
-    name: 'interests',
-    type: 'text',
-    info: 'Please use comma separated values (eg. HTML, CSS, Javascript)'
   }
 ];
 

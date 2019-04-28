@@ -10,14 +10,33 @@ import { clearErrors } from '../../actions/authActions';
 import profileFields from '../../utils/fields/profile';
 import validate from '../../utils/validation/profile'; // update with social
 import socialFields from '../../utils/fields/social';
+import statusOptions from '../../utils/fields/status';
+import SelectField from '../common/SelectField';
 import FormField from '../common/FormField';
 import AreaField from '../common/AreaField';
 import IconField from '../common/IconField';
 
 class CreateProfile extends Component {
+  componentWillUnmount() {
+    this.props.clearErrors();
+  }
+
   onSubmit = formValues => {
     const { submitProfile, history } = this.props;
     submitProfile(formValues, history);
+  };
+
+  renderStatus = () => {
+    return (
+      <Field
+        name="status"
+        info="Give us an idea of where you are at in your career."
+        label="Career Status"
+        controlId="status"
+        component={SelectField}
+        options={statusOptions}
+      />
+    );
   };
 
   renderFields = () => {
@@ -77,6 +96,7 @@ class CreateProfile extends Component {
           You do not yet have a profile. You can create one here:
         </p>
         <Form onSubmit={handleSubmit(this.onSubmit)}>
+          {this.renderStatus()}
           {this.renderFields()}
           {this.renderBioField()}
           {this.renderSocialFields()}
