@@ -21,8 +21,8 @@ export default ({
           </InputGroup.Text>
         </InputGroup.Prepend>
         <Form.Control type={type} placeholder={placeholder} {...input} />
-        {touched && <Form.Text className="text-danger">{error}</Form.Text>}
       </InputGroup>
+      {touched && <Form.Text className="text-danger">{error}</Form.Text>}
     </Form.Group>
   );
 };
