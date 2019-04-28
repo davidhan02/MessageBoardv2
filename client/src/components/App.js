@@ -8,7 +8,6 @@ import Footer from './layout/Footer';
 import Login from './auth/Login';
 import Register from './auth/Register';
 import Dashboard from './dashboard/Dashboard';
-import CreateProfile from './create-profile/CreateProfile';
 
 const About = () => <h2>About</h2>;
 const Landing = () => <h2>Landing</h2>;
@@ -26,7 +25,6 @@ const App = () => {
             <Route exact path="/login" component={Login} />
             <Route exact path="/register" component={Register} />
             <PrivateRoute exact path="/dashboard" component={Dashboard} />
-            <PrivateRoute exact path="/create-prof" component={CreateProfile} />
             <Route component={NotFound} />
           </Switch>
         </Container>

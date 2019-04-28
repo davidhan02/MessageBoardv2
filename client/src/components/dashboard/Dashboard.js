@@ -1,14 +1,13 @@
 import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 
 import { getCurrentProfile, deleteAccount } from '../../actions/profileActions';
-import ProfileActions from './ProfileActions';
 import CreateProfile from '../create-profile/CreateProfile';
+import ProfileActions from './ProfileActions';
 import Spinner from '../common/Spinner';
 
 class Dashboard extends Component {
