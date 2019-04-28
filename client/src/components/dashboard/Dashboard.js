@@ -25,14 +25,16 @@ class Dashboard extends Component {
     const { profile, loading } = this.props.profiles;
 
     const hasProfile = (
-      <Col>
-        <p>Edit your profile, experience, and education here.</p>
-        <ProfileActions />
-        <p>Display profile and exp and edu here</p>
-        <Button variant="danger" onClick={this.onDeleteClick}>
-          Delete my Account
-        </Button>
-      </Col>
+      <Row className="mt-5">
+        <Col md={12} className="m-auto">
+          <p>Edit your profile, experience, and education here.</p>
+          <ProfileActions />
+          <p>Display profile and exp and edu here</p>
+          <Button variant="danger" onClick={this.onDeleteClick}>
+            Delete my Account
+          </Button>
+        </Col>
+      </Row>
     );
 
     if (profile === null || loading) {
