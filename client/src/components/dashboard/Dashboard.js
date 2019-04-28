@@ -8,6 +8,7 @@ import Button from 'react-bootstrap/Button';
 
 import { getCurrentProfile, deleteAccount } from '../../actions/profileActions';
 import ProfileActions from './ProfileActions';
+import CreateProfile from '../create-profile/CreateProfile';
 import Spinner from '../common/Spinner';
 
 class Dashboard extends Component {
@@ -24,14 +25,7 @@ class Dashboard extends Component {
     const { user } = this.props.auth;
     const { profile, loading } = this.props.profiles;
 
-    const noProfile = (
-      <Fragment>
-        <p>You have not yet set up a profile, please add some information.</p>
-        <Link to="/create-prof" className="btn btn-info btn-lg">
-          Create a Profile
-        </Link>
-      </Fragment>
-    );
+    const noProfile = <CreateProfile />;
 
     const hasProfile = (
       <Fragment>
@@ -57,8 +51,7 @@ class Dashboard extends Component {
     return (
       <Row className="dashboard">
         <Col md={12}>
-          <h1 className="display-4">Dashboard</h1>
-          <p className="lead text-muted">Welcome {user.name}</p>
+          <h1 className="display-4">Welcome {user.name}</h1>
           {dashboardContent}
         </Col>
       </Row>

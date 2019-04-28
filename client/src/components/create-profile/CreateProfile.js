@@ -1,7 +1,8 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 import PropTypes from 'prop-types';
+import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
@@ -41,18 +42,17 @@ class CreateProfile extends Component {
   render() {
     const { handleSubmit } = this.props;
     return (
-      <Row className="create-profile">
-        <Col md={8} className="m-auto">
-          <h1 className="display-4 text-center">Create Profile</h1>
-          <p className="lead text-center">Input some of your information</p>
-          <Form onSubmit={handleSubmit(this.onSubmit)}>
-            {this.renderFields()}
-            <Button variant="primary" size="lg" type="submit" block>
-              Submit
-            </Button>
-          </Form>
-        </Col>
-      </Row>
+      <Fragment>
+        <p className="lead">
+          You do not yet have a profile. You can create one here:
+        </p>
+        <Form onSubmit={handleSubmit(this.onSubmit)}>
+          {this.renderFields()}
+          <Button variant="primary" size="lg" type="submit" block>
+            Submit
+          </Button>
+        </Form>
+      </Fragment>
     );
   }
 }
