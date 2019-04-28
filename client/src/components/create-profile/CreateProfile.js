@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from 'react';
+import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 import PropTypes from 'prop-types';
@@ -126,4 +127,4 @@ const formWrap = reduxForm({
 export default connect(
   mapStateToProps,
   { submitProfile, clearErrors }
-)(formWrap);
+)(withRouter(formWrap));

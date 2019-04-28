@@ -27,7 +27,7 @@ export const getCurrentProfile = () => async dispatch => {
 export const submitProfile = (formValues, history) => async dispatch => {
   try {
     await axios.post('/api/profiles', formValues);
-    history.push('/dashboard');
+    history.push('/login');
   } catch (err) {
     dispatch({
       type: SET_ERRORS,
