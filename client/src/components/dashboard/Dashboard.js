@@ -25,14 +25,14 @@ class Dashboard extends Component {
     const { profile, loading } = this.props.profiles;
 
     const hasProfile = (
-      <Fragment>
+      <Col>
         <p>Edit your profile, experience, and education here.</p>
         <ProfileActions />
         <p>Display profile and exp and edu here</p>
         <Button variant="danger" onClick={this.onDeleteClick}>
           Delete my Account
         </Button>
-      </Fragment>
+      </Col>
     );
 
     if (profile === null || loading) {
@@ -46,12 +46,14 @@ class Dashboard extends Component {
     }
 
     return (
-      <Row className="dashboard">
-        <Col md={12}>
-          <h1 className="display-4">Welcome {user.name}</h1>
-          {dashboardContent}
-        </Col>
-      </Row>
+      <Fragment>
+        <Row className="dashboard">
+          <Col className="text-center">
+            <h1 className="display-4">Welcome {user.name}</h1>
+          </Col>
+        </Row>
+        {dashboardContent}
+      </Fragment>
     );
   }
 }

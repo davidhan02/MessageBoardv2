@@ -3,13 +3,15 @@ import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 import PropTypes from 'prop-types';
+import Col from 'react-bootstrap/Col';
+import Row from 'react-bootstrap/Row';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 
 import { submitProfile } from '../../actions/profileActions';
 import { clearErrors } from '../../actions/authActions';
 import profileFields from '../../utils/fields/profile';
-import validate from '../../utils/validation/profile'; // update with social
+import validate from '../../utils/validation/profile';
 import socialFields from '../../utils/fields/social';
 import statusOptions from '../../utils/fields/status';
 import SelectField from '../common/SelectField';
@@ -18,6 +20,8 @@ import AreaField from '../common/AreaField';
 import IconField from '../common/IconField';
 
 class CreateProfile extends Component {
+  state = { showSocialLinks: false };
+
   componentWillUnmount() {
     this.props.clearErrors();
   }
@@ -73,39 +77,54 @@ class CreateProfile extends Component {
   };
 
   renderSocialFields = () => {
-    return socialFields.map(({ label, name, icon }) => {
-      return (
-        <Field
-          key={name}
-          type="text"
-          name={name}
-          icon={icon}
-          label={label}
-          controlId={name}
-          placeholder={label}
-          component={IconField}
-        />
-      );
-    });
+    if (this.state.showSocialLinks) {
+      return socialFields.map(({ label, name, icon }) => {
+        return (
+          <Field
+            key={name}
+            type="text"
+            name={name}
+            icon={icon}
+            label={label}
+            controlId={name}
+            placeholder={label}
+            component={IconField}
+          />
+        );
+      });
+    }
+  };
+
+  toggleSocial = () => {
+    this.setState(prevState => ({
+      showSocialLinks: !prevState.showSocialLinks
+    }));
   };
 
   render() {
     const { handleSubmit } = this.props;
     return (
-      <Fragment>
-        <p className="lead">
-          You do not yet have a profile. You can create one here:
-        </p>
-        <Form onSubmit={handleSubmit(this.onSubmit)}>
-          {this.renderStatus()}
-          {this.renderFields()}
-          {this.renderBioField()}
-          {this.renderSocialFields()}
-          <Button variant="primary" size="lg" type="submit" block>
-            Save Profile
-          </Button>
-        </Form>
-      </Fragment>
+      <Row>
+        <Col lg={8} className="m-auto">
+          <p className="lead text-center">
+            You do not yet have a profile. You can create one here:
+          </p>
+          <Form onSubmit={handleSubmit(this.onSubmit)}>
+            {this.renderStatus()}
+            {this.renderFields()}
+            {this.renderBioField()}
+            <Form.Group>
+              <Button variant="outline-info" onClick={this.toggleSocial} block>
+                Toggle Social Links
+              </Button>
+            </Form.Group>
+            {this.renderSocialFields()}
+            <Button variant="primary" size="lg" type="submit" block>
+              Save Profile
+            </Button>
+          </Form>
+        </Col>
+      </Row>
     );
   }
 }
