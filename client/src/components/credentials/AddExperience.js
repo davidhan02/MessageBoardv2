@@ -10,10 +10,14 @@ import Button from 'react-bootstrap/Button';
 
 import { clearErrors } from '../../actions/authActions';
 import { addExperience } from '../../actions/profileActions';
+import ProfileButtons from '../dashboard/ProfileButtons';
 import expFields from '../../utils/fields/experience';
 import FormField from '../common/fields/FormField';
+import CheckBox from '../common/fields/CheckBox';
 
 class AddExperience extends Component {
+  state = { disabled: false };
+
   componentWillUnmount() {
     this.props.clearErrors();
   }
@@ -40,18 +44,39 @@ class AddExperience extends Component {
     });
   }
 
+  toggleDisabled = () => {
+    this.setState({ disabled: !this.state.disabled });
+  };
+
   render() {
-    const { handleSubmit } = this.props;
+    const { handleSubmit, errors } = this.props;
     return (
       <Row>
         <Col md={8} className="m-auto">
-          <h1 className="display-4 text-center">Add Experience</h1>
-          <p className="lead text-center">
+          <h1 className="display-4 text-center mt-3">Add Experience</h1>
+          <div className="m-3 text-center">
+            <ProfileButtons />
+          </div>
+          <p className="lead">
             Add any job or position you have had in the past or current:
           </p>
           <small className="d-block pb-3">* = required fields</small>
           <Form onSubmit={handleSubmit(this.onSubmit)}>
             {this.renderFields()}
+            <Field
+              name="to"
+              type="date"
+              label="To Date"
+              errors={errors}
+              component={FormField}
+              disabled={this.state.disabled}
+            />
+            <Field
+              name="current"
+              label="Currently Working Here"
+              toggle={() => this.toggleDisabled()}
+              component={CheckBox}
+            />
             <Button variant="primary" size="lg" type="submit" block>
               Submit
             </Button>
