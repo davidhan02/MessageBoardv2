@@ -107,9 +107,6 @@ class CreateProfile extends Component {
     return (
       <Row>
         <Col lg={8} className="m-auto">
-          <p className="lead text-center">
-            You do not yet have a profile. You can create one here:
-          </p>
           <Form onSubmit={handleSubmit(this.onSubmit)}>
             {this.renderStatus()}
             {this.renderFields()}

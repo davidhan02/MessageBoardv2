@@ -7,6 +7,7 @@ import Button from 'react-bootstrap/Button';
 import CreateProfile from './CreateProfile';
 import ProfileButtons from './ProfileButtons';
 import { deleteAccount } from '../../actions/profileActions';
+import isEmpty from '../../utils/is-empty';
 
 class DashboardProfile extends Component {
   onDeleteClick = e => {
@@ -14,24 +15,35 @@ class DashboardProfile extends Component {
   };
 
   render() {
+    const { profile } = this.props.profiles;
     return (
       <Fragment>
-        <Row className="mt-5">
-          <Col md={12} className="m-auto">
-            <p>Edit your profile, experience, and education here.</p>
-            <ProfileButtons />
+        <Row className="mt-3">
+          <Col lg={8} className="text-center m-auto">
+            {!isEmpty(profile) && <ProfileButtons />}
+            <p className="text-left lead mt-3">
+              {!isEmpty(profile)
+                ? 'Edit your profile information here: '
+                : 'A profile is optional, you can create one here: '}
+            </p>
+          </Col>
+        </Row>
+        <CreateProfile />
+        <Row>
+          <Col className="m-3 text-center">
             <Button variant="danger" onClick={this.onDeleteClick}>
               Delete my Account
             </Button>
           </Col>
         </Row>
-        <CreateProfile />
       </Fragment>
     );
   }
 }
 
+const mapStateToProps = ({ profiles }) => ({ profiles });
+
 export default connect(
-  null,
+  mapStateToProps,
   { deleteAccount }
 )(DashboardProfile);

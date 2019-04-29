@@ -6,7 +6,6 @@ import Col from 'react-bootstrap/Col';
 
 import { getCurrentProfile } from '../../actions/profileActions';
 import DashboardProfile from './DashboardProfile';
-import CreateProfile from './CreateProfile';
 import Spinner from '../common/spinner/Spinner';
 
 class Dashboard extends Component {
@@ -14,21 +13,9 @@ class Dashboard extends Component {
     this.props.getCurrentProfile();
   }
 
-  renderContent() {
-    const { profile, loading } = this.props.profiles;
-    if (profile === null || loading) {
-      return <Spinner />;
-    } else {
-      if (Object.keys(profile).length > 0) {
-        return <DashboardProfile />;
-      } else {
-        return <CreateProfile />;
-      }
-    }
-  }
-
   render() {
     const { user } = this.props.auth;
+    const { profile, loading } = this.props.profiles;
     return (
       <Fragment>
         <Row className="dashboard">
@@ -36,7 +23,7 @@ class Dashboard extends Component {
             <h1 className="display-4">Welcome {user.name}</h1>
           </Col>
         </Row>
-        {this.renderContent()}
+        {profile === null || loading ? <Spinner /> : <DashboardProfile />}
       </Fragment>
     );
   }
