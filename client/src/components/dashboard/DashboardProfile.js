@@ -1,10 +1,11 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 
-import ProfileActions from '../edit-profile/ProfileActions';
+import CreateProfile from './CreateProfile';
+import ProfileButtons from './ProfileButtons';
 import { deleteAccount } from '../../actions/profileActions';
 
 class DashboardProfile extends Component {
@@ -14,16 +15,18 @@ class DashboardProfile extends Component {
 
   render() {
     return (
-      <Row className="mt-5">
-        <Col md={12} className="m-auto">
-          <p>Edit your profile, experience, and education here.</p>
-          <ProfileActions />
-          <p>Display profile and exp and edu here</p>
-          <Button variant="danger" onClick={this.onDeleteClick}>
-            Delete my Account
-          </Button>
-        </Col>
-      </Row>
+      <Fragment>
+        <Row className="mt-5">
+          <Col md={12} className="m-auto">
+            <p>Edit your profile, experience, and education here.</p>
+            <ProfileButtons />
+            <Button variant="danger" onClick={this.onDeleteClick}>
+              Delete my Account
+            </Button>
+          </Col>
+        </Row>
+        <CreateProfile />
+      </Fragment>
     );
   }
 }

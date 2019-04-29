@@ -18,6 +18,7 @@ import SelectField from '../common/fields/SelectField';
 import FormField from '../common/fields/FormField';
 import AreaField from '../common/fields/AreaField';
 import IconField from '../common/fields/IconField';
+import isEmpty from '../../utils/is-empty';
 
 class CreateProfile extends Component {
   state = { showSocialLinks: false };
@@ -136,11 +137,26 @@ CreateProfile.propTypes = {
   clearErrors: PropTypes.func.isRequired
 };
 
-const mapStateToProps = ({ profile, errors }) => ({ profile, errors });
+const mapStateToProps = ({ profiles, errors }) => {
+  let initialValues = {};
+  const { profile } = profiles;
+  if (!isEmpty(profile)) {
+    initialValues = {
+      ...profile,
+      interests: profile.interests.join(', ')
+    };
+  }
+  return {
+    profiles,
+    errors,
+    initialValues
+  };
+};
 
 const formWrap = reduxForm({
   validate,
-  form: 'profileForm'
+  form: 'profileForm',
+  enableReinitialize: true
 })(CreateProfile);
 
 export default connect(

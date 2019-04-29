@@ -3,7 +3,6 @@ import React, { Fragment } from 'react';
 import Container from 'react-bootstrap/Container';
 
 import PrivateRoute from './common/PrivateRoute';
-import EditProfile from './edit-profile/EditProfile';
 import Dashboard from './dashboard/Dashboard';
 import Register from './auth/Register';
 import Navbar from './layout/Navbar';
@@ -26,7 +25,6 @@ const App = () => {
             <Route exact path="/login" component={Login} />
             <Route exact path="/register" component={Register} />
             <PrivateRoute exact path="/dashboard" component={Dashboard} />
-            <PrivateRoute exact path="/edit-profile" component={EditProfile} />
             <Route component={NotFound} />
           </Switch>
         </Container>

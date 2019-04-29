@@ -2,10 +2,10 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
 
-const ProfileActions = () => {
+const ProfileButtons = () => {
   return (
     <ButtonGroup>
-      <Link to="/edit-profile" className="btn btn-outline-info">
+      <Link to="/dashboard" className="btn btn-outline-info">
         <i className="fas fa-user-circle text-info mr-2" />
         Edit Profile
       </Link>
@@ -21,4 +21,4 @@ const ProfileActions = () => {
   );
 };
 
-export default ProfileActions;
+export default ProfileButtons;
