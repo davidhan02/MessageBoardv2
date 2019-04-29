@@ -9,11 +9,11 @@ const ProfileButtons = () => {
         <i className="fas fa-user-circle text-info mr-2" />
         Edit Profile
       </Link>
-      <Link to="/add-experience" className="btn btn-outline-info">
+      <Link to="/add-exp" className="btn btn-outline-info">
         <i className="fab fa-black-tie text-info mr-2" />
         Add Experience
       </Link>
-      <Link to="/add-education" className="btn btn-outline-info">
+      <Link to="/add-edu" className="btn btn-outline-info">
         <i className="fas fa-graduation-cap text-info mr-2" />
         Add Education
       </Link>

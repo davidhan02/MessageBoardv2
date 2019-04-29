@@ -9,22 +9,31 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 
 import { clearErrors } from '../../actions/authActions';
-import { postExperience } from '../../actions/profileActions';
+import { addExperience } from '../../actions/profileActions';
 import FormField from '../common/fields/FormField';
 
-class PostExperience extends Component {
+class AddExperience extends Component {
   componentWillUnmount() {
     this.props.clearErrors();
   }
 
+  onSubmit = formValues => {
+    const { addExperience, history } = this.props;
+    addExperience(formValues, history);
+  };
+
   render() {
+    const { handleSubmit } = this.props;
     return (
       <Row>
         <Col md={8} className="m-auto">
           <h1 className="display-4 text-center">Add Experience</h1>
-          <p className="lead text-center">Add prior work experience here: </p>
+          <p className="lead text-center">
+            Add any job or position you have had in the past or current:
+          </p>
+          <small className="d-block pb-3">* = required fields</small>
           <Form onSubmit={handleSubmit(this.onSubmit)}>
-            {this.renderFields()}
+            <Field component="input" type="text" name="text" />
             <Button variant="primary" size="lg" type="submit" block>
               Submit
             </Button>
@@ -35,21 +44,20 @@ class PostExperience extends Component {
   }
 }
 
-PostExperience.propTypes = {
+AddExperience.propTypes = {
   errors: PropTypes.object.isRequired,
-  profile: PropTypes.object.isRequired,
+  profiles: PropTypes.object.isRequired,
   clearErrors: PropTypes.func.isRequired,
-  postExperience: PropTypes.func.isRequired
+  addExperience: PropTypes.func.isRequired
 };
 
-const mapStateToProps = ({ profile, errors }) => ({ profile, errors });
+const mapStateToProps = ({ profiles, errors }) => ({ profiles, errors });
 
 const formWrap = reduxForm({
-  validate,
   form: 'expForm'
-})(PostExperience);
+})(AddExperience);
 
 export default connect(
   mapStateToProps,
-  { postExperience, clearErrors }
+  { addExperience, clearErrors }
 )(withRouter(formWrap));
