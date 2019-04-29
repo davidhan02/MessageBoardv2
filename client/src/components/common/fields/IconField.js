@@ -8,7 +8,6 @@ export default ({
   icon,
   label,
   controlId,
-  placeholder,
   meta: { error, touched }
 }) => {
   return (
@@ -20,7 +19,7 @@ export default ({
             <i className={icon} />
           </InputGroup.Text>
         </InputGroup.Prepend>
-        <Form.Control type={type} placeholder={placeholder} {...input} />
+        <Form.Control type={type} placeholder={label} {...input} />
       </InputGroup>
       {touched && <Form.Text className="text-danger">{error}</Form.Text>}
     </Form.Group>

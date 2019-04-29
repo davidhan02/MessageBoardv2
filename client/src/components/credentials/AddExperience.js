@@ -10,6 +10,7 @@ import Button from 'react-bootstrap/Button';
 
 import { clearErrors } from '../../actions/authActions';
 import { addExperience } from '../../actions/profileActions';
+import expFields from '../../utils/fields/experience';
 import FormField from '../common/fields/FormField';
 
 class AddExperience extends Component {
@@ -22,6 +23,23 @@ class AddExperience extends Component {
     addExperience(formValues, history);
   };
 
+  renderFields() {
+    const { errors } = this.props;
+    return expFields.map(({ label, name, type }) => {
+      return (
+        <Field
+          key={name}
+          name={name}
+          type={type}
+          label={label}
+          errors={errors}
+          controlId={name}
+          component={FormField}
+        />
+      );
+    });
+  }
+
   render() {
     const { handleSubmit } = this.props;
     return (
@@ -33,7 +51,7 @@ class AddExperience extends Component {
           </p>
           <small className="d-block pb-3">* = required fields</small>
           <Form onSubmit={handleSubmit(this.onSubmit)}>
-            <Field component="input" type="text" name="text" />
+            {this.renderFields()}
             <Button variant="primary" size="lg" type="submit" block>
               Submit
             </Button>
