@@ -125,19 +125,17 @@ router.post('/', requireLogin, (req, res) => {
 
   Profile.findOne({ handle }).then(profile => {
     if (profile) {
-      errors.handle = 'That handle already exists';
-      return res.status(400).json(errors);
-    }
-    Profile.findOne({ user: req.user.id }).then(profile => {
-      if (profile) {
-        Profile.findOneAndUpdate(
-          { user: req.user.id },
-          { $set: profileFields },
-          { new: true }
-        ).then(profile => res.json(profile));
+      if (profile.user._id != req.user.id) {
+        errors.handle = 'That handle already exists';
+        return res.status(400).json(errors);
       }
-      const newProfile = new Profile(profileFields);
-      newProfile.save().then(profile => res.json(profile));
+    }
+    Profile.findOneAndUpdate(
+      { user: req.user.id },
+      { $set: profileFields },
+      { upsert: true }
+    ).then(profile => {
+      res.json(profile);
     });
   });
 });
