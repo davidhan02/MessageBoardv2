@@ -57,7 +57,6 @@ class CreateProfile extends Component {
           label={label}
           errors={errors}
           controlId={name}
-          placeholder={label}
           component={FormField}
         />
       );
@@ -88,7 +87,6 @@ class CreateProfile extends Component {
             icon={icon}
             label={label}
             controlId={name}
-            placeholder={label}
             component={IconField}
           />
         );

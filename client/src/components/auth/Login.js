@@ -39,7 +39,6 @@ class Login extends Component {
           label={label}
           errors={errors}
           controlId={name}
-          placeholder={label}
           component={FormField}
         />
       );
