@@ -48,6 +48,18 @@ export const addExperience = (formValues, history) => async dispatch => {
   }
 };
 
+export const addEducation = (formValues, history) => async dispatch => {
+  try {
+    await axios.post('api/profiles/education', formValues);
+    history.push('/dashboard');
+  } catch (err) {
+    dispatch({
+      type: SET_ERRORS,
+      payload: err.response.data
+    });
+  }
+};
+
 export const deleteAccount = () => async dispatch => {
   if (window.confirm('Are you sure you want to delete your account?')) {
     try {
