@@ -7,7 +7,7 @@ import Button from 'react-bootstrap/Button';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
-import { submitRegister, clearErrors } from '../../actions/authActions';
+import * as authActions from '../../actions/authActions';
 import registerFields from '../../utils/fields/register';
 import validate from '../../utils/validation/register';
 import FormField from '../common/fields/FormField';
@@ -76,5 +76,5 @@ const formWrap = reduxForm({
 
 export default connect(
   mapStateToProps,
-  { submitRegister, clearErrors }
+  authActions
 )(formWrap);
