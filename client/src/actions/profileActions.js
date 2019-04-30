@@ -3,6 +3,7 @@ import axios from 'axios';
 import {
   FETCH_USER,
   SET_ERRORS,
+  CLEAR_ERRORS,
   GET_PROFILE,
   SET_PROFILE_LOADING,
   CLEAR_CURRENT_PROFILE
@@ -79,5 +80,11 @@ export const setProfileLoading = () => {
 export const clearCurrentProfile = () => {
   return {
     type: CLEAR_CURRENT_PROFILE
+  };
+};
+
+export const clearErrors = () => {
+  return {
+    type: CLEAR_ERRORS
   };
 };

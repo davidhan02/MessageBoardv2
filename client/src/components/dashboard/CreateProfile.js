@@ -8,8 +8,7 @@ import Row from 'react-bootstrap/Row';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 
-import { submitProfile } from '../../actions/profileActions';
-import { clearErrors } from '../../actions/authActions';
+import * as profileActions from '../../actions/profileActions';
 import profileFields from '../../utils/fields/profile';
 import validate from '../../utils/validation/profile';
 import socialFields from '../../utils/fields/social';
@@ -22,6 +21,10 @@ import isEmpty from '../../utils/is-empty';
 
 class CreateProfile extends Component {
   state = { showSocialLinks: false };
+
+  componentWillMount() {
+    this.props.getCurrentProfile();
+  }
 
   componentWillUnmount() {
     this.props.clearErrors();
@@ -134,10 +137,10 @@ CreateProfile.propTypes = {
 const mapStateToProps = ({ profiles, errors }) => {
   let initialValues = {};
   const { profile } = profiles;
-  const { twitter, facebook, linkedin, youtube, instagram } = profile.social;
-  const social = { twitter, facebook, linkedin, youtube, instagram };
 
   if (!isEmpty(profile)) {
+    const { twitter, facebook, linkedin, youtube, instagram } = profile.social;
+    const social = { twitter, facebook, linkedin, youtube, instagram };
     initialValues = {
       ...profile,
       ...social,
@@ -159,5 +162,5 @@ const formWrap = reduxForm({
 
 export default connect(
   mapStateToProps,
-  { submitProfile, clearErrors }
+  profileActions
 )(withRouter(formWrap));

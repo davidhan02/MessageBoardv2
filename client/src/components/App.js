@@ -5,6 +5,7 @@ import Container from 'react-bootstrap/Container';
 import PrivateRoute from './common/PrivateRoute';
 import AddExperience from './credentials/AddExperience';
 import AddEducation from './credentials/AddEducation';
+import CreateProfile from './dashboard/CreateProfile';
 import Dashboard from './dashboard/Dashboard';
 import Register from './auth/Register';
 import Navbar from './layout/Navbar';
@@ -27,6 +28,7 @@ const App = () => {
             <Route exact path="/login" component={Login} />
             <Route exact path="/register" component={Register} />
             <PrivateRoute exact path="/dashboard" component={Dashboard} />
+            <PrivateRoute exact path="/create-prof" component={CreateProfile} />
             <PrivateRoute exact path="/add-exp" component={AddExperience} />
             <PrivateRoute exact path="/add-edu" component={AddEducation} />
             <Route component={NotFound} />
