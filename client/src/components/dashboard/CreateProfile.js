@@ -22,8 +22,10 @@ import isEmpty from '../../utils/is-empty';
 class CreateProfile extends Component {
   state = { showSocialLinks: false };
 
-  componentWillMount() {
-    this.props.getCurrentProfile();
+  componentDidMount() {
+    if (isEmpty(this.props.profiles.profile)) {
+      this.props.getCurrentProfile();
+    }
   }
 
   componentWillUnmount() {
