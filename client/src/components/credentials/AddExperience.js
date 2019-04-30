@@ -13,6 +13,7 @@ import { addExperience } from '../../actions/profileActions';
 import ProfileButtons from '../dashboard/ProfileButtons';
 import expFields from '../../utils/fields/experience';
 import FormField from '../common/fields/FormField';
+import AreaField from '../common/fields/AreaField';
 import CheckBox from '../common/fields/CheckBox';
 
 class AddExperience extends Component {
@@ -76,6 +77,13 @@ class AddExperience extends Component {
               label="Currently Working Here"
               toggle={() => this.toggleDisabled()}
               component={CheckBox}
+            />
+            <Field
+              name="description"
+              label="Description"
+              info="Tell us a little bit about the position"
+              controlId="description"
+              component={AreaField}
             />
             <Button variant="primary" size="lg" type="submit" block>
               Submit

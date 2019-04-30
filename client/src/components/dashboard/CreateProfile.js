@@ -70,7 +70,6 @@ class CreateProfile extends Component {
         info="Please tell us a little information about yourself"
         label="Short Bio"
         controlId="bio"
-        placeholder="Short Bio"
         component={AreaField}
       />
     );
