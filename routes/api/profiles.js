@@ -74,7 +74,7 @@ router.get('/user/:user_id', (req, res) => {
 // @route   GET api/profiles/
 // @desc    Get logged in users profile
 // @access  Private
-router.get('/', requireLogin, async (req, res) => {
+router.get('/me', requireLogin, async (req, res) => {
   const errors = {};
 
   Profile.findOne({ user: req.user.id })
@@ -95,7 +95,7 @@ router.get('/', requireLogin, async (req, res) => {
 // @route   POST api/profiles/
 // @desc    Create / Edit users profile
 // @access  Private
-router.post('/', requireLogin, (req, res) => {
+router.post('/me', requireLogin, (req, res) => {
   const errors = {};
   const { handle, interests, website } = req.body;
   const socialList = [
@@ -231,7 +231,7 @@ router.delete('/education/:edu_id', requireLogin, (req, res) => {
 // @route   DELETE api/profiles/
 // @desc    Delete user and profile
 // @access  Private
-router.delete('/', requireLogin, async (req, res) => {
+router.delete('/me', requireLogin, async (req, res) => {
   await Profile.findOneAndRemove({ user: req.user.id });
   await User.findOneAndRemove({ _id: req.user.id });
   res.json({ success: true });
