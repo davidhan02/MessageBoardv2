@@ -4,7 +4,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 
-import CreateProfile from './CreateProfile';
+import CreateProfile from '../profile/edit/CreateProfile';
 import ProfileButtons from './ProfileButtons';
 import { deleteAccount } from '../../actions/profileActions';
 import isEmpty from '../../utils/is-empty';
@@ -18,14 +18,9 @@ class DashboardProfile extends Component {
     const { profile } = this.props.profiles;
     return (
       <Fragment>
-        <Row className="mt-3">
-          <Col lg={8} className="text-center m-auto">
-            {!isEmpty(profile) && <ProfileButtons />}
-            <p className="text-left lead mt-3">
-              {!isEmpty(profile)
-                ? 'Edit your profile information here: '
-                : 'A profile is optional, you can create one here: '}
-            </p>
+        <Row className="dashboard-profile">
+          <Col lg={12} className="text-center">
+            <div className="m-3">{!isEmpty(profile) && <ProfileButtons />}</div>
           </Col>
         </Row>
         <CreateProfile />

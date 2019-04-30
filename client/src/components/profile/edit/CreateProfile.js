@@ -8,16 +8,16 @@ import Row from 'react-bootstrap/Row';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 
-import * as profileActions from '../../actions/profileActions';
-import profileFields from '../../utils/fields/profile';
-import validate from '../../utils/validation/profile';
-import socialFields from '../../utils/fields/social';
-import statusOptions from '../../utils/fields/status';
-import SelectField from '../common/fields/SelectField';
-import FormField from '../common/fields/FormField';
-import AreaField from '../common/fields/AreaField';
-import IconField from '../common/fields/IconField';
-import isEmpty from '../../utils/is-empty';
+import * as profileActions from '../../../actions/profileActions';
+import profileFields from '../../../utils/fields/profile';
+import validate from '../../../utils/validation/profile';
+import socialFields from '../../../utils/fields/social';
+import statusOptions from '../../../utils/fields/status';
+import SelectField from '../../common/fields/SelectField';
+import FormField from '../../common/fields/FormField';
+import AreaField from '../../common/fields/AreaField';
+import IconField from '../../common/fields/IconField';
+import isEmpty from '../../../utils/is-empty';
 
 class CreateProfile extends Component {
   state = { showSocialLinks: false };
