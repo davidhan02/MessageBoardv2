@@ -8,8 +8,7 @@ import Row from 'react-bootstrap/Row';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 
-import { clearErrors } from '../../actions/authActions';
-import { addExperience } from '../../actions/profileActions';
+import * as profileActions from '../../actions/profileActions';
 import ProfileButtons from '../dashboard/ProfileButtons';
 import expFields from '../../utils/fields/experience';
 import FormField from '../common/fields/FormField';
@@ -112,5 +111,5 @@ const formWrap = reduxForm({
 
 export default connect(
   mapStateToProps,
-  { addExperience, clearErrors }
+  profileActions
 )(withRouter(formWrap));
