@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
-import CreateProfile from './CreateProfile';
+import ProfileForm from './ProfileForm';
 import ProfileButtons from '../../dashboard/ProfileButtons';
 import { getCurrentProfile } from '../../../actions/profileActions';
 
@@ -24,7 +24,7 @@ class EditProfile extends Component {
             </div>
           </Col>
         </Row>
-        <CreateProfile />
+        <ProfileForm />
       </Fragment>
     );
   }

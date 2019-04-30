@@ -19,7 +19,7 @@ import AreaField from '../../common/fields/AreaField';
 import IconField from '../../common/fields/IconField';
 import isEmpty from '../../../utils/is-empty';
 
-class CreateProfile extends Component {
+class ProfileForm extends Component {
   state = { showSocialLinks: false };
 
   componentWillUnmount() {
@@ -123,7 +123,7 @@ class CreateProfile extends Component {
   }
 }
 
-CreateProfile.propTypes = {
+ProfileForm.propTypes = {
   profile: PropTypes.object,
   errors: PropTypes.object.isRequired,
   submitProfile: PropTypes.func.isRequired,
@@ -154,7 +154,7 @@ const formWrap = reduxForm({
   validate,
   form: 'profileForm',
   enableReinitialize: true
-})(CreateProfile);
+})(ProfileForm);
 
 export default connect(
   mapStateToProps,

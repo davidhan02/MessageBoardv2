@@ -6,7 +6,7 @@ import Col from 'react-bootstrap/Col';
 import PropTypes from 'prop-types';
 
 import * as profileActions from '../../actions/profileActions';
-import CreateProfile from '../profile/edit/CreateProfile';
+import ProfileForm from '../profile/edit/ProfileForm';
 import Spinner from '../common/spinner/Spinner';
 import ProfileButtons from './ProfileButtons';
 import isEmpty from '../../utils/is-empty';
@@ -28,7 +28,7 @@ class Dashboard extends Component {
     if (profile === null || loading) {
       return <Spinner />;
     } else if (isEmpty(profile)) {
-      return <CreateProfile />;
+      return <ProfileForm />;
     }
     return <h1>Dashboard display profile</h1>;
   }
