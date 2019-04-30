@@ -19,24 +19,15 @@ class Dashboard extends Component {
   renderHeader() {
     const { profile } = this.props.profiles;
     if (isEmpty(profile))
-      return (
-        <p className="lead">
-          You don't have a profile, but you can create one here:
-        </p>
-      );
-    return (
-      <div className="m-3">
-        <ProfileButtons />
-      </div>
-    );
+      return 'You do not have a profile, but you can create one here:';
+    return <ProfileButtons />;
   }
 
   renderContent() {
     const { profile, loading } = this.props.profiles;
     if (profile === null || loading) {
       return <Spinner />;
-    }
-    if (isEmpty(profile)) {
+    } else if (isEmpty(profile)) {
       return <CreateProfile />;
     }
     return <h1>Dashboard display profile</h1>;
@@ -53,7 +44,7 @@ class Dashboard extends Component {
         <Row className="dashboard">
           <Col lg={12} className="text-center">
             <h1 className="display-4">Welcome {user.name}</h1>
-            {this.renderHeader()}
+            <div className="lead m-3">{this.renderHeader()}</div>
           </Col>
         </Row>
         {this.renderContent()}
