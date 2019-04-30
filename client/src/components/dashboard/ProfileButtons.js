@@ -5,6 +5,10 @@ import ButtonGroup from 'react-bootstrap/ButtonGroup';
 const ProfileButtons = () => {
   return (
     <ButtonGroup>
+      <Link to="/dashboard" className="btn btn-outline-info">
+        <i className="fas fa-home text-info mr-2" />
+        Dashboard
+      </Link>
       <Link to="/edit-prof" className="btn btn-outline-info">
         <i className="fas fa-user-circle text-info mr-2" />
         Edit Profile
