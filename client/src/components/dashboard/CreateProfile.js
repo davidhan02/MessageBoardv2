@@ -134,10 +134,16 @@ CreateProfile.propTypes = {
 const mapStateToProps = ({ profiles, errors }) => {
   let initialValues = {};
   const { profile } = profiles;
+  const { twitter, facebook, linkedin, youtube, instagram } = profile.social;
   if (!isEmpty(profile)) {
     initialValues = {
       ...profile,
-      interests: profile.interests.join(', ')
+      interests: profile.interests.join(', '),
+      twitter,
+      facebook,
+      linkedin,
+      youtube,
+      instagram
     };
   }
   return {
