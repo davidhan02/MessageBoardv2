@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
+const passport = require('passport');
 const prependHttp = require('prepend-http');
 
 const requireLogin = require('../../middlewares/requireLogin');
@@ -71,28 +72,28 @@ router.get('/user/:user_id', (req, res) => {
     });
 });
 
-// @route   GET api/profiles/
+// @route   GET api/profiles/me
 // @desc    Get logged in users profile
 // @access  Private
-router.get('/me', requireLogin, async (req, res) => {
-  const errors = {};
-
-  Profile.findOne({ user: req.user.id })
-    .populate('user', ['name', 'email'])
-    .then(profile => {
-      if (!profile) {
-        errors.noprofile = 'No profile found';
-        return res.status(404).json(errors);
-      }
-      return res.json(profile);
-    })
-    .catch(err => {
-      errors.noprofile = 'No matching user ID';
-      res.status(404).json(errors);
-    });
+router.get('/me', requireLogin, async ({ user: { id } }, res) => {
+  try {
+    const profile = await Profile.findOne({ user: id }).populate('user', [
+      'name',
+      'email'
+    ]);
+    if (!profile) {
+      const errors = {};
+      errors.msg = 'No profile found for this user';
+      return res.status(400).json(errors);
+    }
+    res.json(profile);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server Error');
+  }
 });
 
-// @route   POST api/profiles/
+// @route   POST api/profiles/me
 // @desc    Create / Edit users profile
 // @access  Private
 router.post('/me', requireLogin, (req, res) => {
@@ -228,7 +229,7 @@ router.delete('/education/:edu_id', requireLogin, (req, res) => {
     .catch(err => res.status(404).json(err));
 });
 
-// @route   DELETE api/profiles/
+// @route   DELETE api/profiles/me
 // @desc    Delete user and profile
 // @access  Private
 router.delete('/me', requireLogin, async (req, res) => {
