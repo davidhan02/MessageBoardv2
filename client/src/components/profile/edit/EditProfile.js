@@ -30,6 +30,10 @@ class EditProfile extends Component {
   }
 }
 
+EditProfile.propTypes = {
+  getCurrentProfile: PropTypes.func.isRequired
+};
+
 export default connect(
   null,
   { getCurrentProfile }
