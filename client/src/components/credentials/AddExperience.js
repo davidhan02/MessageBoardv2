@@ -53,11 +53,13 @@ class AddExperience extends Component {
     const { handleSubmit, errors } = this.props;
     return (
       <Row>
-        <Col lg={8} className="m-auto">
-          <h1 className="display-4 text-center mt-3">Add Experience</h1>
-          <div className="m-3 text-center">
+        <Col lg={12} className="text-center">
+          <h1 className="display-4">Add Experience</h1>
+          <div className="m-3">
             <ProfileButtons />
           </div>
+        </Col>
+        <Col lg={8} className="m-auto">
           <p className="lead">
             Add any job or position you have had in the past or current:
           </p>
