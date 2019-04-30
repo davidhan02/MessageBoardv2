@@ -53,7 +53,7 @@ class AddExperience extends Component {
     const { handleSubmit, errors } = this.props;
     return (
       <Row>
-        <Col md={8} className="m-auto">
+        <Col lg={8} className="m-auto">
           <h1 className="display-4 text-center mt-3">Add Experience</h1>
           <div className="m-3 text-center">
             <ProfileButtons />
