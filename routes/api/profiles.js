@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
 const passport = require('passport');
-const prependHttp = require('prepend-http');
+const http = require('prepend-http');
 
 const requireLogin = require('../../middlewares/requireLogin');
 const Profile = require('../../models/Profile');
@@ -99,32 +99,21 @@ router.get('/me', requireLogin, async ({ user: { id } }, res) => {
 router.post('/me', requireLogin, async (req, res) => {
   const errors = {};
   const { handle, interests, website } = req.body;
-  const socialList = [
-    'youtube',
-    'twitter',
-    'facebook',
-    'instagram',
-    'linkedin'
-  ];
+  const socials = ['youtube', 'twitter', 'facebook', 'instagram', 'linkedin'];
   const profileFields = {
     ...req.body,
+    social: {},
     user: req.user.id,
     interests: interests
       .split(',')
       .map(x => x.trim())
-      .filter(x => x !== ''),
-    social: {}
+      .filter(x => x !== '')
   };
 
-  if (website)
-    profileFields.website = prependHttp(website, {
-      https: true
-    });
-  socialList.forEach(link => {
+  if (website) profileFields.website = http(website, { https: true });
+  socials.forEach(link => {
     if (req.body[link])
-      profileFields.social[link] = prependHttp(req.body[link], {
-        https: true
-      });
+      profileFields.social[link] = http(req.body[link], { https: true });
   });
 
   try {
