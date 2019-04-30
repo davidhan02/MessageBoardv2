@@ -135,16 +135,13 @@ const mapStateToProps = ({ profiles, errors }) => {
   let initialValues = {};
   const { profile } = profiles;
   const { twitter, facebook, linkedin, youtube, instagram } = profile.social;
+  const social = { twitter, facebook, linkedin, youtube, instagram };
 
   if (!isEmpty(profile)) {
     initialValues = {
       ...profile,
-      interests: profile.interests.join(', '),
-      twitter,
-      facebook,
-      linkedin,
-      youtube,
-      instagram
+      ...social,
+      interests: profile.interests.join(', ')
     };
   }
   return {
