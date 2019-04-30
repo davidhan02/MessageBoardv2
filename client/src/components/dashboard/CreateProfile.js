@@ -135,6 +135,7 @@ const mapStateToProps = ({ profiles, errors }) => {
   let initialValues = {};
   const { profile } = profiles;
   const { twitter, facebook, linkedin, youtube, instagram } = profile.social;
+
   if (!isEmpty(profile)) {
     initialValues = {
       ...profile,
