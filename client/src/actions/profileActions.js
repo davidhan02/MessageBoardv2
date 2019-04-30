@@ -1,11 +1,11 @@
 import axios from 'axios';
 
 import {
+  FETCH_USER,
   SET_ERRORS,
   GET_PROFILE,
   SET_PROFILE_LOADING,
-  CLEAR_CURRENT_PROFILE,
-  FETCH_USER
+  CLEAR_CURRENT_PROFILE
 } from './types';
 
 export const getCurrentProfile = () => async dispatch => {
@@ -62,18 +62,11 @@ export const addEducation = (formValues, history) => async dispatch => {
 
 export const deleteAccount = () => async dispatch => {
   if (window.confirm('Are you sure you want to delete your account?')) {
-    try {
-      await axios.delete('/api/profiles/me');
-      dispatch({
-        type: FETCH_USER,
-        payload: {}
-      });
-    } catch (err) {
-      dispatch({
-        type: SET_ERRORS,
-        payload: err.response.data
-      });
-    }
+    await axios.delete('/api/profiles/me');
+    dispatch({
+      type: FETCH_USER,
+      payload: {}
+    });
   }
 };
 
