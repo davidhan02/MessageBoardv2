@@ -19,14 +19,15 @@ router.get('/all', (req, res) => {
     .populate('user', ['name', 'email'])
     .then(profiles => {
       if (!profiles) {
-        errors.noprofiles = 'No profiles found';
-        return res.status(404).json(errors);
+        errors.serverErr = 'No profiles found';
+        return res.status(500).json(errors);
       }
-      return res.json(profiles);
+      res.json(profiles);
     })
     .catch(err => {
-      errors.noprofiles = 'No profiles found';
-      return res.status(404).json(errors);
+      console.error(err.message);
+      errors.serverErr = 'No profiles found';
+      res.status(500).json(errors);
     });
 });
 
@@ -40,14 +41,15 @@ router.get('/handle/:handle', (req, res) => {
     .populate('user', ['name', 'email'])
     .then(profile => {
       if (!profile) {
-        errors.noprofile = 'No profile found';
-        return res.status(404).json(errors);
+        errors.serverErr = 'No profile found';
+        return res.status(500).json(errors);
       }
-      return res.json(profile);
+      res.json(profile);
     })
     .catch(err => {
-      errors.noprofile = 'No matching handle';
-      res.status(404).json(errors);
+      console.error(err.message);
+      errors.serverErr = 'No matching handle';
+      res.status(500).json(errors);
     });
 });
 
@@ -61,14 +63,15 @@ router.get('/user/:user_id', (req, res) => {
     .populate('user', ['name', 'email'])
     .then(profile => {
       if (!profile) {
-        errors.noprofile = 'No profile found';
-        return res.status(404).json(errors);
+        errors.serverErr = 'No profile found';
+        return res.status(500).json(errors);
       }
-      return res.json(profile);
+      res.json(profile);
     })
     .catch(err => {
       console.error(err.message);
-      res.status(500).send('Server Error');
+      errors.serverErr = 'No matching user ID';
+      res.status(500).json(errors);
     });
 });
 
@@ -83,13 +86,14 @@ router.get('/me', requireLogin, async ({ user: { id } }, res) => {
     ]);
     if (!profile) {
       const errors = {};
-      errors.msg = 'No profile found for this user';
-      return res.status(400).json(errors);
+      errors.serverErr = 'No profile found for this user';
+      return res.status(500).json(errors);
     }
     res.json(profile);
   } catch (err) {
     console.error(err.message);
-    res.status(500).send('Server Error');
+    errors.serverErr = 'Server Error';
+    res.status(500).json(errors);
   }
 });
 
@@ -130,7 +134,8 @@ router.post('/me', requireLogin, async (req, res) => {
     res.json(profile);
   } catch (err) {
     console.error(err.message);
-    res.status(500).send('Server Error');
+    errors.serverErr = 'Server Error';
+    res.status(500).json(errors);
   }
 });
 
@@ -147,8 +152,9 @@ router.post('/experience', requireLogin, (req, res) => {
       profile.save().then(profile => res.json(profile));
     })
     .catch(err => {
-      errors.noprofile = 'No matching user ID';
-      res.status(404).json(errors);
+      console.error(err.message);
+      errors.serverErr = 'No matching user ID';
+      res.status(500).json(errors);
     });
 });
 
@@ -165,8 +171,9 @@ router.post('/education', requireLogin, (req, res) => {
       profile.save().then(profile => res.json(profile));
     })
     .catch(err => {
-      errors.noprofile = 'No matching user ID';
-      res.status(404).json(errors);
+      console.error(err.message);
+      errors.serverErr = 'No matching user ID';
+      res.status(500).json(errors);
     });
 });
 
@@ -180,7 +187,7 @@ router.put('/experience/:exp_id', requireLogin, (req, res) => {
     { new: true }
   )
     .then(profile => res.json(profile))
-    .catch(err => res.status(404).json(err));
+    .catch(err => res.status(500).json(err));
 });
 
 // @route   PUT api/profiles/education
@@ -193,7 +200,7 @@ router.put('/education/:edu_id', requireLogin, (req, res) => {
     { new: true }
   )
     .then(profile => res.json(profile))
-    .catch(err => res.status(404).json(err));
+    .catch(err => res.status(500).json(err));
 });
 
 // @route   DELETE api/profiles/experience/:exp_id
@@ -206,7 +213,7 @@ router.delete('/experience/:exp_id', requireLogin, (req, res) => {
 
       profile.save().then(profile => res.json(profile));
     })
-    .catch(err => res.status(404).json(err));
+    .catch(err => res.status(500).json(err));
 });
 
 // @route   DELETE api/profiles/education/:edu_id
@@ -219,7 +226,7 @@ router.delete('/education/:edu_id', requireLogin, (req, res) => {
 
       profile.save().then(profile => res.json(profile));
     })
-    .catch(err => res.status(404).json(err));
+    .catch(err => res.status(500).json(err));
 });
 
 // @route   DELETE api/profiles/me
