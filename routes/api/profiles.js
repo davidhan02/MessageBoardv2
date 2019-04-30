@@ -67,8 +67,8 @@ router.get('/user/:user_id', (req, res) => {
       return res.json(profile);
     })
     .catch(err => {
-      errors.noprofile = 'No matching user ID';
-      res.status(404).json(errors);
+      console.error(err.message);
+      res.status(500).send('Server Error');
     });
 });
 
@@ -96,7 +96,7 @@ router.get('/me', requireLogin, async ({ user: { id } }, res) => {
 // @route   POST api/profiles/me
 // @desc    Create / Edit users profile
 // @access  Private
-router.post('/me', requireLogin, (req, res) => {
+router.post('/me', requireLogin, async (req, res) => {
   const errors = {};
   const { handle, interests, website } = req.body;
   const socialList = [
@@ -109,7 +109,10 @@ router.post('/me', requireLogin, (req, res) => {
   const profileFields = {
     ...req.body,
     user: req.user.id,
-    interests: interests.split(',').map(x => x.trim()),
+    interests: interests
+      .split(',')
+      .map(x => x.trim())
+      .filter(x => x !== ''),
     social: {}
   };
 
@@ -124,21 +127,22 @@ router.post('/me', requireLogin, (req, res) => {
       });
   });
 
-  Profile.findOne({ handle }).then(profile => {
-    if (profile) {
-      if (profile.user._id != req.user.id) {
-        errors.handle = 'That handle already exists';
-        return res.status(400).json(errors);
-      }
+  try {
+    let profile = await Profile.findOne({ handle });
+    if (profile && profile.user._id != req.user.id) {
+      errors.handle = 'That handle already exists';
+      return res.status(400).json(errors);
     }
-    Profile.findOneAndUpdate(
+    profile = await Profile.findOneAndUpdate(
       { user: req.user.id },
       { $set: profileFields },
       { upsert: true }
-    ).then(profile => {
-      res.json(profile);
-    });
-  });
+    );
+    res.json(profile);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server Error');
+  }
 });
 
 // @route   POST api/profiles/experience
