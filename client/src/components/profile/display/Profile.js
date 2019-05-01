@@ -7,6 +7,7 @@ const Profile = ({ profile }) => {
   return (
     <Fragment>
       <ProfileHeader profile={profile} />
+      <ProfileAbout profile={profile} />
     </Fragment>
   );
 };
