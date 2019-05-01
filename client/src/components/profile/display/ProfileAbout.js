@@ -11,8 +11,8 @@ const ProfileAbout = ({ profile }) => {
     </div>
   ));
   return (
-    <Row className="profile-about">
-      <Col md={12} className="mt-3">
+    <Row>
+      <Col md={12} className="mt-3 mb-3">
         <Card body className="bg-light text-center">
           <h3 className="text-info">{firstName}'s Bio</h3>
           <p className="lead">
