@@ -112,11 +112,8 @@ export const addEducation = (formValues, history) => async dispatch => {
 
 export const deleteExperience = id => async dispatch => {
   try {
-    const res = await axios.delete(`/api/profiles/experience/${id}`);
-    dispatch({
-      type: GET_PROFILE,
-      payload: res.data
-    });
+    await axios.delete(`/api/profiles/experience/${id}`);
+    dispatch(getCurrentProfile());
   } catch (err) {
     dispatch({
       type: SET_ERRORS,
@@ -127,11 +124,8 @@ export const deleteExperience = id => async dispatch => {
 
 export const deleteEducation = id => async dispatch => {
   try {
-    const res = await axios.delete(`/api/profiles/education/${id}`);
-    dispatch({
-      type: GET_PROFILE,
-      payload: res.data
-    });
+    await axios.delete(`/api/profiles/education/${id}`);
+    dispatch(getCurrentProfile());
   } catch (err) {
     dispatch({
       type: SET_ERRORS,

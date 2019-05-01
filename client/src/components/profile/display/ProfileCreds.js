@@ -1,29 +1,56 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import Moment from 'react-moment';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import ListGroup from 'react-bootstrap/ListGroup';
+import Button from 'react-bootstrap/Button';
 
-const ProfileCreds = ({ experience, education }) => {
+import {
+  deleteExperience,
+  deleteEducation
+} from '../../../actions/profileActions';
+
+const ProfileCreds = ({
+  auth: { user },
+  userId,
+  experience,
+  education,
+  deleteExperience,
+  deleteEducation
+}) => {
   let eduList, expList;
+
   eduList = expList = (
     <ListGroup.Item className="text-center">None Listed Yet</ListGroup.Item>
   );
 
+  const deleteExp = id => {
+    deleteExperience(id);
+  };
+
+  const deleteEdu = id => {
+    deleteEducation(id);
+  };
+
   if (experience.length > 0) {
     expList = experience.map(exp => {
       const { _id, company, from, to, title, location, description } = exp;
+      const userLinks = (
+        <div className="float-right">
+          <Link to={`/edit-exp/${_id}`} className="btn btn-outline-info mr-1">
+            Edit
+          </Link>
+          <Button variant="outline-danger" onClick={() => deleteExp(_id)}>
+            X
+          </Button>
+        </div>
+      );
       return (
         <ListGroup.Item key={_id}>
-          <div className="float-right">
-            <Link to={`/edit-exp/${_id}`} className="btn btn-outline-info mr-1">
-              Edit
-            </Link>
-            <Link to={`/delete-exp/${_id}`} className="btn btn-outline-danger">
-              X
-            </Link>
-          </div>
+          {userId === user._id && userLinks}
           <h4>{company}</h4>
           <p>
             <Moment format="YYYY/MM/DD">{from}</Moment>
@@ -50,16 +77,19 @@ const ProfileCreds = ({ experience, education }) => {
   if (education.length > 0) {
     eduList = education.map(edu => {
       const { _id, school, from, to, degree, major, description } = edu;
+      const userLinks = (
+        <div className="float-right">
+          <Link to={`/edit-edu/${_id}`} className="btn btn-outline-info mr-1">
+            Edit
+          </Link>
+          <Button variant="outline-danger" onClick={() => deleteEdu(_id)}>
+            X
+          </Button>
+        </div>
+      );
       return (
         <ListGroup.Item key={_id}>
-          <div className="float-right">
-            <Link to={`/edit-edu/${_id}`} className="btn btn-outline-info mr-1">
-              Edit
-            </Link>
-            <Link to={`/delete-edu/${_id}`} className="btn btn-outline-danger">
-              X
-            </Link>
-          </div>
+          {userId === user._id && userLinks}
           <h4>{school}</h4>
           <p>
             <Moment format="YYYY/MM/DD">{from}</Moment>
@@ -97,4 +127,18 @@ const ProfileCreds = ({ experience, education }) => {
   );
 };
 
-export default ProfileCreds;
+ProfileCreds.propTypes = {
+  auth: PropTypes.object.isRequired,
+  userId: PropTypes.string.isRequired,
+  education: PropTypes.array.isRequired,
+  experience: PropTypes.array.isRequired,
+  deleteExperience: PropTypes.func.isRequired,
+  deleteEducation: PropTypes.func.isRequired
+};
+
+const mapStateToProps = ({ auth }) => ({ auth });
+
+export default connect(
+  mapStateToProps,
+  { deleteExperience, deleteEducation }
+)(ProfileCreds);
