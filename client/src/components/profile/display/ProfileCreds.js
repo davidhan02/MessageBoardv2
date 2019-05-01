@@ -10,6 +10,7 @@ const ProfileCreds = ({ experience, education }) => {
   eduList = expList = (
     <ListGroup.Item className="text-center">None Listed Yet</ListGroup.Item>
   );
+
   if (experience.length > 0) {
     expList = experience.map(exp => {
       const { _id, company, from, to, title, location, description } = exp;
@@ -83,7 +84,7 @@ const ProfileCreds = ({ experience, education }) => {
     });
   }
   return (
-    <Row>
+    <Row className="mb-3">
       <Col md={6}>
         <h3 className="text-center text-info">Experience</h3>
         <ListGroup>{expList}</ListGroup>
