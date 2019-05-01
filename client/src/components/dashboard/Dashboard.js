@@ -7,6 +7,7 @@ import PropTypes from 'prop-types';
 
 import * as profileActions from '../../actions/profileActions';
 import ProfileForm from '../profile/edit/ProfileForm';
+import Profile from '../profile/display/Profile';
 import Spinner from '../common/spinner/Spinner';
 import ProfileButtons from './ProfileButtons';
 import isEmpty from '../../utils/is-empty';
@@ -30,7 +31,7 @@ class Dashboard extends Component {
     } else if (isEmpty(profile)) {
       return <ProfileForm />;
     }
-    return <h1>Dashboard display profile</h1>;
+    return <Profile profile={profile} />;
   }
 
   onDeleteClick = e => {
