@@ -1,14 +1,13 @@
-import React from 'react';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
+import React, { Fragment } from 'react';
+import ProfileHeader from './ProfileHeader';
+import ProfileAbout from './ProfileAbout';
+import ProfileCreds from './ProfileCreds';
 
 const Profile = ({ profile }) => {
   return (
-    <Row>
-      <Col>
-        <h1>{profile.handle}</h1>
-      </Col>
-    </Row>
+    <Fragment>
+      <ProfileHeader profile={profile} />
+    </Fragment>
   );
 };
 
