@@ -6,6 +6,7 @@ import PrivateRoute from './common/PrivateRoute';
 import AddExperience from './credentials/AddExperience';
 import AddEducation from './credentials/AddEducation';
 import EditProfile from './profile/edit/EditProfile';
+import ShowProfile from './profile/display/ShowProfile';
 import Dashboard from './dashboard/Dashboard';
 import Register from './auth/Register';
 import Navbar from './layout/Navbar';
@@ -27,6 +28,8 @@ const App = () => {
             <Route exact path="/about" component={About} />
             <Route exact path="/login" component={Login} />
             <Route exact path="/register" component={Register} />
+            <Route exact path="/user/:userId" component={ShowProfile} />
+            <Route exact path="/handle/:handle" component={ShowProfile} />
             <PrivateRoute exact path="/dashboard" component={Dashboard} />
             <PrivateRoute exact path="/edit-prof" component={EditProfile} />
             <PrivateRoute exact path="/add-exp" component={AddExperience} />

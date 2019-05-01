@@ -4,32 +4,30 @@ import Col from 'react-bootstrap/Col';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
+import Profile from './Profile';
 import Spinner from '../../common/spinner/Spinner';
-import * as authActions from '../../../actions/authActions';
+import * as profileActions from '../../../actions/profileActions';
 
 class ShowProfile extends Component {
   componentDidMount() {
-    const { handle } = this.props.match.params;
-    if (handle) {
+    const { userId, handle } = this.props.match.params;
+    if (userId) {
+      this.props.getProfileById(userId);
+    } else if (handle) {
       this.props.getProfileByHandle(handle);
     }
   }
 
-  componentWillReceiveProps(nextProps) {
-    const { profile, loading } = nextProps.profiles;
-    if (profile === null && loading) {
-      this.props.history.push('/not-found');
-    }
-  }
-
-  renderContent() {
+  renderProfile = () => {
     const { profile, loading } = this.props.profiles;
-    if (profile === null || loading) {
+    if (profile === null && !loading) {
+      return <h1>No profile found</h1>;
+    } else if (profile === null || loading) {
       return <Spinner />;
     } else {
       return <Profile profile={profile} />;
     }
-  }
+  };
 
   render() {
     return (
@@ -40,20 +38,20 @@ class ShowProfile extends Component {
             <p className="lead">This is a profile test</p>
           </Col>
         </Row>
-        {this.renderContent()}
+        {this.renderProfile()}
       </Fragment>
     );
   }
 }
 
 ShowProfile.propTypes = {
-  profile: PropTypes.object,
+  profiles: PropTypes.object.isRequired,
   getProfileByHandle: PropTypes.func.isRequired
 };
 
-mapStateToProps = ({ profile }) => ({ profile });
+const mapStateToProps = ({ profiles }) => ({ profiles });
 
 export default connect(
   mapStateToProps,
-  authActions
+  profileActions
 )(ShowProfile);

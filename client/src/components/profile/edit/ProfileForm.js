@@ -124,7 +124,7 @@ class ProfileForm extends Component {
 }
 
 ProfileForm.propTypes = {
-  profile: PropTypes.object,
+  profiles: PropTypes.object.isRequired,
   errors: PropTypes.object.isRequired,
   submitProfile: PropTypes.func.isRequired,
   clearErrors: PropTypes.func.isRequired
