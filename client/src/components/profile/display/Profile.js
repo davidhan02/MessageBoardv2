@@ -1,9 +1,24 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 import Spinner from '../../common/spinner/Spinner';
+import * as authActions from '../../../actions/authActions';
 
 class Profile extends Component {
+  componentDidMount() {
+    const { handle } = this.props.match.params;
+    if (handle) {
+      this.props.getProfileByHandle(handle);
+    }
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.profile.profile === null && nextProps.profile.loading) {
+      this.props.history.push('/asdf');
+    }
+  }
+
   render() {
     return (
       <div>
@@ -13,4 +28,11 @@ class Profile extends Component {
   }
 }
 
-export default Profile;
+Profile.propTypes = {
+  getProfileByHandle: PropTypes.func.isRequired
+};
+
+export default connect(
+  mapStateToProps,
+  authActions
+)(Profile);
