@@ -6,25 +6,34 @@ import Card from 'react-bootstrap/Card';
 import socialList from '../../../utils/fields/social';
 
 const ProfileHeader = ({ profile }) => {
-  const renderWebsite = () => {
-    if (profile.website)
+  let websiteLink = null;
+  if (profile.website) {
+    websiteLink = (
+      <a
+        href={profile.website}
+        className="text-white p-2"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <i className="fas fa-globe fa-2x" />
+      </a>
+    );
+  }
+
+  const socialLinks = socialList.map(({ name, icon }) => {
+    if (profile.social[name])
       return (
-        <a href={profile.website} className="text-white p-2" target="_blank">
-          <i className="fas fa-globe fa-2x" />
+        <a
+          key={name}
+          target="_blank"
+          href={profile.social[name]}
+          className="text-white p-2"
+          rel="noopener noreferrer"
+        >
+          <i className={`${icon} fa-2x`} />
         </a>
       );
-  };
-
-  const renderSocials = () => {
-    return socialList.map(({ name, icon }) => {
-      if (profile.social[name])
-        return (
-          <a href={profile.social[name]} className="text-white p-2">
-            <i className={`${icon} fa-2x`} />
-          </a>
-        );
-    });
-  };
+  });
 
   return (
     <Row>
@@ -36,8 +45,8 @@ const ProfileHeader = ({ profile }) => {
               {profile.status} {profile.company && `at ${profile.company}.`}
             </p>
             {profile.location && <p>Located in {profile.location}</p>}
-            {renderWebsite()}
-            {renderSocials()}
+            {websiteLink}
+            {socialLinks}
           </div>
         </Card>
       </Col>
