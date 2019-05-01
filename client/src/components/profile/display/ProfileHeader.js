@@ -20,8 +20,9 @@ const ProfileHeader = ({ profile }) => {
     );
   }
 
-  const socialLinks = socialList.map(({ name, icon }) => {
-    if (profile.social[name])
+  const socialLinks = socialList
+    .filter(({ name }) => profile.social[name])
+    .map(({ name, icon }) => {
       return (
         <a
           key={name}
@@ -33,7 +34,7 @@ const ProfileHeader = ({ profile }) => {
           <i className={`${icon} fa-2x`} />
         </a>
       );
-  });
+    });
 
   return (
     <Row>
