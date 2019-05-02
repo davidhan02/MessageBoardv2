@@ -16,15 +16,37 @@ import AreaField from '../common/fields/AreaField';
 import CheckBox from '../common/fields/CheckBox';
 
 class AddExperience extends Component {
-  state = { disabled: false };
+  state = { disabled: false, editMode: false };
+
+  componentDidMount = async () => {
+    const { expId } = this.props.match.params;
+    if (expId) {
+      await this.props.getCurrentProfile();
+      const { experience } = this.props.profiles.profile;
+      const expFields = experience.filter(x => x._id === expId)[0];
+      if (expFields) {
+        this.setState({ editMode: true });
+        this.props.initialize({
+          ...expFields,
+          from: expFields.from.split('T')[0],
+          to: expFields.current ? '' : expFields.to.split('T')[0]
+        });
+      }
+    }
+  };
 
   componentWillUnmount() {
     this.props.clearErrors();
   }
 
   onSubmit = formValues => {
-    const { addExperience, history } = this.props;
-    addExperience(formValues, history);
+    const { expId } = this.props.match.params;
+    const { addExperience, editExperience, history } = this.props;
+    if (!this.state.editMode) {
+      addExperience(formValues, history);
+    } else {
+      editExperience(formValues, history, expId);
+    }
   };
 
   renderFields() {

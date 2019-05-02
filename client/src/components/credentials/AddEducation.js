@@ -16,7 +16,7 @@ import AreaField from '../common/fields/AreaField';
 import CheckBox from '../common/fields/CheckBox';
 
 class AddEducation extends Component {
-  state = { disabled: false };
+  state = { disabled: false, editMode: false };
 
   componentDidMount = async () => {
     const { eduId } = this.props.match.params;
@@ -24,7 +24,14 @@ class AddEducation extends Component {
       await this.props.getCurrentProfile();
       const { education } = this.props.profiles.profile;
       const eduFields = education.filter(x => x._id === eduId)[0];
-      if (eduFields) console.log(eduFields);
+      if (eduFields) {
+        this.setState({ editMode: true });
+        this.props.initialize({
+          ...eduFields,
+          from: eduFields.from.split('T')[0],
+          to: eduFields.current ? '' : eduFields.to.split('T')[0]
+        });
+      }
     }
   };
 
@@ -33,8 +40,13 @@ class AddEducation extends Component {
   }
 
   onSubmit = formValues => {
-    const { addEducation, history } = this.props;
-    addEducation(formValues, history);
+    const { eduId } = this.props.match.params;
+    const { addEducation, editEducation, history } = this.props;
+    if (!this.state.editMode) {
+      addEducation(formValues, history);
+    } else {
+      editEducation(formValues, history, eduId);
+    }
   };
 
   renderFields() {

@@ -177,7 +177,7 @@ router.post('/education', requireLogin, (req, res) => {
     });
 });
 
-// @route   PUT api/profiles/experience
+// @route   PUT api/profiles/experience/:exp_id
 // @desc    Replace experience in profile
 // @access  Private
 router.put('/experience/:exp_id', requireLogin, (req, res) => {
@@ -190,7 +190,7 @@ router.put('/experience/:exp_id', requireLogin, (req, res) => {
     .catch(err => res.status(500).json(err));
 });
 
-// @route   PUT api/profiles/education
+// @route   PUT api/profiles/education/:edu_id
 // @desc    Replace education in profile
 // @access  Private
 router.put('/education/:edu_id', requireLogin, (req, res) => {

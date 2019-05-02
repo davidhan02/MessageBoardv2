@@ -110,6 +110,34 @@ export const addEducation = (formValues, history) => async dispatch => {
   }
 };
 
+export const editExperience = (
+  formValues,
+  history,
+  expId
+) => async dispatch => {
+  try {
+    await axios.put(`/api/profiles/experience/${expId}`, formValues);
+    history.push('/dashboard');
+  } catch (err) {
+    dispatch({
+      type: SET_ERRORS,
+      payload: err.response.data
+    });
+  }
+};
+
+export const editEducation = (formValues, history, eduId) => async dispatch => {
+  try {
+    await axios.put(`/api/profiles/education/${eduId}`, formValues);
+    history.push('/dashboard');
+  } catch (err) {
+    dispatch({
+      type: SET_ERRORS,
+      payload: err.response.data
+    });
+  }
+};
+
 export const deleteExperience = id => async dispatch => {
   if (window.confirm('Are you sure you want to delete this?')) {
     try {

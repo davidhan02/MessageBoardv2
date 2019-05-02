@@ -37,7 +37,7 @@ const ProfileCreds = ({
 
   if (experience.length > 0) {
     expList = experience.map(
-      ({ _id, company, from, to, title, location, description }) => {
+      ({ _id, company, from, to, current, title, location, description }) => {
         const expCreds = [
           { label: 'Position', text: title },
           { label: 'Location', text: location },
@@ -69,7 +69,7 @@ const ProfileCreds = ({
             <p>
               <Moment format="YYYY/MM/DD">{from}</Moment>
               {' - '}
-              {to ? <Moment format="YYYY/MM/DD">{to}</Moment> : 'Now'}
+              {current ? 'Now' : <Moment format="YYYY/MM/DD">{to}</Moment>}
             </p>
             {content}
           </ListGroup.Item>
@@ -80,7 +80,7 @@ const ProfileCreds = ({
 
   if (education.length > 0) {
     eduList = education.map(
-      ({ _id, school, from, to, degree, major, description }) => {
+      ({ _id, school, from, to, current, degree, major, description }) => {
         const eduCreds = [
           { label: 'Degree', text: degree },
           { label: 'Major', text: major },
@@ -112,7 +112,7 @@ const ProfileCreds = ({
             <p>
               <Moment format="YYYY/MM/DD">{from}</Moment>
               {' - '}
-              {to ? <Moment format="YYYY/MM/DD">{to}</Moment> : 'Now'}
+              {current ? 'Now' : <Moment format="YYYY/MM/DD">{to}</Moment>}
             </p>
             {content}
           </ListGroup.Item>
