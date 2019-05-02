@@ -36,83 +36,89 @@ const ProfileCreds = ({
   };
 
   if (experience.length > 0) {
-    expList = experience.map(exp => {
-      const { _id, company, from, to, title, location, description } = exp;
-      const userLinks = (
-        <div className="float-right">
-          <Link to={`/edit-exp/${_id}`} className="btn btn-outline-info mr-1">
-            Edit
-          </Link>
-          <Button variant="outline-danger" onClick={() => deleteExp(_id)}>
-            X
-          </Button>
-        </div>
-      );
-      return (
-        <ListGroup.Item key={_id}>
-          {userId === user._id && userLinks}
-          <h4>{company}</h4>
-          <p>
-            <Moment format="YYYY/MM/DD">{from}</Moment>
-            {' - '}
-            {to ? <Moment format="YYYY/MM/DD">{to}</Moment> : 'Now'}
-          </p>
-          <p>
-            <strong>Position:</strong> {title}
-          </p>
-          <p>
-            <span>
-              <strong>Location: </strong> {location || ''}
-            </span>
-          </p>
-          <p>
-            <span>
-              <strong>Description: </strong> {description || ''}
-            </span>
-          </p>
-        </ListGroup.Item>
-      );
-    });
+    expList = experience.map(
+      ({ _id, company, from, to, title, location, description }) => {
+        const expCreds = [
+          { label: 'Position', text: title },
+          { label: 'Location', text: location },
+          { label: 'Description', text: description }
+        ];
+        const userLinks = (
+          <div className="float-right">
+            <Link to={`/edit-exp/${_id}`} className="btn btn-outline-info mr-1">
+              Edit
+            </Link>
+            <Button variant="outline-danger" onClick={() => deleteExp(_id)}>
+              X
+            </Button>
+          </div>
+        );
+        const content = expCreds.map(({ label, text }) => {
+          if (text)
+            return (
+              <p>
+                <strong>{label}:</strong> {text}
+              </p>
+            );
+        });
+        return (
+          <ListGroup.Item key={_id}>
+            {userId === user._id && userLinks}
+            <h4>{company}</h4>
+            <p>
+              <Moment format="YYYY/MM/DD">{from}</Moment>
+              {' - '}
+              {to ? <Moment format="YYYY/MM/DD">{to}</Moment> : 'Now'}
+            </p>
+            {content}
+          </ListGroup.Item>
+        );
+      }
+    );
   }
+
   if (education.length > 0) {
-    eduList = education.map(edu => {
-      const { _id, school, from, to, degree, major, description } = edu;
-      const userLinks = (
-        <div className="float-right">
-          <Link to={`/edit-edu/${_id}`} className="btn btn-outline-info mr-1">
-            Edit
-          </Link>
-          <Button variant="outline-danger" onClick={() => deleteEdu(_id)}>
-            X
-          </Button>
-        </div>
-      );
-      return (
-        <ListGroup.Item key={_id}>
-          {userId === user._id && userLinks}
-          <h4>{school}</h4>
-          <p>
-            <Moment format="YYYY/MM/DD">{from}</Moment>
-            {' - '}
-            {to ? <Moment format="YYYY/MM/DD">{to}</Moment> : 'Now'}
-          </p>
-          <p>
-            <strong>Degree:</strong> {degree}
-          </p>
-          <p>
-            <span>
-              <strong>Major: </strong> {major || ''}
-            </span>
-          </p>
-          <p>
-            <span>
-              <strong>Description: </strong> {description || ''}
-            </span>
-          </p>
-        </ListGroup.Item>
-      );
-    });
+    eduList = education.map(
+      ({ _id, school, from, to, degree, major, description }) => {
+        const eduCreds = [
+          { label: 'Degree', text: degree },
+          { label: 'Major', text: major },
+          { label: 'Description', text: description }
+        ];
+        const userLinks = (
+          <div className="float-right">
+            <Link to={`/edit-edu/${_id}`} className="btn btn-outline-info mr-1">
+              Edit
+            </Link>
+            <Button variant="outline-danger" onClick={() => deleteEdu(_id)}>
+              X
+            </Button>
+          </div>
+        );
+        const content = eduCreds.map(({ label, text }) => {
+          if (text)
+            return (
+              <p>
+                <strong>{label}:</strong> {text}
+              </p>
+            );
+        });
+        return (
+          <ListGroup.Item key={_id}>
+            {userId === user._id && userLinks}
+            <h4>{school}</h4>
+            <p>
+              <Moment format="YYYY/MM/DD">{from}</Moment>
+              {' - '}
+              {to ? <Moment format="YYYY/MM/DD">{to}</Moment> : 'Now'}
+            </p>
+            {content}
+          </ListGroup.Item>
+        );
+      }
+    );
   }
+
   return (
     <Row className="mb-3">
       <Col md={6}>
