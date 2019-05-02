@@ -34,6 +34,11 @@ const App = () => {
             <PrivateRoute exact path="/edit-prof" component={EditProfile} />
             <PrivateRoute exact path="/add-exp" component={AddExperience} />
             <PrivateRoute exact path="/add-edu" component={AddEducation} />
+            <PrivateRoute
+              exact
+              path="/edit-edu/:eduId"
+              component={AddEducation}
+            />
             <Route component={NotFound} />
           </Switch>
         </Container>

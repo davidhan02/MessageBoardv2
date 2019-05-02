@@ -18,6 +18,16 @@ import CheckBox from '../common/fields/CheckBox';
 class AddEducation extends Component {
   state = { disabled: false };
 
+  componentDidMount = async () => {
+    const { eduId } = this.props.match.params;
+    if (eduId) {
+      await this.props.getCurrentProfile();
+      const { education } = this.props.profiles.profile;
+      const eduFields = education.filter(x => x._id === eduId)[0];
+      if (eduFields) console.log(eduFields);
+    }
+  };
+
   componentWillUnmount() {
     this.props.clearErrors();
   }
@@ -100,7 +110,8 @@ AddEducation.propTypes = {
   errors: PropTypes.object.isRequired,
   profiles: PropTypes.object.isRequired,
   clearErrors: PropTypes.func.isRequired,
-  addEducation: PropTypes.func.isRequired
+  addEducation: PropTypes.func.isRequired,
+  getCurrentProfile: PropTypes.func.isRequired
 };
 
 const mapStateToProps = ({ profiles, errors }) => ({ profiles, errors });
