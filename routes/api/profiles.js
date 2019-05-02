@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
-const passport = require('passport');
 const http = require('prepend-http');
 
 const requireLogin = require('../../middlewares/requireLogin');
