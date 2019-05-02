@@ -26,6 +26,9 @@ class AddEducation extends Component {
       const eduFields = education.filter(x => x._id === eduId)[0];
       if (eduFields) {
         this.setState({ editMode: true });
+        if (eduFields.current) {
+          this.setState({ disabled: true });
+        }
         this.props.initialize({
           ...eduFields,
           from: eduFields.from.split('T')[0],

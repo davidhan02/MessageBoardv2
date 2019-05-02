@@ -26,6 +26,9 @@ class AddExperience extends Component {
       const expFields = experience.filter(x => x._id === expId)[0];
       if (expFields) {
         this.setState({ editMode: true });
+        if (expFields.current) {
+          this.setState({ disabled: true });
+        }
         this.props.initialize({
           ...expFields,
           from: expFields.from.split('T')[0],
