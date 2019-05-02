@@ -111,26 +111,30 @@ export const addEducation = (formValues, history) => async dispatch => {
 };
 
 export const deleteExperience = id => async dispatch => {
-  try {
-    await axios.delete(`/api/profiles/experience/${id}`);
-    dispatch(getCurrentProfile());
-  } catch (err) {
-    dispatch({
-      type: SET_ERRORS,
-      payload: err.response.data
-    });
+  if (window.confirm('Are you sure you want to delete this?')) {
+    try {
+      await axios.delete(`/api/profiles/experience/${id}`);
+      dispatch(getCurrentProfile());
+    } catch (err) {
+      dispatch({
+        type: SET_ERRORS,
+        payload: err.response.data
+      });
+    }
   }
 };
 
 export const deleteEducation = id => async dispatch => {
-  try {
-    await axios.delete(`/api/profiles/education/${id}`);
-    dispatch(getCurrentProfile());
-  } catch (err) {
-    dispatch({
-      type: SET_ERRORS,
-      payload: err.response.data
-    });
+  if (window.confirm('Are you sure you want to delete this?')) {
+    try {
+      await axios.delete(`/api/profiles/education/${id}`);
+      dispatch(getCurrentProfile());
+    } catch (err) {
+      dispatch({
+        type: SET_ERRORS,
+        payload: err.response.data
+      });
+    }
   }
 };
 
