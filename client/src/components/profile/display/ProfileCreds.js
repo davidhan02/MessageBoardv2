@@ -53,14 +53,15 @@ const ProfileCreds = ({
             </Button>
           </div>
         );
-        const content = expCreds.map(({ label, text }) => {
-          if (text)
+        const content = expCreds
+          .filter(({ text }) => text)
+          .map(({ label, text }) => {
             return (
-              <p>
+              <p key={label}>
                 <strong>{label}:</strong> {text}
               </p>
             );
-        });
+          });
         return (
           <ListGroup.Item key={_id}>
             {userId === user._id && userLinks}
@@ -95,14 +96,15 @@ const ProfileCreds = ({
             </Button>
           </div>
         );
-        const content = eduCreds.map(({ label, text }) => {
-          if (text)
+        const content = eduCreds
+          .filter(({ text }) => text)
+          .map(({ label, text }) => {
             return (
-              <p>
+              <p key={label}>
                 <strong>{label}:</strong> {text}
               </p>
             );
-        });
+          });
         return (
           <ListGroup.Item key={_id}>
             {userId === user._id && userLinks}
