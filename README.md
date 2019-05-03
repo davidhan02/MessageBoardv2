@@ -1,2 +1,2 @@
 # NewProject
-Building my own full stack blog / social application with Node, Express, React &amp; Redux, and MongoDB.
+Use of Node, Express, MongoDB Atlas for back end. React and Redux for front end. Passport OAuth for authentication.
