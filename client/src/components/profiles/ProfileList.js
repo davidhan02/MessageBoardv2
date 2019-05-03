@@ -17,7 +17,9 @@ class ProfileList extends Component {
     const { profiles, loading } = this.props.profiles;
     if (profiles === null || loading) return <Spinner />;
     if (profiles.length > 0) {
-      return <h1>Display profiles here...</h1>;
+      return profiles.map(profile => (
+        <ProfileItem key={profile._id} profile={profile} />
+      ));
     }
     return <h4>No profiles found...</h4>;
   }
