@@ -13,19 +13,16 @@ class ProfileList extends Component {
     this.props.getProfiles();
   }
 
-  render() {
+  renderContent() {
     const { profiles, loading } = this.props.profiles;
-    let profileItems;
-
-    if (profiles === null || loading) {
-      profileItems = <Spinner />;
-    } else {
-      if (profiles.length > 0) {
-        profileItems = <h1>Display profiles here...</h1>;
-      } else {
-        profileItems = <h4>No profiles found...</h4>;
-      }
+    if (profiles === null || loading) return <Spinner />;
+    if (profiles.length > 0) {
+      return <h1>Display profiles here...</h1>;
     }
+    return <h4>No profiles found...</h4>;
+  }
+
+  render() {
     return (
       <Row>
         <Col md={12}>
@@ -33,7 +30,7 @@ class ProfileList extends Component {
           <p className="lead text-center">
             Browse and connect with other users
           </p>
-          {profileItems}
+          {this.renderContent()}
         </Col>
       </Row>
     );
