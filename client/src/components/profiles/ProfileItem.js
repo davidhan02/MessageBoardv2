@@ -24,7 +24,15 @@ class ProfileItem extends Component {
             <Col md>
               <InfoCol profile={profile} />
             </Col>
-            <Col md>list posts here</Col>
+            <Col md>
+              <ListGroup variant="flush">
+                <ListGroup.Item className="lead">Posts: </ListGroup.Item>
+                <ListGroup.Item>Post displayed here</ListGroup.Item>
+                <ListGroup.Item>Post displayed here</ListGroup.Item>
+                <ListGroup.Item>Post displayed here</ListGroup.Item>
+                <ListGroup.Item>Post displayed here</ListGroup.Item>
+              </ListGroup>
+            </Col>
             <Col lg={3} className="d-none d-lg-block">
               <ListGroup variant="flush">
                 <ListGroup.Item className="lead">
