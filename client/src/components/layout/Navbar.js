@@ -53,8 +53,8 @@ class Header extends Component {
               <Link className="nav-link" to="/">
                 Home
               </Link>
-              <Link className="nav-link" to="/about">
-                About Us
+              <Link className="nav-link" to="/profiles">
+                Profiles
               </Link>
               {loading ? loadingLink : isAuthenticated ? authLinks : guestLinks}
             </Nav>
