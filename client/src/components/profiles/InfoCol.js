@@ -1,4 +1,6 @@
-import React, { Fragment } from 'react';
+import React from 'react';
+import { Link } from 'react-router-dom';
+import ListGroup from 'react-bootstrap/ListGroup';
 import socialList from '../../utils/fields/social';
 
 const InfoCol = ({ profile }) => {
@@ -34,17 +36,35 @@ const InfoCol = ({ profile }) => {
     });
 
   return (
-    <Fragment>
-      <p className="lead">
+    <ListGroup variant="flush">
+      <ListGroup.Item className="lead">
+        {firstName}'s Information:
+      </ListGroup.Item>
+      <ListGroup.Item>
         {profile.status} {profile.company && `@ ${profile.company}`}
-      </p>
-      {profile.location && <p>Located in {profile.location}</p>}
-      <p>{profile.bio || `${firstName} does not have a bio`}</p>
-      <p>
-        {websiteLink}
-        {socialLinks}
-      </p>
-    </Fragment>
+      </ListGroup.Item>
+      {profile.location && (
+        <ListGroup.Item>Located in {profile.location}</ListGroup.Item>
+      )}
+      <ListGroup.Item>
+        "{profile.bio || `${firstName} does not have a bio`}"
+      </ListGroup.Item>
+      {websiteLink && socialLinks && (
+        <ListGroup.Item>
+          Links:
+          {websiteLink}
+          {socialLinks}
+        </ListGroup.Item>
+      )}
+      <ListGroup.Item className="text-center">
+        <Link
+          className="btn btn-outline-primary btn-block"
+          to={`/handle/${profile.handle}`}
+        >
+          View Full Profile
+        </Link>
+      </ListGroup.Item>
+    </ListGroup>
   );
 };
 
