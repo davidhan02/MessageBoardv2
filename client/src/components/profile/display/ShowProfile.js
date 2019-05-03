@@ -46,6 +46,7 @@ class ShowProfile extends Component {
 
 ShowProfile.propTypes = {
   profiles: PropTypes.object.isRequired,
+  getProfileById: PropTypes.func.isRequired,
   getProfileByHandle: PropTypes.func.isRequired
 };
 
