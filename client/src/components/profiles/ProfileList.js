@@ -6,9 +6,9 @@ import Col from 'react-bootstrap/Col';
 
 import ProfileItem from './ProfileItem';
 import Spinner from '../common/spinner/Spinner';
-import getProfiles from '../../actions/profileActions';
+import { getProfiles } from '../../actions/profileActions';
 
-class Profiles extends Component {
+class ProfileList extends Component {
   componentDidMount() {
     this.props.getProfiles();
   }
@@ -40,7 +40,7 @@ class Profiles extends Component {
   }
 }
 
-Profiles.propTypes = {
+ProfileList.propTypes = {
   getProfiles: PropTypes.func.isRequired,
   profiles: PropTypes.object.isRequired
 };
@@ -50,4 +50,4 @@ const mapStateToProps = ({ profiles }) => ({ profiles });
 export default connect(
   mapStateToProps,
   { getProfiles }
-)(Profiles);
+)(ProfileList);
