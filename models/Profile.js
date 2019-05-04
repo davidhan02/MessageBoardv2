@@ -43,4 +43,12 @@ const ProfileSchema = new Schema({
   social: SocialSchema
 });
 
+ProfileSchema.set('toJSON', { getters: true });
+ProfileSchema.options.toJSON.transform = (doc, ret) => {
+  const obj = { ...ret };
+  delete obj.id;
+  delete obj.__v;
+  return obj;
+};
+
 module.exports = mongoose.model('profiles', ProfileSchema);

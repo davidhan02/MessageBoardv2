@@ -19,4 +19,11 @@ const SocialSchema = new Schema({
   }
 });
 
+SocialSchema.set('toJSON', { getters: true });
+SocialSchema.options.toJSON.transform = (doc, ret) => {
+  const obj = { ...ret };
+  delete obj.id;
+  return obj;
+};
+
 module.exports = SocialSchema;
