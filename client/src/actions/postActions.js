@@ -56,11 +56,11 @@ export const getPost = postId => async dispatch => {
   }
 };
 
-export const submitPost = formValues => async dispatch => {
+export const submitPost = (formValues, history) => async dispatch => {
   dispatch(setPostLoading);
   try {
     await axios.post('/api/posts/create', formValues);
-    dispatch(getPosts);
+    history.push('/profiles');
   } catch (err) {
     dispatch(setErrors(err));
   }
