@@ -11,3 +11,13 @@ export const GET_PROFILES = 'GET_PROFILES';
 export const PROFILE_NOT_FOUND = 'PROFILE_NOT_FOUND';
 export const SET_PROFILE_LOADING = 'SET_PROFILE_LOADING';
 export const CLEAR_CURRENT_PROFILE = 'CLEAR_CURRENT_PROFILE';
+
+export const GET_POST = 'GET_POST';
+export const GET_POSTS = 'GET_POSTS';
+export const SEND_VOTE = 'SEND_VOTE';
+export const CREATE_POST = 'CREATE_POST';
+export const DELETE_POST = 'DELETE_POST';
+export const CREATE_COMMENT = 'CREATE_COMMENT';
+export const DELETE_COMMENT = 'DELETE_COMMENT';
+export const POST_NOT_FOUND = 'POST_NOT_FOUND';
+export const SET_POST_LOADING = 'SET_POST_LOADING';
