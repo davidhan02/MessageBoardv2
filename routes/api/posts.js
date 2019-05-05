@@ -103,7 +103,7 @@ router.get('/unvote/:post/', requireLogin, async (req, res) => {
 // @desc    Reset vote on post to zero
 // @access  Private
 router.delete(
-  '/destroy/:post/',
+  '/delete/:post/',
   requireLogin,
   requireAuthor,
   async (req, res) => {
