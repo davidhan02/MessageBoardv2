@@ -49,9 +49,9 @@ const PostSchema = new Schema({
 PostSchema.set('toJSON', { getters: true, virtuals: true });
 PostSchema.options.toJSON.transform = (doc, ret) => {
   const obj = { ...ret };
-  delete obj.author.id;
+  delete obj.author._id;
   delete obj.__v;
-  delete obj.id;
+  delete obj._id;
   return obj;
 };
 

@@ -17,4 +17,12 @@ const CommentSchema = new Schema({
   }
 });
 
+CommentSchema.set('toJSON', { getters: true });
+CommentSchema.options.toJSON.transform = (doc, ret) => {
+  const obj = { ...ret };
+  delete obj.author._id;
+  delete obj._id;
+  return obj;
+};
+
 module.exports = CommentSchema;

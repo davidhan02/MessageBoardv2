@@ -49,14 +49,27 @@ router.post('/create', requireLogin, async (req, res, next) => {
 // @route   PARAM .../:post/...
 // @desc    Middleware for post param
 // @access  Public
-router.param('post', async (req, res, next, id) => {
+router.param('post', async (req, res, next, postId) => {
   try {
-    req.post = await Post.findById(id);
+    req.post = await Post.findById(postId);
     if (!req.post) return res.status(404).json({ msg: 'Post not found' });
   } catch (err) {
     if (err.name === 'CastError') {
       return res.status(400).json({ msg: 'Invalid post ID' });
     }
+    return next(err);
+  }
+  next();
+});
+
+// @route   PARAM .../:comment/...
+// @desc    Middleware for comment param
+// @access  Public
+router.param('comment', async (req, res, next, commentId) => {
+  try {
+    req.comment = await req.post.comments.id(commentId);
+    if (!req.comment) return next(new Error('Comment not found'));
+  } catch (err) {
     return next(err);
   }
   next();
@@ -110,5 +123,16 @@ router.delete(
     res.json({ msg: 'Success' });
   }
 );
+
+router.post('/view/:post', async (req, res, next) => {
+  try {
+    const post = await req.post.addComment(req.body.id, req.body.comment);
+    res.status(201).json(post);
+  } catch (err) {
+    next(err);
+  }
+});
+
+router.delete('/view/:post/:comment');
 
 module.exports = router;
