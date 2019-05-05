@@ -46,6 +46,15 @@ const PostSchema = new Schema({
   comments: [CommentSchema]
 });
 
+PostSchema.set('toJSON', { getters: true });
+PostSchema.options.toJSON.transform = (doc, ret) => {
+  const obj = { ...ret };
+  delete obj.author.id;
+  delete obj.id;
+  delete obj.__v;
+  return obj;
+};
+
 PostSchema.virtual('upvotePercentage').get(function() {
   if (this.votes.length === 0) return 0;
   const upvotes = this.votes.filter(({ vote }) => vote === 1);
