@@ -88,6 +88,18 @@ router.get('/view/:post', async (req, res) => {
   res.json(post);
 });
 
+// @route   POST api/posts/view/:post
+// @desc    Create a post comment
+// @access  Private
+router.post('/view/:post', requireLogin, async (req, res, next) => {
+  try {
+    const post = await req.post.addComment(req.user.id, req.body.comment);
+    res.status(201).json(post);
+  } catch (err) {
+    next(err);
+  }
+});
+
 // @route   GET api/posts/upvote/:post
 // @desc    Upvote a post
 // @access  Private
@@ -118,18 +130,6 @@ router.get('/unvote/:post/', requireLogin, async (req, res) => {
 router.delete('/delete/:post/', requireLogin, postAuth, async (req, res) => {
   await req.post.remove();
   res.json({ msg: 'Success' });
-});
-
-// @route   POST api/posts/view/:post
-// @desc    Create a post comment
-// @access  Private
-router.post('/view/:post', requireLogin, async (req, res, next) => {
-  try {
-    const post = await req.post.addComment(req.user.id, req.body.comment);
-    res.status(201).json(post);
-  } catch (err) {
-    next(err);
-  }
 });
 
 // @route   DELETE api/posts/view/:post/:comment
