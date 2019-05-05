@@ -46,10 +46,10 @@ const PostSchema = new Schema({
   comments: [CommentSchema]
 });
 
-PostSchema.virtual('likePercentage').get(function() {
+PostSchema.virtual('upvotePercentage').get(function() {
   if (this.votes.length === 0) return 0;
-  const likes = this.votes.filter(({ vote }) => vote === 1);
-  return Math.floor((likes.length / this.votes.length) * 100);
+  const upvotes = this.votes.filter(({ vote }) => vote === 1);
+  return Math.floor((upvotes.length / this.votes.length) * 100);
 });
 
 PostSchema.methods.vote = function(user, vote) {

@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
+const requireAuthor = require('../../middlewares/requireAuthor');
 const requireLogin = require('../../middlewares/requireLogin');
 const Post = require('../../models/Post');
 const User = require('../../models/User');
@@ -22,7 +23,31 @@ router.get('/category/:category', async (req, res) => {
   res.json(posts);
 });
 
-// @route   GET api/posts/:post/...
+// @route   GET api/posts/user/:userId
+// @desc    List posts by user
+// @access  Public
+router.get('/user/:userId', async (req, res) => {
+  const user = req.params.userId;
+  const posts = await Post.find({ author: userId }).sort('-created');
+  res.json(posts);
+});
+
+// @route   POST api/posts/create
+// @desc    Create a post
+// @access  Private
+router.post('/create', async (req, res, next) => {
+  try {
+    const post = await Post.create({
+      ...req.body,
+      author: req.body.id
+    });
+    res.status(201).json(post);
+  } catch (err) {
+    next(err);
+  }
+});
+
+// @route   PARAM .../:post/...
 // @desc    Middleware for post param
 // @access  Public
 router.param('post', async (req, res, next, id) => {
@@ -50,33 +75,41 @@ router.get('/view/:post', async (req, res) => {
   res.json(post);
 });
 
-// @route   POST api/posts/create
-// @desc    Create a post
+// @route   GET api/posts/upvote/:post
+// @desc    Upvote a post
 // @access  Private
-router.post('/create', async (req, res, next) => {
-  try {
-    const post = await Post.create({
-      ...req.body,
-      author: req.body.id
-    });
-    res.status(201).json(post);
-  } catch (err) {
-    next(err);
-  }
-});
-
-// @route   GET api/posts/user/:userId
-// @desc    List posts by user
-// @access  Public
-router.get('/user/:userId', async (req, res) => {
-  const userId = req.params.userId;
-  const posts = await Post.find({ author: userId }).sort('-created');
-  res.json(posts);
-});
-
-router.get('/upvote/:post/', async (req, res) => {
+router.get('/upvote/:post/', requireLogin, async (req, res) => {
   const post = await req.post.vote(req.user.id, 1);
   res.json(post);
 });
+
+// @route   GET api/posts/downvote/:post
+// @desc    Downvote a post
+// @access  Private
+router.get('/downvote/:post/', requireLogin, async (req, res) => {
+  const post = await req.post.vote(req.user.id, -1);
+  res.json(post);
+});
+
+// @route   GET api/posts/unvote/:post
+// @desc    Reset vote on post to zero
+// @access  Private
+router.get('/unvote/:post/', requireLogin, async (req, res) => {
+  const post = await req.post.vote(req.user.id, 0);
+  res.json(post);
+});
+
+// @route   DELETE api/posts/unvote/:post
+// @desc    Reset vote on post to zero
+// @access  Private
+router.delete(
+  '/destroy/:post/',
+  requireLogin,
+  requireAuthor,
+  async (req, res) => {
+    await req.post.remove();
+    res.json({ msg: 'Success' });
+  }
+);
 
 module.exports = router;
