@@ -27,7 +27,7 @@ router.get('/category/:category', async (req, res) => {
 // @desc    List posts by user
 // @access  Public
 router.get('/user/:userId', async (req, res) => {
-  const user = req.params.userId;
+  const userId = req.params.userId;
   const posts = await Post.find({ author: userId }).sort('-created');
   res.json(posts);
 });
@@ -124,7 +124,7 @@ router.get('/unvote/:post/', requireLogin, async (req, res) => {
   res.json(post);
 });
 
-// @route   DELETE api/posts/unvote/:post
+// @route   DELETE api/posts/delete/:post
 // @desc    Delete a post
 // @access  Private
 router.delete('/delete/:post/', requireLogin, postAuth, async (req, res) => {
