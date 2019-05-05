@@ -4,7 +4,6 @@ const router = express.Router();
 const requireAuthor = require('../../middlewares/requireAuthor');
 const requireLogin = require('../../middlewares/requireLogin');
 const Post = require('../../models/Post');
-const User = require('../../models/User');
 
 // @route   GET api/posts/all
 // @desc    Display list of all posts
@@ -35,11 +34,11 @@ router.get('/user/:userId', async (req, res) => {
 // @route   POST api/posts/create
 // @desc    Create a post
 // @access  Private
-router.post('/create', async (req, res, next) => {
+router.post('/create', requireLogin, async (req, res, next) => {
   try {
     const post = await Post.create({
       ...req.body,
-      author: req.body.id
+      author: req.user.id
     });
     res.status(201).json(post);
   } catch (err) {

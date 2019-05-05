@@ -46,12 +46,12 @@ const PostSchema = new Schema({
   comments: [CommentSchema]
 });
 
-PostSchema.set('toJSON', { getters: true });
+PostSchema.set('toJSON', { getters: true, virtuals: true });
 PostSchema.options.toJSON.transform = (doc, ret) => {
   const obj = { ...ret };
   delete obj.author.id;
-  delete obj.id;
   delete obj.__v;
+  delete obj.id;
   return obj;
 };
 
