@@ -108,5 +108,7 @@ export const setErrors = err => ({
   type: SET_ERRORS,
   payload: err.response.data
 });
+
 export const setPostLoading = { type: SET_POST_LOADING };
+
 export const setCommentLoading = { type: SET_COMMENT_LOADING };
