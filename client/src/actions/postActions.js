@@ -61,10 +61,7 @@ export const submitPost = formValues => async dispatch => {
     await axios.post('/api/posts/create', formValues);
     dispatch(getPosts);
   } catch (err) {
-    dispatch({
-      type: SET_ERRORS,
-      payload: err.response.data
-    });
+    dispatch(setErrors(err));
   }
 };
 
@@ -74,10 +71,7 @@ export const deletePost = postId => async dispatch => {
     await axios.delete(`/api/posts/delete/${postId}`);
     dispatch(getPosts);
   } catch (err) {
-    dispatch({
-      type: SET_ERRORS,
-      payload: err.response.data
-    });
+    dispatch(setErrors(err));
   }
 };
 
@@ -87,10 +81,7 @@ export const submitComment = (formValues, postId) => async dispatch => {
     await axios.post(`/api/posts/view/${postId}`, formValues);
     dispatch(getPosts);
   } catch (err) {
-    dispatch({
-      type: SET_ERRORS,
-      payload: err.response.data
-    });
+    dispatch(setErrors(err));
   }
 };
 
@@ -100,10 +91,7 @@ export const deleteComment = (postId, commentId) => async dispatch => {
     await axios.delete(`/api/posts/view/${postId}/${commentId}`);
     dispatch(getPosts);
   } catch (err) {
-    dispatch({
-      type: SET_ERRORS,
-      payload: err.response.data
-    });
+    dispatch(setErrors(err));
   }
 };
 
@@ -112,12 +100,13 @@ export const submitVote = postId => async dispatch => {
     await axios.get(`api/posts/upvote/${postId}`);
     dispatch(getPosts);
   } catch (err) {
-    dispatch({
-      type: SET_ERRORS,
-      payload: err.response.data
-    });
+    dispatch(setErrors(err));
   }
 };
 
+export const setErrors = err => ({
+  type: SET_ERRORS,
+  payload: err.response.data
+});
 export const setPostLoading = { type: SET_POST_LOADING };
 export const setCommentLoading = { type: SET_COMMENT_LOADING };
