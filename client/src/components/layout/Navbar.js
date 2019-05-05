@@ -17,14 +17,17 @@ class Header extends Component {
   };
 
   render() {
-    const { isAuthenticated, loading, user } = this.props.auth;
+    const { isAuthenticated, loading } = this.props.auth;
 
     const loadingLink = <Nav.Link>Loading...</Nav.Link>;
 
     const authLinks = (
       <Fragment>
         <Link className="nav-link" to="/dashboard">
-          {user.name}
+          Dashboard
+        </Link>
+        <Link className="nav-link" to="/create">
+          Create
         </Link>
         <Nav.Link onClick={this.logoutUser}>Logout</Nav.Link>
       </Fragment>
