@@ -61,11 +61,11 @@ PostSchema.methods.vote = function(userId, vote) {
       this.votes.pull(existingVote);
     } else {
       this.score += vote;
-      this.votes.push({ user, vote });
+      this.votes.push({ userId, vote });
     }
   } else if (vote !== 0) {
     this.score += vote;
-    this.votes.push({ user, vote });
+    this.votes.push({ userId, vote });
   }
   return this.save();
 };

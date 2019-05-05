@@ -30,6 +30,15 @@ const UserSchema = new Schema({
 
 UserSchema.plugin(uniqueValidator);
 
+UserSchema.set('toJSON', { getters: true });
+UserSchema.options.toJSON.transform = (doc, ret) => {
+  const obj = { ...ret };
+  delete obj.passwordHash;
+  delete obj.oauthId;
+  delete obj.__v;
+  return obj;
+};
+
 UserSchema.methods.validPassword = function(password) {
   return bcrypt.compareSync(password, this.passwordHash);
 };

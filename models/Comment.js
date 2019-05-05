@@ -17,4 +17,4 @@ const CommentSchema = new Schema({
   }
 });
 
-export default CommentSchema;
+module.exports = CommentSchema;
