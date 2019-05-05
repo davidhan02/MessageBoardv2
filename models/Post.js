@@ -52,8 +52,8 @@ PostSchema.virtual('likePercentage').get(function() {
   return Math.floor((likes.length / this.votes.length) * 100);
 });
 
-PostSchema.methods.vote = function(userId, vote) {
-  const existingVote = this.votes.find(item => item.user._id.equals(userId));
+PostSchema.methods.vote = function(user, vote) {
+  const existingVote = this.votes.find(item => item.user._id.equals(user));
 
   if (existingVote) {
     this.score -= existingVote.vote;
@@ -61,11 +61,11 @@ PostSchema.methods.vote = function(userId, vote) {
       this.votes.pull(existingVote);
     } else {
       this.score += vote;
-      this.votes.push({ userId, vote });
+      existingVote.vote = vote;
     }
   } else if (vote !== 0) {
     this.score += vote;
-    this.votes.push({ userId, vote });
+    this.votes.push({ user, vote });
   }
   return this.save();
 };

@@ -16,7 +16,7 @@ router.get('/all', async (req, res) => {
 // @route   GET api/posts/all/:category
 // @desc    Display posts under a category
 // @access  Public
-router.get('/all/:category', async (req, res) => {
+router.get('/category/:category', async (req, res) => {
   const category = req.params.category;
   const posts = await Post.find({ category }).sort('-score');
   res.json(posts);
@@ -38,6 +38,9 @@ router.param('post', async (req, res, next, id) => {
   next();
 });
 
+// @route   GET api/posts/view/:post
+// @desc    Get a single post by postId
+// @access  Public
 router.get('/view/:post', async (req, res) => {
   const post = await Post.findByIdAndUpdate(
     req.post.id,
@@ -47,6 +50,9 @@ router.get('/view/:post', async (req, res) => {
   res.json(post);
 });
 
+// @route   POST api/posts/create
+// @desc    Create a post
+// @access  Private
 router.post('/create', async (req, res, next) => {
   try {
     const post = await Post.create({
@@ -57,6 +63,20 @@ router.post('/create', async (req, res, next) => {
   } catch (err) {
     next(err);
   }
+});
+
+// @route   GET api/posts/user/:userId
+// @desc    List posts by user
+// @access  Public
+router.get('/user/:userId', async (req, res) => {
+  const userId = req.params.userId;
+  const posts = await Post.find({ author: userId }).sort('-created');
+  res.json(posts);
+});
+
+router.get('/upvote/:post/', async (req, res) => {
+  const post = await req.post.vote(req.user.id, 1);
+  res.json(post);
 });
 
 module.exports = router;
