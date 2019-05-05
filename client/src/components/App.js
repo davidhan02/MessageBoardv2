@@ -7,12 +7,13 @@ import AddExperience from './credentials/AddExperience';
 import AddEducation from './credentials/AddEducation';
 import EditProfile from './profile/edit/EditProfile';
 import ShowProfile from './profile/display/ShowProfile';
+import ProfileList from './profiles/ProfileList';
+import PostForm from './post/PostForm';
 import Dashboard from './dashboard/Dashboard';
 import Register from './auth/Register';
 import Navbar from './layout/Navbar';
 import Footer from './layout/Footer';
 import Login from './auth/Login';
-import ProfileList from './profiles/ProfileList';
 
 const About = () => <h2>About</h2>;
 const Landing = () => <h2>Landing</h2>;
@@ -38,6 +39,7 @@ const App = () => {
             <PrivateRoute path="/edit-exp/:expId" component={AddExperience} />
             <PrivateRoute exact path="/add-edu" component={AddEducation} />
             <PrivateRoute path="/edit-edu/:eduId" component={AddEducation} />
+            <PrivateRoute exact path="/create" component={PostForm} />
             <Route component={NotFound} />
           </Switch>
         </Container>

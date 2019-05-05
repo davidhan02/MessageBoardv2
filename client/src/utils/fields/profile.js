@@ -20,7 +20,7 @@ const profileFields = [
   {
     label: 'Website',
     name: 'website',
-    type: 'text',
+    type: 'url',
     info: 'Could be your own website or a company website.'
   },
   {

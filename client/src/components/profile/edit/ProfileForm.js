@@ -80,7 +80,7 @@ class ProfileForm extends Component {
         return (
           <Field
             key={name}
-            type="text"
+            type="url"
             name={name}
             icon={icon}
             label={label}

@@ -1,8 +1,9 @@
 import axios from 'axios';
 import {
-  SET_ERRORS,
   GET_POST,
   GET_POSTS,
+  SET_ERRORS,
+  CLEAR_ERRORS,
   SET_POST_LOADING,
   SET_COMMENT_LOADING
 } from './types';
@@ -107,6 +108,10 @@ export const submitVote = postId => async dispatch => {
 export const setErrors = err => ({
   type: SET_ERRORS,
   payload: err.response.data
+});
+
+export const clearErrors = () => ({
+  type: CLEAR_ERRORS
 });
 
 export const setPostLoading = { type: SET_POST_LOADING };
