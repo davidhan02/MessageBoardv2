@@ -37,6 +37,12 @@ export default (state = initialState, action) => {
         ...state,
         commentLoading: true
       };
+    case SET_ERRORS:
+      return {
+        ...state,
+        postLoading: false,
+        commentLoading: false
+      };
     default:
       return state;
   }
