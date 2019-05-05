@@ -1,7 +1,8 @@
 const express = require('express');
 const router = express.Router();
 
-const requireAuthor = require('../../middlewares/requireAuthor');
+const commentAuth = require('../../middlewares/commentAuth');
+const postAuth = require('../../middlewares/postAuth');
 const requireLogin = require('../../middlewares/requireLogin');
 const Post = require('../../models/Post');
 
@@ -112,27 +113,40 @@ router.get('/unvote/:post/', requireLogin, async (req, res) => {
 });
 
 // @route   DELETE api/posts/unvote/:post
-// @desc    Reset vote on post to zero
+// @desc    Delete a post
 // @access  Private
-router.delete(
-  '/delete/:post/',
-  requireLogin,
-  requireAuthor,
-  async (req, res) => {
-    await req.post.remove();
-    res.json({ msg: 'Success' });
-  }
-);
+router.delete('/delete/:post/', requireLogin, postAuth, async (req, res) => {
+  await req.post.remove();
+  res.json({ msg: 'Success' });
+});
 
-router.post('/view/:post', async (req, res, next) => {
+// @route   POST api/posts/view/:post
+// @desc    Create a post comment
+// @access  Private
+router.post('/view/:post', requireLogin, async (req, res, next) => {
   try {
-    const post = await req.post.addComment(req.body.id, req.body.comment);
+    const post = await req.post.addComment(req.user.id, req.body.comment);
     res.status(201).json(post);
   } catch (err) {
     next(err);
   }
 });
 
-router.delete('/view/:post/:comment');
+// @route   DELETE api/posts/view/:post/:comment
+// @desc    Delete a post comment
+// @access  Private
+router.delete(
+  '/view/:post/:comment',
+  requireLogin,
+  commentAuth,
+  async (req, res, next) => {
+    try {
+      const post = await req.post.removeComment(req.params.comment);
+      res.json(post);
+    } catch (err) {
+      next(err);
+    }
+  }
+);
 
 module.exports = router;
