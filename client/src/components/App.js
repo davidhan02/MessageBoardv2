@@ -8,7 +8,7 @@ import AddEducation from './credentials/AddEducation';
 import EditProfile from './profile/edit/EditProfile';
 import ShowProfile from './profile/display/ShowProfile';
 import ProfileList from './profiles/ProfileList';
-import PostForm from './post/PostForm';
+import NewPost from './post/NewPost';
 import Dashboard from './dashboard/Dashboard';
 import Register from './auth/Register';
 import Navbar from './layout/Navbar';
@@ -39,7 +39,7 @@ const App = () => {
             <PrivateRoute path="/edit-exp/:expId" component={AddExperience} />
             <PrivateRoute exact path="/add-edu" component={AddEducation} />
             <PrivateRoute path="/edit-edu/:eduId" component={AddEducation} />
-            <PrivateRoute exact path="/create" component={PostForm} />
+            <PrivateRoute exact path="/create" component={NewPost} />
             <Route component={NotFound} />
           </Switch>
         </Container>
