@@ -15,6 +15,7 @@ import Navbar from './layout/Navbar';
 import Footer from './layout/Footer';
 import Login from './auth/Login';
 import PostList from './posts/PostList';
+import ViewPost from './post/ViewPost';
 
 const About = () => <h2>About</h2>;
 const Landing = () => <h2>Landing</h2>;
@@ -32,6 +33,7 @@ const App = () => {
             <Route exact path="/login" component={Login} />
             <Route exact path="/register" component={Register} />
             <Route exact path="/posts" component={PostList} />
+            <Route exact path="/posts/:postId" component={ViewPost} />
             <Route exact path="/profiles" component={ProfileList} />
             <Route exact path="/user/:userId" component={ShowProfile} />
             <Route exact path="/handle/:handle" component={ShowProfile} />

@@ -15,9 +15,7 @@ class PostList extends Component {
   }
 
   renderPosts() {
-    const {
-      posts: { postList, postLoading }
-    } = this.props;
+    const { postList, postLoading } = this.props.posts;
     if (postList === null || postLoading) {
       return <Spinner />;
     }

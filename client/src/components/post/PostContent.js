@@ -18,7 +18,7 @@ const PostContent = ({ post }) => {
       {post.url && <span>{post.url}</span>}
       <p className="mt-1 mb-1">{post.text}</p>
       <div className="d-flex w-100 justify-content-between align-items-center">
-        <Link to={`/comment/${post.id}`}>
+        <Link to={`/posts/${post.id}`}>
           <small>{post.comments.length} Comments</small>
         </Link>
         <Badge variant="primary">{post.category}</Badge>
