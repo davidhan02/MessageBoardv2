@@ -2,11 +2,12 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import Badge from 'react-bootstrap/Badge';
 import ListGroup from 'react-bootstrap/ListGroup';
 
 import { getPosts, getPostsByUser } from '../../actions/postActions';
+
 import Spinner from '../common/spinner/Spinner';
+import PostItem from '../post/PostItem';
 
 class PostList extends Component {
   componentDidMount() {
@@ -21,22 +22,7 @@ class PostList extends Component {
       return <Spinner />;
     }
     if (postList)
-      return postList.map(post => (
-        <ListGroup.Item key={post.id}>
-          <div className="d-flex w-100 justify-content-between">
-            <h5 className="m-0">{post.title}</h5>
-            <span>
-              <small>Posted to </small>
-              <Badge variant="primary">{post.category}</Badge>
-              <small> on {post.created.split('T')[0]}</small>
-            </span>
-          </div>
-          <hr />
-          {post.url && <small>{post.url}</small>}
-          <p className="mt-1 mb-1">{post.text}</p>
-          <small>{post.comments.length} Comments</small>
-        </ListGroup.Item>
-      ));
+      return postList.map(post => <PostItem key={post.id} post={post} />);
   }
 
   render() {
