@@ -69,7 +69,7 @@ class PostVote extends Component {
           onClick={this.upvote}
           disabled={!isAuthenticated}
         >
-          <i class="fas fa-arrow-up" />
+          <i className="fas fa-arrow-up" />
         </Button>
         <span className="m-2">{this.state.score}</span>
         <Button
@@ -77,7 +77,7 @@ class PostVote extends Component {
           onClick={this.downvote}
           disabled={!isAuthenticated}
         >
-          <i class="fas fa-arrow-down" />
+          <i className="fas fa-arrow-down" />
         </Button>
       </div>
     );
