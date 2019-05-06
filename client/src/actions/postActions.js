@@ -96,14 +96,15 @@ export const deleteComment = (postId, commentId) => async dispatch => {
   }
 };
 
-export const submitVote = (postId, vote, history) => async dispatch => {
+export const submitVote = (postId, vote) => async dispatch => {
+  const voteTypes = {
+    '1': 'upvote',
+    '0': 'unvote',
+    '-1': 'downvote'
+  };
+  const voteType = voteTypes[vote];
   try {
-    const res = await axios.get(`api/posts/${vote}/${postId}`);
-    dispatch({
-      type: GET_POST,
-      payload: res.data
-    });
-    history.push('/posts');
+    await axios.get(`api/posts/${voteType}/${postId}`);
   } catch (err) {
     dispatch(setErrors(err));
   }

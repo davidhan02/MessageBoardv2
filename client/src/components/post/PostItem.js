@@ -9,7 +9,7 @@ const PostItem = ({ post }) => {
   return (
     <ListGroup.Item>
       <Row>
-        <PostVote post={post} />
+        <PostVote id={post.id} votes={post.votes} score={post.score} />
         <PostContent post={post} />
       </Row>
     </ListGroup.Item>
