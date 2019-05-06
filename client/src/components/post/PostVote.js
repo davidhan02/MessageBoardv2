@@ -63,7 +63,7 @@ class PostVote extends Component {
   render() {
     const { isAuthenticated } = this.props;
     return (
-      <div className="d-flex flex-column text-center justify-content-between ml-2">
+      <div className="d-flex flex-column text-center ml-2">
         <Button
           variant={this.state.didUpvote ? 'primary' : 'outline-primary'}
           onClick={this.upvote}
