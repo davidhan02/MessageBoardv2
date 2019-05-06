@@ -6,6 +6,7 @@ import Badge from 'react-bootstrap/Badge';
 import ListGroup from 'react-bootstrap/ListGroup';
 
 import { getPosts, getPostsByUser } from '../../actions/postActions';
+import Spinner from '../common/spinner/Spinner';
 
 class PostList extends Component {
   componentDidMount() {
@@ -14,8 +15,11 @@ class PostList extends Component {
 
   renderPosts() {
     const {
-      posts: { postList }
+      posts: { postList, postLoading }
     } = this.props;
+    if (postList === null || postLoading) {
+      return <Spinner />;
+    }
     if (postList)
       return postList.map(post => (
         <ListGroup.Item key={post.id}>
@@ -27,8 +31,10 @@ class PostList extends Component {
               <small> on {post.created.split('T')[0]}</small>
             </span>
           </div>
+          <hr />
           {post.url && <small>{post.url}</small>}
-          <p className="mt-1">{post.text}</p>
+          <p className="mt-1 mb-1">{post.text}</p>
+          <small>{post.comments.length} Comments</small>
         </ListGroup.Item>
       ));
   }
