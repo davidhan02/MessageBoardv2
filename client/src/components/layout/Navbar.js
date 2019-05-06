@@ -56,6 +56,9 @@ class Header extends Component {
               <Link className="nav-link" to="/">
                 Home
               </Link>
+              <Link className="nav-link" to="/posts">
+                Posts
+              </Link>
               <Link className="nav-link" to="/profiles">
                 Profiles
               </Link>
