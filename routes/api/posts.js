@@ -10,7 +10,7 @@ const Post = require('../../models/Post');
 // @desc    Display list of all posts
 // @access  Public
 router.get('/all', async (req, res) => {
-  const posts = await Post.find().sort('-score');
+  const posts = await Post.find().sort('-created');
   res.json(posts);
 });
 

@@ -8,7 +8,7 @@ import {
 
 const initialState = {
   post: null,
-  posts: null,
+  postList: null,
   postLoading: false,
   commentLoading: false
 };
@@ -24,7 +24,7 @@ export default (state = initialState, action) => {
     case GET_POSTS:
       return {
         ...state,
-        posts: action.payload,
+        postList: action.payload,
         postLoading: false
       };
     case SET_POST_LOADING:

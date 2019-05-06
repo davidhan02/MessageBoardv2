@@ -8,10 +8,10 @@ import {
   SET_COMMENT_LOADING
 } from './types';
 
-export const getPosts = (category = '') => async dispatch => {
+export const getPosts = () => async dispatch => {
   dispatch(setPostLoading);
   try {
-    const posts = await axios.get('/api/profile/all');
+    const posts = await axios.get('/api/posts/all');
     dispatch({
       type: GET_POSTS,
       payload: posts.data
