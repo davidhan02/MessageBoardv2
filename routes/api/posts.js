@@ -29,7 +29,7 @@ router.get('/category/:category', async (req, res) => {
 // @access  Public
 router.get('/user/:userId', async (req, res) => {
   const userId = req.params.userId;
-  const posts = await Post.find({ author: userId }).sort('-created');
+  const posts = await Post.find({ author: userId }).sort('-score');
   res.json(posts);
 });
 
