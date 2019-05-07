@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { reset } from 'redux-form';
 import {
   GET_POST,
   GET_POSTS,
@@ -84,6 +85,7 @@ export const submitComment = (formValues, postId) => async dispatch => {
       type: GET_POST,
       payload: post.data
     });
+    dispatch(reset('commentForm'));
   } catch (err) {
     dispatch(setErrors(err));
   }

@@ -80,7 +80,7 @@ PostSchema.methods.vote = function(user, vote) {
 };
 
 PostSchema.methods.addComment = function(author, body) {
-  this.comments.push({ author, body });
+  this.comments.unshift({ author, body });
   return this.save();
 };
 

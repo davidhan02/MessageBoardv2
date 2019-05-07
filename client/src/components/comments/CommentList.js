@@ -7,8 +7,12 @@ class CommentList extends Component {
 
     if (comments.length > 0) {
       return comments.map(({ author, body, created }) => (
-        <ListGroup.Item className="ml-3 mr-3">
-          {body} {author.name} {created}
+        <ListGroup.Item className="ml-3 mr-3" key={author.id}>
+          <small className="text-muted">
+            {author.name} on {created.split('T')[0]}
+          </small>
+          <br />
+          <span>{body}</span>
         </ListGroup.Item>
       ));
     }

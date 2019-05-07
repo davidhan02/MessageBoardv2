@@ -9,7 +9,9 @@ import AreaField from '../common/fields/AreaField';
 import { submitComment } from '../../actions/postActions';
 
 class CommentForm extends Component {
-  onSubmit = comment => this.props.submitComment(comment, this.props.id);
+  onSubmit = comment => {
+    this.props.submitComment(comment, this.props.id);
+  };
 
   render() {
     const { auth, handleSubmit } = this.props;
