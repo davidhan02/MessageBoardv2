@@ -5,6 +5,7 @@ import ListGroup from 'react-bootstrap/ListGroup';
 import PostItem from './PostItem';
 import Spinner from '../common/spinner/Spinner';
 import { getPost } from '../../actions/postActions';
+import CommentForm from '../comments/CommentForm';
 
 class ViewPost extends Component {
   componentDidMount() {
@@ -23,7 +24,7 @@ class ViewPost extends Component {
         <ListGroup>
           <PostItem post={post} />
           <ListGroup.Item className="ml-3 mr-3">
-            Comment Form Here
+            <CommentForm id={post.id} />
           </ListGroup.Item>
         </ListGroup>
       </div>

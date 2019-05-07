@@ -9,14 +9,14 @@ import AreaField from '../common/fields/AreaField';
 import { submitComment } from '../../actions/postActions';
 
 class CommentForm extends Component {
-  onSubmit = comment => this.props.submitComment(comment);
+  onSubmit = comment => this.props.submitComment(comment, this.props.id);
 
   render() {
     const { handleSubmit } = this.props;
     return (
       <Form onSubmit={handleSubmit(this.onSubmit)}>
         <Field
-          name="text"
+          name="comment"
           label="Comment"
           controlId="comment"
           component={AreaField}

@@ -7,7 +7,7 @@ const CommentSchema = new Schema({
     ref: 'users',
     required: true
   },
-  text: {
+  body: {
     type: String,
     required: true
   },
@@ -20,7 +20,6 @@ const CommentSchema = new Schema({
 CommentSchema.set('toJSON', { getters: true });
 CommentSchema.options.toJSON.transform = (doc, ret) => {
   const obj = { ...ret };
-  delete obj.author._id;
   delete obj._id;
   return obj;
 };

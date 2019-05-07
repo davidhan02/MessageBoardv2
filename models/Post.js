@@ -79,8 +79,8 @@ PostSchema.methods.vote = function(user, vote) {
   return this.save();
 };
 
-PostSchema.methods.addComment = function(author, text) {
-  this.comments.push({ author, text });
+PostSchema.methods.addComment = function(author, body) {
+  this.comments.push({ author, body });
   return this.save();
 };
 
