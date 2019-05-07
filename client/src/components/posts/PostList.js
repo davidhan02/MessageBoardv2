@@ -15,7 +15,8 @@ import PostItem from '../post/PostItem';
 
 class PostList extends Component {
   componentDidMount() {
-    const { category } = this.props.match.params;
+    const { userId, category } = this.props.match.params;
+    if (userId) return this.props.getPostsByUser(userId);
     if (category) return this.props.getPostsByCat(category);
     this.props.getPosts();
   }
