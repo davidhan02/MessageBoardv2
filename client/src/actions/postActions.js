@@ -79,8 +79,11 @@ export const deletePost = postId => async dispatch => {
 export const submitComment = (formValues, postId) => async dispatch => {
   dispatch(setCommentLoading);
   try {
-    await axios.post(`/api/posts/view/${postId}`, formValues);
-    dispatch(getPosts);
+    const post = await axios.post(`/api/posts/view/${postId}`, formValues);
+    dispatch({
+      type: GET_POST,
+      payload: post.data
+    });
   } catch (err) {
     dispatch(setErrors(err));
   }
