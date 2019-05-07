@@ -33,6 +33,7 @@ const App = () => {
             <Route exact path="/login" component={Login} />
             <Route exact path="/register" component={Register} />
             <Route exact path="/posts" component={PostList} />
+            <Route exact path="/r/:category" component={PostList} />
             <Route exact path="/posts/:postId" component={ViewPost} />
             <Route exact path="/profiles" component={ProfileList} />
             <Route exact path="/user/:userId" component={ShowProfile} />

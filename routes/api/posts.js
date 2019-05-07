@@ -18,7 +18,8 @@ router.get('/all', async (req, res) => {
 // @desc    Display posts under a category
 // @access  Public
 router.get('/category/:category', async (req, res) => {
-  const category = req.params.category;
+  const param = req.params.category;
+  const category = param.substring(0, 1).toUpperCase() + param.substring(1);
   const posts = await Post.find({ category }).sort('-score');
   res.json(posts);
 });
