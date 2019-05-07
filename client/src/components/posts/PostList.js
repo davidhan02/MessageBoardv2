@@ -4,13 +4,19 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import ListGroup from 'react-bootstrap/ListGroup';
 
-import { getPosts, getPostsByUser } from '../../actions/postActions';
+import {
+  getPosts,
+  getPostsByUser,
+  getPostsByCat
+} from '../../actions/postActions';
 
 import Spinner from '../common/spinner/Spinner';
 import PostItem from '../post/PostItem';
 
 class PostList extends Component {
   componentDidMount() {
+    const { category } = this.props.match.params;
+    if (category) return this.props.getPostsByCat(category);
     this.props.getPosts();
   }
 
@@ -36,7 +42,7 @@ class PostList extends Component {
 }
 
 const mapStateToProps = ({ posts }) => ({ posts });
-const mapDispatchToProps = { getPosts, getPostsByUser };
+const mapDispatchToProps = { getPosts, getPostsByUser, getPostsByCat };
 
 export default connect(
   mapStateToProps,
