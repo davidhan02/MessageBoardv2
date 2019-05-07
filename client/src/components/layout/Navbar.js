@@ -54,9 +54,6 @@ class Header extends Component {
           <Navbar.Collapse id="navigation">
             <Nav className="ml-auto">
               <Link className="nav-link" to="/">
-                Home
-              </Link>
-              <Link className="nav-link" to="/posts">
                 Posts
               </Link>
               <Link className="nav-link" to="/profiles">
