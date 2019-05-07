@@ -41,6 +41,22 @@ export const getPostsByUser = userId => async dispatch => {
   }
 };
 
+export const getPostsByCat = category => async dispatch => {
+  dispatch(setPostLoading);
+  try {
+    const posts = await axios.get(`api/posts/category/${category}`);
+    dispatch({
+      type: GET_POSTS,
+      payload: posts.data
+    });
+  } catch (err) {
+    dispatch({
+      type: GET_POSTS,
+      payload: null
+    });
+  }
+};
+
 export const getPost = postId => async dispatch => {
   dispatch(setPostLoading);
   try {
