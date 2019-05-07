@@ -12,7 +12,7 @@ class CommentForm extends Component {
   onSubmit = comment => this.props.submitComment(comment, this.props.id);
 
   render() {
-    const { handleSubmit } = this.props;
+    const { auth, handleSubmit } = this.props;
     return (
       <Form onSubmit={handleSubmit(this.onSubmit)}>
         <Field
@@ -21,18 +21,25 @@ class CommentForm extends Component {
           controlId="comment"
           component={AreaField}
         />
-        <Button type="submit">Submit Comment</Button>
+        <Button
+          type="submit"
+          className="float-right"
+          disabled={!auth.isAuthenticated}
+        >
+          Submit Comment
+        </Button>
       </Form>
     );
   }
 }
 
+const mapStateToProps = ({ auth }) => ({ auth });
 const mapDispatchToProps = { submitComment };
 
 const enhance = compose(
   reduxForm({ form: 'commentForm' }),
   connect(
-    null,
+    mapStateToProps,
     mapDispatchToProps
   )
 );
