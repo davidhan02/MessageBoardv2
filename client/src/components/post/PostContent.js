@@ -14,15 +14,15 @@ const PostContent = ({ post }) => {
           </small>
         </span>
       </div>
-      <hr className="mt-2 mb-2" />
-      {post.url && <span>{post.url}</span>}
-      <p className="mt-1 mb-1">{post.text}</p>
+      <hr className="mt-2 mb-1" />
       <div className="d-flex w-100 justify-content-between align-items-center">
         <Link to={`/posts/${post.id}`}>
           <small>{post.comments.length} Comments</small>
         </Link>
         <Badge variant="primary">{post.category}</Badge>
       </div>
+      {post.url && <small>Link: {post.url}</small>}
+      <p className="mt-1 mb-1">{post.text}</p>
     </Col>
   );
 };
