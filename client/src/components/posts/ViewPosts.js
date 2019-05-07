@@ -12,6 +12,7 @@ import {
 
 import Spinner from '../common/spinner/Spinner';
 import PostItem from '../post/PostItem';
+import CategoryMenu from '../categories/CategoryMenu';
 
 class PostList extends Component {
   componentDidMount() {
@@ -21,25 +22,25 @@ class PostList extends Component {
     this.props.getPosts();
   }
 
-  renderPosts() {
+  render() {
+    const { category } = this.props.match.params;
     const { postList, postLoading } = this.props.posts;
     if (postList === null || postLoading) {
       return <Spinner />;
     }
-    if (postList.length > 0)
-      return postList.map(post => <PostItem key={post.id} post={post} />);
+    if (postList.length > 0) {
+      return (
+        <>
+          <CategoryMenu category={category || 'all'} />
+          <ListGroup>
+            {postList.map(post => (
+              <PostItem key={post.id} post={post} />
+            ))}
+          </ListGroup>
+        </>
+      );
+    }
     return <h4>There's nothing here...</h4>;
-  }
-
-  render() {
-    return (
-      <Row>
-        <Col>
-          <h1>render posts here</h1>
-          <ListGroup>{this.renderPosts()}</ListGroup>
-        </Col>
-      </Row>
-    );
   }
 }
 

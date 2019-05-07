@@ -77,7 +77,7 @@ export const submitPost = (formValues, history) => async dispatch => {
   dispatch(setPostLoading);
   try {
     await axios.post('/api/posts/create', formValues);
-    history.push('/posts');
+    history.push('/');
   } catch (err) {
     dispatch(setErrors(err));
   }

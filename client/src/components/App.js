@@ -14,7 +14,7 @@ import Register from './auth/Register';
 import Navbar from './layout/Navbar';
 import Footer from './layout/Footer';
 import Login from './auth/Login';
-import PostList from './posts/PostList';
+import ViewPosts from './posts/ViewPosts';
 import ViewPost from './post/ViewPost';
 
 const About = () => <h2>About</h2>;
@@ -28,12 +28,11 @@ const App = () => {
         <Navbar />
         <Container>
           <Switch>
-            <Route exact path="/" component={PostList} />
+            <Route exact path="/" component={ViewPosts} />
             <Route exact path="/about" component={About} />
             <Route exact path="/login" component={Login} />
             <Route exact path="/register" component={Register} />
-            <Route exact path="/u/:userId" component={PostList} />
-            <Route exact path="/r/:category" component={PostList} />
+            <Route exact path="/u/:userId" component={ViewPosts} />
             <Route exact path="/posts/:postId" component={ViewPost} />
             <Route exact path="/profiles" component={ProfileList} />
             <Route exact path="/user/:userId" component={ShowProfile} />
@@ -45,6 +44,13 @@ const App = () => {
             <PrivateRoute exact path="/add-edu" component={AddEducation} />
             <PrivateRoute path="/edit-edu/:eduId" component={AddEducation} />
             <PrivateRoute exact path="/create" component={NewPost} />
+            <Route
+              exact
+              path="/r/:category"
+              render={props => (
+                <ViewPosts key={props.match.params.category} {...props} />
+              )}
+            />
             <Route component={NotFound} />
           </Switch>
         </Container>
