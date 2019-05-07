@@ -25,8 +25,9 @@ class PostList extends Component {
     if (postList === null || postLoading) {
       return <Spinner />;
     }
-    if (postList)
+    if (postList.length > 0)
       return postList.map(post => <PostItem key={post.id} post={post} />);
+    return <h4>There's nothing here...</h4>;
   }
 
   render() {
