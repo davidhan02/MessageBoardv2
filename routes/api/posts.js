@@ -14,7 +14,7 @@ router.get('/all', async (req, res) => {
   res.json(posts);
 });
 
-// @route   GET api/posts/all/:category
+// @route   GET api/posts/category/:category
 // @desc    Display posts under a category
 // @access  Public
 router.get('/category/:category', async (req, res) => {
