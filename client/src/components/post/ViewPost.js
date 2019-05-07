@@ -6,6 +6,7 @@ import PostItem from './PostItem';
 import Spinner from '../common/spinner/Spinner';
 import { getPost } from '../../actions/postActions';
 import CommentForm from '../comments/CommentForm';
+import CommentList from '../comments/CommentList';
 
 class ViewPost extends Component {
   componentDidMount() {
@@ -26,6 +27,7 @@ class ViewPost extends Component {
           <ListGroup.Item className="ml-3 mr-3">
             <CommentForm id={post.id} />
           </ListGroup.Item>
+          <CommentList comments={post.comments} />
         </ListGroup>
       </div>
     );
