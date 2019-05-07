@@ -18,7 +18,6 @@ import ViewPosts from './posts/ViewPosts';
 import ViewPost from './post/ViewPost';
 
 const About = () => <h2>About</h2>;
-const Landing = () => <h2>Landing</h2>;
 const NotFound = () => <h2>404 Not Found</h2>;
 
 const App = () => {
