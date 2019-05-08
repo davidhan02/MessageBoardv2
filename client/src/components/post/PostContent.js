@@ -10,7 +10,8 @@ const PostContent = ({ post }) => {
         <h5 className="m-0">{post.title}</h5>
         <span>
           <small>
-            Posted {post.created.split('T')[0]} by {post.author.name}
+            Posted {post.created.split('T')[0]} by{' '}
+            <Link to={`/u/${post.author.id}`}>{post.author.name}</Link>
           </small>
         </span>
       </div>
