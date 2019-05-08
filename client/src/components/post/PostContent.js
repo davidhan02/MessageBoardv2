@@ -20,7 +20,9 @@ const PostContent = ({ post }) => {
         <Link to={`/posts/${post.id}`}>
           <small>{post.comments.length} Comments</small>
         </Link>
-        <Badge variant="primary">{post.category}</Badge>
+        <Link to={`/r/${post.category}`}>
+          <Badge variant="primary">{post.category}</Badge>
+        </Link>
       </div>
       {post.url && <small>Link: {post.url}</small>}
       <p className="mt-1 mb-1">{post.text}</p>
