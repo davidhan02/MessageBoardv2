@@ -7,7 +7,7 @@ import {
   getPostsByUser,
   getPostsByCat
 } from '../../actions/postActions';
-
+import ProfileCard from '../profile/display/ProfileCard';
 import Spinner from '../common/spinner/Spinner';
 import PostItem from '../post/PostItem';
 import CategoryMenu from '../categories/CategoryMenu';
@@ -21,7 +21,7 @@ class PostList extends Component {
   }
 
   render() {
-    const { category } = this.props.match.params;
+    const { userId, category } = this.props.match.params;
     const { postList, postLoading } = this.props.posts;
     if (postList === null || postLoading) {
       return <Spinner />;
@@ -29,7 +29,11 @@ class PostList extends Component {
     if (postList.length > 0) {
       return (
         <>
-          <CategoryMenu category={category || 'all'} />
+          {userId ? (
+            <ProfileCard id={userId} />
+          ) : (
+            <CategoryMenu category={category || 'all'} />
+          )}
           <ListGroup>
             {postList.map(post => (
               <PostItem key={post.id} post={post} />

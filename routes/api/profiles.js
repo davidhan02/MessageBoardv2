@@ -29,7 +29,7 @@ router.get('/handle/:handle', async (req, res) => {
   try {
     const profile = await Profile.findOne({
       handle: req.params.handle
-    }).populate('user', ['name', 'email']);
+    }).populate('user');
     if (!profile) {
       errors.msg = 'No profile found for this user';
       return res.status(400).json(errors);
@@ -50,7 +50,7 @@ router.get('/user/:user_id', async (req, res) => {
   try {
     const profile = await Profile.findOne({
       user: req.params.user_id
-    }).populate('user', ['name', 'email']);
+    }).populate('user');
     if (!profile) {
       errors.msg = 'No profile found for this user';
       return res.status(400).json(errors);

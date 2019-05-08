@@ -65,7 +65,7 @@ const ProfileCreds = ({
         return (
           <ListGroup.Item key={_id}>
             {userId === user._id && userLinks}
-            <h4>{company}</h4>
+            <h5>{company}</h5>
             <p>
               <Moment format="YYYY/MM/DD">{from}</Moment>
               {' - '}
@@ -108,7 +108,7 @@ const ProfileCreds = ({
         return (
           <ListGroup.Item key={_id}>
             {userId === user._id && userLinks}
-            <h4>{school}</h4>
+            <h5>{school}</h5>
             <p>
               <Moment format="YYYY/MM/DD">{from}</Moment>
               {' - '}
@@ -124,11 +124,11 @@ const ProfileCreds = ({
   return (
     <Row className="mb-3">
       <Col md={6}>
-        <h3 className="text-center text-info">Experience</h3>
+        <h4 className="text-center text-info">Experience</h4>
         <ListGroup>{expList}</ListGroup>
       </Col>
       <Col md={6}>
-        <h3 className="text-center text-info">Education</h3>
+        <h4 className="text-center text-info">Education</h4>
         <ListGroup>{eduList}</ListGroup>
       </Col>
     </Row>
