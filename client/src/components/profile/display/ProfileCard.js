@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 import ListGroup from 'react-bootstrap/ListGroup';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import Button from 'react-bootstrap/Button';
 
 import { getProfileById } from '../../../actions/profileActions';
 import ProfileCreds from './ProfileCreds';
@@ -39,7 +38,7 @@ class ProfileCard extends Component {
                     <p className="mb-1">Located in {profile.location}.</p>
                   )}
                   <p className="mb-1">
-                    User since {profile.user.date.split('T')[0]}
+                    Profile created {profile.date.split('T')[0]}
                   </p>
                 </ListGroup.Item>
               </Col>

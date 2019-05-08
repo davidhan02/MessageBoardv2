@@ -20,16 +20,13 @@ class ViewPost extends Component {
       return <Spinner />;
     }
     return (
-      <div>
-        <h1>ViewPost</h1>
-        <ListGroup>
-          <PostItem post={post} />
-          <ListGroup.Item className="ml-3 mr-3">
-            <CommentForm id={post.id} />
-          </ListGroup.Item>
-          <CommentList comments={post.comments} />
-        </ListGroup>
-      </div>
+      <ListGroup>
+        <PostItem post={post} />
+        <ListGroup.Item className="ml-3 mr-3">
+          <CommentForm id={post.id} />
+        </ListGroup.Item>
+        <CommentList comments={post.comments} />
+      </ListGroup>
     );
   }
 }

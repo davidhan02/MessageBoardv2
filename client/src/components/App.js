@@ -7,7 +7,6 @@ import AddExperience from './credentials/AddExperience';
 import AddEducation from './credentials/AddEducation';
 import EditProfile from './profile/edit/EditProfile';
 import ShowProfile from './profile/display/ShowProfile';
-import ProfileList from './profiles/ProfileList';
 import NewPost from './post/NewPost';
 import Dashboard from './dashboard/Dashboard';
 import Register from './auth/Register';
@@ -32,7 +31,6 @@ const App = () => {
             <Route exact path="/login" component={Login} />
             <Route exact path="/register" component={Register} />
             <Route exact path="/posts/:postId" component={ViewPost} />
-            <Route exact path="/profiles" component={ProfileList} />
             <Route exact path="/user/:userId" component={ShowProfile} />
             <Route exact path="/handle/:handle" component={ShowProfile} />
             <PrivateRoute exact path="/dashboard" component={Dashboard} />

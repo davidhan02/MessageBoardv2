@@ -56,9 +56,6 @@ class Header extends Component {
               <Link className="nav-link" to="/">
                 Posts
               </Link>
-              <Link className="nav-link" to="/profiles">
-                Profiles
-              </Link>
               {loading ? loadingLink : isAuthenticated ? authLinks : guestLinks}
             </Nav>
           </Navbar.Collapse>
