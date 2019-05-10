@@ -18,7 +18,7 @@ class ShowProfile extends Component {
     }
   }
 
-  renderProfile = () => {
+  render() {
     const { profile, loading } = this.props.profiles;
     if (profile === null && !loading) {
       return <h1>No profile found</h1>;
@@ -27,20 +27,6 @@ class ShowProfile extends Component {
     } else {
       return <Profile profile={profile} />;
     }
-  };
-
-  render() {
-    return (
-      <Fragment>
-        <Row>
-          <Col lg={12} className="text-center">
-            <h1 className="display-4">Profile Display</h1>
-            <p className="lead">This is a profile test</p>
-          </Col>
-        </Row>
-        {this.renderProfile()}
-      </Fragment>
-    );
   }
 }
 
