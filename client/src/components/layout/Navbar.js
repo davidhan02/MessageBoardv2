@@ -45,7 +45,7 @@ class Header extends Component {
     );
 
     return (
-      <Navbar expand="sm" className="navbar mb-5">
+      <Navbar expand="sm" className="navbar">
         <Container>
           <Link className="navbar-brand" to="/">
             CompanyName
